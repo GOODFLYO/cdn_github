@@ -1,3 +1,4 @@
+# 用于存放GOODFLYO.GITHUB.IO的引用资源
 # cdn
 >jsDelivr+Github
 # introduction
