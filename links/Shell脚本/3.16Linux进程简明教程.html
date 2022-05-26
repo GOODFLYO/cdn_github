@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_3521.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./3.16Linux进程简明教程_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./3.16Linux进程简明教程_files/common.css" rel="stylesheet">
+<title>Linux进程简明教程</title>
+<meta name="description" content="进程是 Linux 操作系统中最重要的基本概念之一，这一节我们将了解学习 Linux 进程的一些基础知识。 进程是运行在 Linux 中的程序的一个实例。这是一个你之前就可能已经听说过的基本定">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./3.16Linux进程简明教程_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<h4><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/shell/">Shell</a></h4>
+	<dl id="contents">
+		<dt><a href="http://c.biancheng.net/shell/base/">Shell基础（开胃菜）</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/706.html">Shell是什么</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/731.html">Shell是运维人员必须掌握的技能</a>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_4555.html">常用的Shell有哪些？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/733.html">进入Shell的两种方式</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/3163.html">Shell命令的基本格式</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3229.html">Shell命令的本质到底是什么？如何自己实现一个命令？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3230.html">Shell命令的选项和参数在本质上是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/3175.html">Shell命令提示符</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3279.html">修改命令提示符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/735.html">第一个Shell脚本</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/739.html">执行Shell脚本</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3231.html">Shell四种运行方式（启动方式）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3232.html">Shell配置文件（配置脚本）的加载</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3233.html">如何编写自己的Shell配置文件？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/program/">Shell编程</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/743.html">Shell变量</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_4558.html">Shell变量的作用域（精讲）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/1164.html">Shell命令替换</a>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/789.html">Shell位置参数</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/806.html">Shell特殊变量</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_4559.html">Shell $*和$@之间的区别</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/808.html">Shell $?</a>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/821.html">Shell字符串详解</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/1114.html">Shell字符串拼接</a>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/1120.html">Shell字符串截取</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/810.html">Shell数组</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/812.html">Shell获取数组长度</a>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/818.html">Shell数组拼接</a>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/819.html">Shell删除数组元素</a>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3234.html">Shell关联数组</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/1136.html">Shell内建命令</a>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/1138.html">Shell alias命令</a>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/1142.html">Shell echo命令</a>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/2991.html">Shell read命令</a>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/1145.html">Shell exit命令</a>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/2709.html">Shell declare和typeset命令</a>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/1169.html">Shell数学计算</a>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/2480.html">Shell (())</a>
+		</dd>
+<dd>24.<a href="http://c.biancheng.net/view/2504.html">Shell let命令</a>
+		</dd>
+<dd>25.<a href="http://c.biancheng.net/view/vip_3235.html">Shell $[]</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>26.<a href="http://c.biancheng.net/view/vip_3236.html">Shell expr命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>27.<a href="http://c.biancheng.net/view/vip_3237.html">Linux bc命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>28.<a href="http://c.biancheng.net/view/vip_3238.html">Shell declare -i</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>29.<a href="http://c.biancheng.net/view/1262.html">Shell if else</a>
+		</dd>
+<dd>30.<a href="http://c.biancheng.net/view/2735.html">Shell退出状态</a>
+		</dd>
+<dd>31.<a href="http://c.biancheng.net/view/2742.html">Shell test命令</a>
+		</dd>
+<dd>32.<a href="http://c.biancheng.net/view/2751.html">Shell [[]]</a>
+		</dd>
+<dd>33.<a href="http://c.biancheng.net/view/2767.html">Shell case in</a>
+		</dd>
+<dd>34.<a href="http://c.biancheng.net/view/1006.html">Shell while</a>
+		</dd>
+<dd>35.<a href="http://c.biancheng.net/view/1007.html">Shell until</a>
+		</dd>
+<dd>36.<a href="http://c.biancheng.net/view/2804.html">Shell for</a>
+		</dd>
+<dd>37.<a href="http://c.biancheng.net/view/2829.html">Shell select in</a>
+		</dd>
+<dd>38.<a href="http://c.biancheng.net/view/1011.html">Shell break和continue</a>
+		</dd>
+<dd>39.<a href="http://c.biancheng.net/view/1009.html">Shell函数</a>
+		</dd>
+<dd>40.<a href="http://c.biancheng.net/view/2860.html">Shell函数参数</a>
+		</dd>
+<dd>41.<a href="http://c.biancheng.net/view/vip_3239.html">Shell函数返回值精讲</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/942.html">Shell重定向</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3240.html">Linux中的文件描述符到底是什么？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3241.html">结合文件描述符谈重定向，彻底理解重定向的本质！</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/vip_3242.html">使用exec命令操作文件描述符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/vip_3243.html">Shell代码块重定向</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3244.html">Shell Here Document</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3245.html">Shell Here String</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/vip_3246.html">Shell组命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3247.html">Shell进程替换</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/3131.html">Linux管道</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/3472.html">Shell过滤器</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3248.html">子Shell和子进程到底有什么区别？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3249.html">如何检测子Shell和子进程？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3520.html">Linux中的信号是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3522.html">Bash Shell中的信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd class="active">16.<a href="http://c.biancheng.net/view/vip_3521.html">Linux进程简明教程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/vip_3495.html">使用什么命令查看进程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/vip_3497.html">Shell向进程发送信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/vip_3499.html">使用trap命令获取信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/vip_3506.html">trap命令捕获信号实例演示</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/vip_3507.html">移除（重置）信号捕获</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/vip_3508.html">关于进程、信号和捕获的总结</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/vip_3250.html">Shell模块化（把代码分散到多个脚本文件中）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/shortcut/">Bash Shell快捷键</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/vip_3509.html">Bash Shell快捷键大全</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3510.html">Bash Shell命令自动补全功能</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3512.html">Bash Shell历史命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+
+	</dl>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/shell/">Shell</a> &gt; <a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></span>
+	<span class="read-num">阅读：2,726</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux进程简明教程</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3522.html">Bash Shell中的信号</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3495.html">使用什么命令查看进程</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">进程是 Linux 操作系统中最重要的基本概念之一，这一节我们将了解学习 Linux 进程的一些基础知识。<br>
+<br>
+进程是运行在 Linux 中的程序的一个实例。这是一个你之前就可能已经听说过的基本定义。<br>
+<br>
+当你在 Linux 系统中执行一个程序时，系统会为这个程序创建特定的环境。这个环境包含系统运行这个程序所需的任何东西。<br>
+<br>
+每当你在 Linux 中执行一个命令，它都会创建，或启动一个新的进程。比如，当你尝试运行命令“ls -l”来列出目录的内容时，你就启动了一个进程。如果有两个终端窗口显示在屏幕上，那么你可能运行了两次同样的终端程序，这时会有两个终端进程。<br>
+<br>
+每个终端窗门可能都运行了一个 Shell，每个运行的 Shell 都分别是一个进程。当你从 Shell 调用一个命令时，对应的程序就会在一个新进程中执行，当这个程序的进程执行完成后，Shell 的进程将恢复运行。<br>
+<br>
+操作系统通过被称为 PID 或进程 ID 的数字编码来追踪进程。系统中的每一个进程都有一个唯一的 PID。<br>
+<br>
+现在我们通过一个实例来了解 Linux 中的进程。我们在 Shell 命令行下执行如下命令：
+<pre class="info-box">[c.biancheng.net]$ sleep 10 &amp;
+[1] 3324</pre>
+因为程序会等待 10 秒，所以我们快速地在当前 Shell 上查找任何进程名为 sleep 的进程：
+<pre class="info-box">[c.biancheng.net]$ ps -ef | grep sleep
+mozhiyan  3324  5712  cons1  17:11:46  /usr/bin/sleep</pre>
+我们看到进程名为 /usr/bin/sleep 的进程正运行在系统中（其 PID 与我们在上一命令中得到的 PID 相同）。<br>
+<br>
+现在，我们尝试并行地从 3 个不同的终端窗口运行上述的 sleep 命令，上述命令的输出将类似如下所示：
+<pre class="info-box">[c.biancheng.net]$ ps -ef | grep sleep
+mozhiyan  896   5712  cons1  17:16:51  /usr/bin/sleep
+mozhiyan  5924  5712  cons1  17:16:52  /usr/bin/sleep
+mozhiyan  2424  5712  cons1  17:16:50  /usr/bin/sleep</pre>
+我们看到 sleep 程序的每一个实例都创建了一个单独的进程。<br>
+<br>
+每个 Linux 进程还有另一个 ID 号码，即父进程的 ID(ppid)。系统中的每一个用户进程都有一个父进程。<br>
+<br>
+命令“ps -f”就会列出进程的 PID 和 PPID。此命令的输出类似如下所示：
+<pre class="info-box">[c.biancheng.net]$ ps -f
+   UID     PID   PPID    TTY       STIME      COMMAND
+mozhiyan  4124   228    cons0    21:37:09   /usr/bin/ps
+mozhiyan   228   1      cons0    21:32:23   /usr/bin/bash</pre>
+你在 Shell 命令行提示符下运行的命令都把当前 Shell 的进程作为父进程。例如，你在 Shell 命令行提示符下输入 ls 命令，Shell 将执行 ls 命令，此时 Linux 内核会复制 Shell 的内存页，然后执行 ls 命令。<br>
+<br>
+在 Unix 中，每一个进程是使用 fork 和 exec 方法创建的。然而，这种方法会导致系统资源的损耗。<br>
+<br>
+在 Linux 中，fork 方法是使用写时拷贝内存页实现的，所以它导致的仅是时间和复制父进程的内存页表所需的内存的损失，并且会为子进程创建一个唯一的任务结构。<br>
+<br>
+写时拷贝模式在创建新进程时避免了创建不必要的结构拷贝。例如，用户在 Shell 命令行提示符下输出 ls 命令，Linux 内核将会创建一个 Shell 的子进程，即 Shell 的进程是父进程，而 ls 命令的进程是子进程，ls 命令的进程会指向与此 Shell 相同的内存页，然后子进程使用写时拷贝技术执行 ls 命令。
+<h2>
+	前台进程和后台进程</h2>
+当你启动一个进程时（运行一个命令），可以如下两种方式运行该进程：
+<ul>
+	<li>
+		前台进程</li>
+	<li>
+		后台进程</li>
+</ul>
+<br>
+默认情况下，你启动的每一个进程都是运行在前台的。它从键盘获取输入并发送它的输出到屏幕。<br>
+<br>
+当一个进程运行在前台时，我们不能在同一命令行提示符下运行任何其他命令（启动任何其他进程），因为在程序结束它的进程之前命令行提示符不可用。<br>
+<br>
+启动一个后台进程最简羊的方法是添加一个控制操作符“&amp;”到命令的结尾。例如，如下命令将启动一个后台进程：
+<pre class="info-box">[c.biancheng.net]$ sleep 10 &amp;
+[1] 5720</pre>
+现在 sleep 命令被放在后台运行。当 Bash 在后台启动一个作业时，它会打印一行内容显示作业编号（[1]）和进程号（PID-5720）。当作业完成时，作业会发送类似如下的信息到终端程序，来显示此作业已完成，其内容类似如下所示：
+<p class="info-box">
+	[1]+ Done&nbsp;&nbsp;&nbsp; sleep 10</p>
+将进程放在后台运行的好处是：你可以继续运行其他命令，而不需要等待此进程运行完成再运行其他命令。
+<h2>
+	进程的状态</h2>
+每个 Linux 进程都有它自己的生命周期，比如，创建、执行、结束和清除。每个进程也都有各自的状态，显示进程中当前正发生什么。<br>
+<br>
+进程可以有如下几种状态：
+<ul>
+	<li>
+		D（不可中断休眠状态）——进程正在休眠并且不能恢复，直到一个事件发生为止。</li>
+	<li>
+		R（运行状态）——进程正在运行。</li>
+	<li>
+		S（休眠状态）——进程没有在运行，而在等待一个事件或是信号。</li>
+	<li>
+		T（停止状态）——进程被信号停止，比如，信号 SIGINT 或 SIGSTOP。</li>
+	<li>
+		Z（僵死状态）——标记为 &lt;defunct&gt; 的进程是僵死的进程，它们之所以残留是因为它们的父进程适当地销毁它们。如果父进程退出，这些进程将被 init 进程销毁。</li>
+</ul>
+<br>
+若要查看指定进程的状态，可以使用如下命令：
+<p class="info-box">
+	ps -C processName -o pid=,cmd,stat</p>
+例如：
+<pre class="info-box">[c.biancheng.net]$ ps -C sleep -o pid=,cmd,stat
+      CMD       STAT
+9434 sleep 20    S</pre>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./3.16Linux进程简明教程_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3522.html">Bash Shell中的信号</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3495.html">使用什么命令查看进程</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/256.html" title="逻辑运算符及其优先级，C语言逻辑运算符及其优先级详解">逻辑运算符及其优先级，C语言逻辑运算符及其优先级详解</a></li>
+<li><a href="http://c.biancheng.net/view/1016.html" title="Linux内核（内核模块）的加载过程（超详细）">Linux内核（内核模块）的加载过程（超详细）</a></li>
+<li><a href="http://c.biancheng.net/view/1074.html" title="Linux nice和renice命令：改变进程优先级">Linux nice和renice命令：改变进程优先级</a></li>
+<li><a href="http://c.biancheng.net/view/1483.html" title="JSP response对象：响应客户端的请求并向客户端输出信息">JSP response对象：响应客户端的请求并向客户端输出信息</a></li>
+<li><a href="http://c.biancheng.net/view/1492.html" title="C++复制构造函数（详解版）">C++复制构造函数（详解版）</a></li>
+<li><a href="http://c.biancheng.net/view/1884.html" title="区块链是什么？超级详细，看了无师自通！">区块链是什么？超级详细，看了无师自通！</a></li>
+<li><a href="http://c.biancheng.net/view/3099.html" title="Android数据存储之SharedPreferences">Android数据存储之SharedPreferences</a></li>
+<li><a href="http://c.biancheng.net/view/6222.html" title="PHP static：静态方法和属性">PHP static：静态方法和属性</a></li>
+<li><a href="http://c.biancheng.net/mybatis/update.html" title="MyBatis update标签">MyBatis update标签</a></li>
+<li><a href="http://c.biancheng.net/mybatis/sql-dynamic.html" title="MyBatis动态SQL">MyBatis动态SQL</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 3521;
+window.arcId = "5507ohstFPbSSNCEjaLS/BHNF6qYqysWSF4LS48e9qOptpXHWqefX0xfdOc";
+window.typeidChain = "300|78";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./3.16Linux进程简明教程_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./3.16Linux进程简明教程_files/jquery1.12.4.min.js.下载"></script>
+<script src="./3.16Linux进程简明教程_files/common.js.下载"></script>
+<span style="display:none;"><script src="./3.16Linux进程简明教程_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

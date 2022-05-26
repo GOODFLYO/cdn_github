@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_7654.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/common.css" rel="stylesheet">
+<title>深度剖析Linux硬链接和软链接，直击它们的本质！</title>
+<meta name="description" content="通过学习《 Linux ln 命令 》一节可以看到，使用 ln 命令建立硬链接和软链接非常简单，那这两种链接有什么区别，它们各自的作用和特点又是什么？为了解开这些疑问，本节将对硬链接">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">3</span> <a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a> </dd><dl class="dl-sub"><dd>3.1 <a href="http://c.biancheng.net/view/3546.html">Linux文件系统的层次结构</a></dd><dd>3.2 <a href="http://c.biancheng.net/view/vip_5048.html">Linux文件系统到底有什么用处？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.3 <a href="http://c.biancheng.net/view/5862.html">Linux绝对路径和相对路径</a></dd><dd>3.4 <a href="http://c.biancheng.net/view/3608.html">Linux文件（目录）命名规则</a></dd><dd>3.5 <a href="http://c.biancheng.net/view/vip_7655.html">Linux命令行下，如何识别文件类型？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.6 <a href="http://c.biancheng.net/view/720.html">Linux命令基本格式</a></dd><dd>3.7 <a href="http://c.biancheng.net/view/722.html">Linux切换目录（cd命令）</a></dd><dd>3.8 <a href="http://c.biancheng.net/view/3620.html">Linux显示当前工作路径（pwd命令）</a></dd><dd>3.9 <a href="http://c.biancheng.net/view/721.html">linux查看目录中的文件（ls命令）</a></dd><dd>3.10 <a href="http://c.biancheng.net/view/723.html">Linux创建目录（mkdir命令）</a></dd><dd>3.11 <a href="http://c.biancheng.net/view/725.html">Linux删除空目录（rmdir命令）</a></dd><dd>3.12 <a href="http://c.biancheng.net/view/726.html">Linux创建文件及修改文件时间戳（touch命令）</a></dd><dd>3.13 <a href="http://c.biancheng.net/view/6313.html">Linux建立软/硬链接文件(ln命令)</a></dd><dd class="active">3.14 <a href="http://c.biancheng.net/view/vip_7654.html">深度剖析Linux硬链接和软链接，直击它们的本质！</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.15 <a href="http://c.biancheng.net/view/746.html">Linux复制文件和目录（cp命令）</a></dd><dd>3.16 <a href="http://c.biancheng.net/view/744.html">Linux删除文件或目录（rm命令）</a></dd><dd>3.17 <a href="http://c.biancheng.net/view/749.html">Linux移动或重命名文件和目录（mv命令）</a></dd><dd>3.18 <a href="http://c.biancheng.net/view/vip_7656.html">Linux懒人神器：命令自动补全功能！</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.19 <a href="http://c.biancheng.net/view/vip_7657.html">Linux命令的执行过程是怎样的？（新手必读）</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.20 <a href="http://c.biancheng.net/view/5970.html">什么是环境变量，Linux环境变量有哪些？</a></dd><dd>3.21 <a href="http://c.biancheng.net/view/vip_7658.html">Linux PATH环境变量是什么，有什么用？（入门必读）</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a></span>
+	<span class="read-num">阅读：9,374</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>深度剖析Linux硬链接和软链接，直击它们的本质！</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/6313.html">Linux建立软/硬链接文件(ln命令)</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/746.html">Linux复制文件和目录（cp命令）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">通过学习《<a href="http://c.biancheng.net/view/6313.html" target="_blank">Linux ln 命令</a>》一节可以看到，使用 ln 命令建立硬链接和软链接非常简单，那这两种链接有什么区别，它们各自的作用和特点又是什么？为了解开这些疑问，本节将对硬链接和软链接做深度剖析。
+<h2>
+	对硬链接的深度剖析</h2>
+首先，我们再来建立一个硬链接文件，然后看看这两个文件的特点。<br>
+<p class="info-box">
+	[root@localhost ~]# touch test<br>
+	#建立源文件<br>
+	[root@localhost ~]# ln /root/test /tmp/test-hard<br>
+	#给源文件建立硬链接文件 /tmp/test-hard<br>
+	[root@localhost ~]# ll -i /root/test /tmp/test-hard<br>
+	262147 -rw-r--r-- 2 root root 0 6月 19 10:06 /root/test<br>
+	hard<br>
+	262147 -rw-r--r-- 2 root root 0 6月 19 10:06 /tmp/test-hard<br>
+	#查看两个文件的详细信息，可以发现这两个文件的 inode 号是一样的，"ll"等同于"ls -l"。</p>
+这里有一件很奇怪的事情，我们之前在讲 inode 号的时候说过，每个文件的 inode 号都应该是不一样的。inode 号就相当于文件 ID，我们在查找文件的时候，要先查找 inode 号，才能读取到文件的内容。<br>
+<br>
+但是这里源文件和硬链接文件的 inode 号居然是一样的，那我们在查找文件的时候，到底找到的是哪一个文件呢？我们来画一张示意图，如图 2 所示。<br>
+<div style="text-align: center;">
+	<br>
+	<img alt="硬链接示意图" src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/2-1P92Q61533L3.jpg"><br>
+	图 2 硬链接示意图</div>
+<br>
+在 inode 信息中，是不会记录文件名称的，而是把文件名记录在上级目录的 block 中。也就是说，目录的 block 中记录的是这个目录下所有一级子文件和子目录的文件名及 inode 的对应；而文件的 block 中记录的才是文件实际的数据。<br>
+<br>
+当我们查找一个文件，比如 /root/test 时，要经过以下步骤：
+<ol>
+	<li>
+		首先找到根目录的 inode（根目录的 inode 是系统已知的，inode 号是 2），然后判断用户是否有权限访问根目录的 block。</li>
+	<li>
+		如果有权限，则可以在根目录的 block 中访问到 /root 的文件名及对应的 inode 号。</li>
+	<li>
+		通过 /root/ 目录的 inode 号，可以查找到 /root/ 目录的 inode 信息，接着判断用户是否有权限访问 /root/ 目录的 block。</li>
+	<li>
+		如果有权限，则可以从 /root/ 目录的 block 中读取到 test 文件的文件名及对应的 inode 号。</li>
+	<li>
+		通过 test 文件的 inode 号，就可以找到 test 文件的 inode 信息，接着判断用户是否有权限访问 test 文件的 block。</li>
+	<li>
+		如果有权限，则可以读取 block 中的数据，这样就完成了 /root/test 文件的读取与访问。</li>
+</ol>
+<br>
+按照这个步骤，在给源文件 /root/test 建立了硬链接文件 /tmp/test-hard 之后，在 /root/ 目录和 /tmp/ 目录的 block 中就会建立 test 和 test-hard 的信息，这个信息主要就是文件名和对应的 inode 号。但是我们会发现 test 和 test-hard 的 inode 信息居然是一样的，那么，我们无论访问哪个文件，最终都会访问 inode 号是 262147 的文件信息。<br>
+<br>
+这就是硬链接的原理。硬链接的特点如下：
+<ul>
+	<li>
+		不论是修改源文件（test 文件），还是修改硬链接文件（test-hard 文件），另一个文件中的数据都会发生改变。</li>
+	<li>
+		不论是删除源文件，还是删除硬链接文件，只要还有一个文件存在，这个文件（inode 号是 262147 的文件）都可以被访问。</li>
+	<li>
+		硬链接不会建立新的 inode 信息，也不会更改 inode 的总数。</li>
+	<li>
+		硬链接不能跨文件系统（分区）建立，因为在不同的文件系统中，inode 号是重新计算的。</li>
+	<li>
+		硬链接不能链接目录，因为如果给目录建立硬链接，那么不仅目录本身需要重新建立，目录下所有的子文件，包括子目录中的所有子文件都需要建立硬链接，这对当前的 Linux 来讲过于复杂。</li>
+</ul>
+<br>
+硬链接的限制比较多，既不能跨文件系统，也不能链接目录，而且源文件和硬链接文件之间除 inode 号是一样的之外，没有其他明显的特征。这些特征都使得硬链接并不常用，大家有所了解就好。<br>
+<br>
+我们通过实验来测试一下。
+<p class="info-box">
+	[root@localhost ~]# echo 1111 &gt;&gt;/root/test<br>
+	#向源文件中写入数据<br>
+	[root@localhost ~]# cat /root/test<br>
+	1111<br>
+	[root@localhost ~]# cat /tmp/test-hard<br>
+	1111<br>
+	#源文件和硬链接文件都会发生改变<br>
+	[root@localhost ~]# echo 2222 &gt;&gt; /tmp/test-hard<br>
+	#向硬链接文件中写入数据<br>
+	[root@localhost ~]# cat /root/test<br>
+	1111<br>
+	2222<br>
+	[root@localhost ~】# cat /tmp/test-hard<br>
+	1111<br>
+	2222<br>
+	#源文件和硬链接文件也都会发生改变<br>
+	[root@localhost ~]# rm -rf/root/test<br>
+	#删除源文件<br>
+	[root@localhost ~]# cat /tmp/test-hard<br>
+	1111 2222<br>
+	#硬链接文件依然可常读取</p>
+<h2>
+	对软链接的深度剖析</h2>
+<span style="color: rgb(0, 128, 0);">软链接</span>也称作<span style="color: rgb(0, 128, 0);">符号链接</span>，相比硬链接来讲，软链接就要常用多了。我们先建立一个软链接，再来看看软链接的特点。<br>
+<p class="info-box">
+	[root@localhost ~]# touch check<br>
+	#建立源文件<br>
+	[root@localhost ~]# ln -s /root/check /tmp/check-soft<br>
+	#建立软链接文件<br>
+	[root@localhost ~]# ll -id /root/check /tmp/check-soft<br>
+	262154 -rw-r--r-- 1 root root 0 6月 19 11:30 /root/check<br>
+	917507 lrwxrwxrwx 1 root root 11 6月 19 11:31 /tmp/ check-soft -&gt; /root/check<br>
+	#软链接和源文件的 inode 号不一致，软链接通过 -&gt; 明显地标识出源文件的位置<br>
+	#在软链接的权限位 lrwxrwxrwx 中，l 就代表软链接文件</p>
+再强调一下，软链接的源文件必须写绝对路径，否则建立的软链接文件就会报错，无法正常使用。<br>
+<br>
+软链接的标志非常明显，首先，权限位中"l"表示这是一个软链接文件；其次，在文件的后面通过 "-&gt;" 显示出源文件的完整名字。所以软链接比硬链接的标志要明显得多，而且软链接也不像硬链接的限制那样多，比如软链接可以链接目录，也可以跨分区来建立软链接。<br>
+<br>
+软链接完全可以当作 Windows 的快捷方式来对待，它的特点和快捷方式一样，我们更推荐大家使用软链接，而不是硬链接。<br>
+<br>
+大家在学习软链接的时候会有一些疑问：Windows 的快捷方式是由于源文件放置的位置过深，不容易找到，建立一个快捷方式放在桌面，方便查找，那 Linux 的软链接的作用是什么呢？<br>
+<br>
+笔者个人觉得，软链接主要是为了照顾管理员的使用习惯。比如，有些系统的自启动文件 /etc/rc.local 放置在 /etc 目录中，而有些系统却将其放置在 /etc/rc.d/rc.local 中，那么干脆对这两个文件建立软链接，不论你习惯操作哪一个文件，结果都是一样的。<br>
+<br>
+如果你比较细心，则应该已经发现软链接和源文件的 inode 号是不一致的，我们也画一张示意图来看看软链接的原理，如图 3 所示。<br>
+<div style="text-align: center;">
+	<br>
+	<img alt="软链接示意图" src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/2-1P92Q62012157.jpg"><br>
+	图 3 软链接示意图</div>
+<br>
+软链接和硬链接在原理上最主要的不同在于：硬链接不会建立自己的 inode 索引和 block（数据块），而是直接指向源文件的 inode 信息和 block，所以硬链接和源文件的 inode 号是一致的；而软链接会真正建立自己的 inode 索引和 block，所以软链接和源文件的 inode 号是不一致的，而且在软链接的 block 中，写的不是真正的数据，而仅仅是源文件的文件名及 inode 号。<br>
+<br>
+我们来看看访问软链接的步骤和访问硬链接的步骤有什么不同。<br>
+<ol>
+	<li>
+		首先找到根目录的 inode 索引信息，然后判断用户是否有权限访问根目录的 block。</li>
+	<li>
+		如果有权限访问根目录的 block，就会在 block 中查找到 /tmp/ 目录的 inode 号。</li>
+	<li>
+		接着访问 /tmp/ 目录的 inode 信息，判断用户是否有权限访问 /tmp/ 目录的 block。</li>
+	<li>
+		如果有权限，就会在 block 中读取到软链接文件 check-soft 的 inode 号。因为软链接文件会真正建立自己的 inode 索引和 block，所以软链接文件和源文件的 inode 号是不一样的。</li>
+	<li>
+		通过软链接文件的 inode 号，找到了 check-soft 文件 inode 信息，判断用户是否有权限访问 block。</li>
+	<li>
+		如果有权限，就会发现 check-soft 文件的 block 中没有实际数据，仅有源文件 check 的 inode 号。</li>
+	<li>
+		接着通过源文件的 inode 号，访问到源文件 check 的 inode 信息，判断用户是否有权限访问 block。</li>
+	<li>
+		如果有权限，就会在 check 文件的 block 中读取到真正的数据，从而完成数据访问。</li>
+</ol>
+<br>
+通过这个过程，我们就可以总结出软链接的特点（软链接的特点和 Windows 中的快捷方式完全一致）。<br>
+<ul>
+	<li>
+		不论是修改源文件（check），还是修改硬链接文件（check-soft)，另一个文件中的数据都会发生改变。</li>
+	<li>
+		删除软链接文件，源文件不受影响。而删除原文件，软链接文件将找不到实际的数据，从而显示文件不存在。</li>
+	<li>
+		软链接会新建自己的 inode 信息和 block，只是在 block 中不存储实际文件数据，而存储的是源文件的文件名及 inode 号。</li>
+	<li>
+		软链接可以链接目录。</li>
+	<li>
+		软链接可以跨分区。</li>
+</ul>
+<br>
+我们测试一下软链接的特性。
+<p class="info-box">
+	[root@localhost ~]# echo 111&gt;&gt;/root/check<br>
+	#修改源文件<br>
+	[root@localhost ~]# cat /root/check<br>
+	111<br>
+	[root@localhost ~]# cat /tmp/check-soft<br>
+	111<br>
+	#不论是源文件还是软链接文件，数据都发生改变<br>
+	[root@localhost ~]# echo 2222 &gt;&gt;/tmp/check-soft<br>
+	#修改软链接文件<br>
+	[root@localhost ~]# cat /tmp/check-soft<br>
+	111<br>
+	2222<br>
+	[root@localhost ~]# cat /root/check<br>
+	111<br>
+	2222<br>
+	#不论是源文件还是软链接文件，数据也都会发生改变<br>
+	[root@localhost ~]# rm -rf/root/check<br>
+	#删除源文件<br>
+	[root@localhost ~]# cat /tmp/check-soft<br>
+	cat: /tmp/check-soft:没有那个文件或目录<br>
+	#软链接无法正常使用</p>
+软链接是可以链接目录的，例如：<br>
+<p class="info-box">
+	[root@localhost ~]# mkdir test<br>
+	#建立源目录<br>
+	[root@localhost ~]# ln -s /root/test/ /tmp/<br>
+	[root@localhost ~]# ll -d /tmp/test<br>
+	lrwxrwxrwx 1 root root 11 6月 19 12:43 /tmp/test-&gt;/root/test/<br>
+	#软链接可以链接目录</p>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/6313.html">Linux建立软/硬链接文件(ln命令)</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/746.html">Linux复制文件和目录（cp命令）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/mysql/dayofweek.html" title="MySQL DAYOFWEEK函数：获取日期对应的周索引">MySQL DAYOFWEEK函数：获取日期对应的周索引</a></li>
+<li><a href="http://c.biancheng.net/view/vip_3356.html" title="[数据结构实践项目]括号匹配算法（C语言实现）">[数据结构实践项目]括号匹配算法（C语言实现）</a></li>
+<li><a href="http://c.biancheng.net/view/3714.html" title="汇编语言MACRO和ENDM伪指令：定义宏">汇编语言MACRO和ENDM伪指令：定义宏</a></li>
+<li><a href="http://c.biancheng.net/view/4784.html" title="Go语言函数的底层实现">Go语言函数的底层实现</a></li>
+<li><a href="http://c.biancheng.net/view/4858.html" title="JSP Out.flush()方法：清空当前缓冲区">JSP Out.flush()方法：清空当前缓冲区</a></li>
+<li><a href="http://c.biancheng.net/view/6138.html" title="PHP字符串拼接（连接）">PHP字符串拼接（连接）</a></li>
+<li><a href="http://c.biancheng.net/view/6223.html" title="PHP构造方法和析构方法（__construct和__desctruct）">PHP构造方法和析构方法（__construct和__desctruct）</a></li>
+<li><a href="http://c.biancheng.net/view/7530.html" title="URL结构解析">URL结构解析</a></li>
+<li><a href="http://c.biancheng.net/view/7882.html" title="jQuery removeAttr()方法删除属性">jQuery removeAttr()方法删除属性</a></li>
+<li><a href="http://c.biancheng.net/mybatis/one-to-one.html" title="MyBatis一对一关联查询">MyBatis一对一关联查询</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 7654;
+window.arcId = "c54dQ5tuRJdhRFT19iCwq5420FezXLEQLOCKa3JjJ/6vOPTDOMdz0OniSik";
+window.typeidChain = "267|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/jquery1.12.4.min.js.下载"></script>
+<script src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/common.js.下载"></script>
+<span style="display:none;"><script src="./3.14深度剖析Linux硬链接和软链接，直击它们的本质！_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

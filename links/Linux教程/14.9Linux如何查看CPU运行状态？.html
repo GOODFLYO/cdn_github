@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_7662.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./14.9Linux如何查看CPU运行状态？_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./14.9Linux如何查看CPU运行状态？_files/common.css" rel="stylesheet">
+<title>Linux如何查看CPU运行状态？</title>
+<meta name="description" content="CPU 是影响 Linux 性能的主要因素之一，本节将介绍几个可以用来查看 CPU 性能的命令。 Linux CPU性能分析：vmstat命令 vmstat 命令可以显示关于系统各种资源之间相关性能的简要信息，在 《">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./14.9Linux如何查看CPU运行状态？_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">14</span> <a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a> </dd><dl class="dl-sub"><dd>14.1 <a href="http://c.biancheng.net/view/1048.html">Linux系统服务</a></dd><dd>14.2 <a href="http://c.biancheng.net/view/1050.html">linux端口</a></dd><dd>14.3 <a href="http://c.biancheng.net/view/1053.html">Linux独立服务管理</a></dd><dd>14.4 <a href="http://c.biancheng.net/view/1054.html">Linux基于xinetd服务的管理</a></dd><dd>14.5 <a href="http://c.biancheng.net/view/1058.html">Linux源码包服务管理</a></dd><dd>14.6 <a href="http://c.biancheng.net/view/1059.html">Linux常见服务类别及功能</a></dd><dd>14.7 <a href="http://c.biancheng.net/view/6153.html">影响Linux系统性能的因素有哪些？</a></dd><dd>14.8 <a href="http://c.biancheng.net/view/6212.html">Linux分析系统性能（sar命令）</a></dd><dd class="active">14.9 <a href="http://c.biancheng.net/view/vip_7662.html">Linux如何查看CPU运行状态？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>14.10 <a href="http://c.biancheng.net/view/vip_7663.html">Linux如何查看内存的使用情况？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>14.11 <a href="http://c.biancheng.net/view/vip_7664.html">Linux如何查看硬盘的读写性能？</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a></span>
+	<span class="read-num">阅读：3,248</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux如何查看CPU运行状态？</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/6212.html">Linux分析系统性能（sar命令）</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_7663.html">Linux如何查看内存的使用情况？</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">CPU 是影响 Linux 性能的主要因素之一，本节将介绍几个可以用来查看 CPU 性能的命令。<br>
+<h2>
+	Linux CPU性能分析：vmstat命令</h2>
+vmstat 命令可以显示关于系统各种资源之间相关性能的简要信息，在 《<a href="http://c.biancheng.net/view/1081.html" target="_blank">Linux vmstat命令</a>》一节中，我们已经对此命令的基本格式和用法做了详细的介绍，因此不再赘述，这里主要用它来看 CPU 的一个负载情况。<br>
+<br>
+下面是 vmstat 命令在当前测试系统中的输出结果：
+<pre class="info-box">[root@localhost ~]# vmstat 2 3
+procs -----------memory---------- ---swap-- -----io---- --system-- -----cpu-----
+r  b   swpd   free   buff  cache   si   so    bi    bo   in   cs us sy id wa st
+1  0      8 247512  39660 394168    0    0    31     8   86  269  0  1 98  1  0
+0  0      8 247480  39660 394172    0    0     0     0   96  147  4  0 96  0  0
+0  0      8 247484  39660 394172    0    0     0    66   95  141  2  2 96  0  0</pre>
+通过分析 vmstat 命令的执行结果，可以获得一些与当前 Linux 运行性能相关的信息。比如说：
+<ul>
+	<li>
+		r 列表示运行和等待 CPU 时间片的进程数，如果这个值长期大于系统 CPU 的个数，就说明 CPU 不足，需要增加 CPU。</li>
+	<li>
+		swpd 列表示切换到内存交换区的内存数量（以 kB 为单位）。如果 swpd 的值不为 0，或者比较大，而且 si、so 的值长期为 0，那么这种情况下一般不用担心，不用影响系统性能。</li>
+	<li>
+		cache 列表示缓存的内存数量，一般作为文件系统缓存，频繁访问的文件都会被缓存。如果缓存值较大，就说明缓存的文件数较多，如果此时 I/O 中 bi 比较小，就表明文件系统效率比较好。</li>
+	<li>
+		一般情况下，si（数据由硬盘调入内存）、so（数据由内存调入硬盘） 的值都为 0，如果 si、so 的值长期不为 0，则表示系统内存不足，需要增加系统内存。</li>
+	<li>
+		如果 bi+bo 的参考值为 1000 甚至超过 1000，而且 wa 值较大，则表示系统磁盘 I/O 有问题，应该考虑提高磁盘的读写性能。</li>
+	<li>
+		输出结果中，CPU 项显示了 CPU 的使用状态，其中当 us 列的值较高时，说明用户进程消耗的 CPU 时间多，如果其长期大于 50%，就需要考虑优化程序或算法；sy 列的值较高时，说明内核消耗的 CPU 资源较多。通常情况下，us+sy 的参考值为 80%，如果其值大于 80%，则表明可能存在 CPU 资源不足的情况。</li>
+</ul>
+<br>
+总的来说，vmstat 命令的输出结果中，我们应该重点注意 procs 项中 r 列的值，以及 CPU 项中 us 列、sy 列和 id 列的值。<br>
+<h2>
+	Linux CPU性能分析：sar命令</h2>
+除了 vmstat 命令，sar 命令也可以用来检查 CPU 性能，它可以对系统的每个方面进行单独的统计。<br>
+<blockquote>
+	<p>
+		注意，虽然使用 sar 命令会增加系统开销，不过这些开销是可以评估的，不会对系统性能的统计结果产生很大影响。</p>
+</blockquote>
+和 vmstat 命令一样，sar 命令的基本格式和用法已经在 《<a href="http://c.biancheng.net/view/6212.html" target="_blank">Linux sar命令</a>》一节中做了详细的介绍，接下来直接学习如何使用 sar 命令查看 CPU 性能。<br>
+<br>
+下面是 sar 命令对当前测试系统的 CPU 统计输出结果：<br>
+<pre class="info-box">[root@localhost ~]# sar -u 3 5
+Linux 2.6.32-431.el6.x86_64 (localhost)  10/28/2019  _x86_64_ (8 CPU)
+
+04:02:46 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+04:02:49 AM     all      1.69      0.00      2.03      0.00      0.00     96.27
+04:02:52 AM     all      1.68      0.00      0.67      0.34      0.00     97.31
+04:02:55 AM     all      2.36      0.00      1.69      0.00      0.00     95.95
+04:02:58 AM     all      0.00      0.00      1.68      0.00      0.00     98.32
+04:03:01 AM     all      0.33      0.00      0.67      0.00      0.00     99.00
+Average:        all      1.21      0.00      1.35      0.07      0.00     97.37</pre>
+此输出结果统计的是系统中包含的 8 颗 CPU 的整体运行状况，每项的输出都非常直观，其中最后一行（Average）是汇总行，是对上面统计信息的一个平均值。<br>
+<blockquote>
+	<p>
+		需要指出的是，sar 输出结果中第一行包含了 sar 命令本身的统计消耗，因此 %user 列的值会偏高一点，但这并不会对统计结果产生很大影响。</p>
+</blockquote>
+另外，在一个多 CPU 的系统中，如果程序使用了单线程，就会出现“CPU 整体利用率不高，但系统应用响应慢”的现象，造成此现象的原因在于，单线程只使用一个 CPU，该 CPU 占用率为 100%，无法处理其他请求，但除此之外的其他 CPU 却处于闲置状态，进而整体 CPU 使用率并不高。<br>
+<br>
+针对这个问题，可以使用 sar 命令单独查看系统中每个 CPU 的运行状态，例如：
+<pre class="info-box">[root@localhost ~]# sar -P 0 3 5
+Linux 2.6.32-431.el6.x86_64 (localhost)  10/28/2019  _x86_64_ (8 CPU)
+
+04:44:57 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+04:45:00 AM       0      8.93      0.00      1.37      0.00      0.00     89.69
+04:45:03 AM       0      6.83      0.00      1.02      0.00      0.00     92.15
+04:45:06 AM       0      0.67      0.00      0.33      0.33      0.00     98.66
+04:45:09 AM       0      0.67      0.00      0.33      0.00      0.00     99.00
+04:45:12 AM       0      2.38      0.00      0.34      0.00      0.00     97.28
+Average:          0      3.86      0.00      0.68      0.07      0.00     95.39</pre>
+注意，sar 命令对系统中 CPU 的计数是从数字 0 开始的，因此上面执行的命令表示对系统中第一颗 CPU 的运行状态进行统计。如果想单独统计系统中第 5 颗 CPU 的运行状态，可以执行<code>sar -P 4 3 5</code>命令。<br>
+<h2>
+	Linux CPU性能分析：iostat命令</h2>
+iostat 命令主要用于统计磁盘 I/O 状态，但也能用来查看 CPU 的使用情况，只不过使用此命令仅能显示系统所有 CPU 的平均状态，无法向 sar 命令那样做具体分析。<br>
+<br>
+使用 iostat 命令查看 CPU 运行状态，需要使用该命令提供的 -c 选项，该选项的作用是仅显示系统 CPU 的运行情况。例如：<br>
+<pre class="info-box">[root@localhost ~]# iostat -c
+Linux 2.6.32-431.el6.x86_64 (localhost)  10/28/2019  _x86_64_ (8 CPU)
+
+avg-cpu:  %user   %nice %system %iowait  %steal   %idle
+           0.07    0.00    0.12    0.09    0.00   99.71</pre>
+可以看到，此输出结果中包含的项和 sar 命令的输出项完全相同。<br>
+<blockquote>
+	<p>
+		有关 iostat 命令的基本用法，由于不是本节重点，因为不再详细介绍。</p>
+</blockquote>
+<h2>
+	Linux CPU性能分析：uptime命令</h2>
+uptime 命令是监控系统性能最常用的一个命令，主要用来统计系统当前的运行状况。例如：
+<pre class="info-box">[root@localhost ~]# uptime
+05:38:26 up  1:47,  2 users,  load average: 0.12, 0.08, 0.08</pre>
+该命令的输出结果中，各个数据所代表的含义依次是：系统当前时间、系统运行时长、当前登陆系统的用户数量、系统分别在 1 分钟、5 分钟和 15 分钟内的平均负载。<br>
+<br>
+这里需要注意的是，load average 这 3 个输出值一般不能大于系统 CPU 的个数。例如，本测试系统有 8 个 CPU，如果 load average 中这 3 个值长期大于 8，就说明 CPU 很繁忙，负载很高，系统性能可能会受到影响；如果偶尔大于 8 则不用担心，系统性能一般不会受到影响；如果这 3 个值小于 CPU 的个数（如本例所示），则表示 CPU 是非常空闲的。<br>
+<br>
+总的来说，本节介绍了 4 个可查看 CPU 性能的命令，但这些命令也仅能查看 CPU 是否繁忙、负载是否过大，无法知道造成这种现象的根本原因。因此，在明确判断出系统 CPU 出现问题之后，还要结合 top、ps 等命令，进一步检查出是哪些进程造成的。<br>
+<br>
+另外要知道的是，引发 CPU 资源紧张的原因有多个，可能是应用程序不合理造成的，也可能是硬件资源匮乏引起的。因此，要学会具体问题具体分析，或者优化应用程序，或者增加系统 CPU 资源。<br>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./14.9Linux如何查看CPU运行状态？_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/6212.html">Linux分析系统性能（sar命令）</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_7663.html">Linux如何查看内存的使用情况？</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/432.html" title="C++ deque使用、创建及初始化详解">C++ deque使用、创建及初始化详解</a></li>
+<li><a href="http://c.biancheng.net/view/741.html" title="Bash Shell的安装和升级（源码安装）">Bash Shell的安装和升级（源码安装）</a></li>
+<li><a href="http://c.biancheng.net/view/954.html" title="Shell（Bash）小括号和大括号用法及区别">Shell（Bash）小括号和大括号用法及区别</a></li>
+<li><a href="http://c.biancheng.net/view/1957.html" title="基于DBN实现情绪检测（详解版）">基于DBN实现情绪检测（详解版）</a></li>
+<li><a href="http://c.biancheng.net/view/vip_3241.html" title="结合文件描述符谈重定向，彻底理解重定向的本质！">结合文件描述符谈重定向，彻底理解重定向的本质！</a></li>
+<li><a href="http://c.biancheng.net/view/vip_3359.html" title="栈和队列是线性结构（包含栈和队列的区别和共同点）">栈和队列是线性结构（包含栈和队列的区别和共同点）</a></li>
+<li><a href="http://c.biancheng.net/view/5269.html" title="Spring queryForLong方法：long类型单值查询方法">Spring queryForLong方法：long类型单值查询方法</a></li>
+<li><a href="http://c.biancheng.net/view/6521.html" title="为什么使用向上转型而不直接创建子类对象？">为什么使用向上转型而不直接创建子类对象？</a></li>
+<li><a href="http://c.biancheng.net/view/7621.html" title="PHP Session是什么">PHP Session是什么</a></li>
+<li><a href="http://c.biancheng.net/view/9359.html" title="JS RegExp（正则表达式）对象">JS RegExp（正则表达式）对象</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 7662;
+window.arcId = "7552t9HnmyyjqN7gg1GMeYZQ1bpTXb0e6mICX0GHs3cuGb3uRzywg+n2aR8";
+window.typeidChain = "102|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./14.9Linux如何查看CPU运行状态？_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./14.9Linux如何查看CPU运行状态？_files/jquery1.12.4.min.js.下载"></script>
+<script src="./14.9Linux如何查看CPU运行状态？_files/common.js.下载"></script>
+<span style="display:none;"><script src="./14.9Linux如何查看CPU运行状态？_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

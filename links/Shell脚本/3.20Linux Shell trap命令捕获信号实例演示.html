@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_3506.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./3.20Linux Shell trap命令捕获信号实例演示_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./3.20Linux Shell trap命令捕获信号实例演示_files/common.css" rel="stylesheet">
+<title>Linux Shell trap命令捕获信号实例演示</title>
+<meta name="description" content="通过前面内容的学习，我们已经知道，信号多用于以友好的方式结束一个进程的执行，即允许进程在退出之前有机会做一些清理工作。然而，信号同样还可用于其他用途。例如，当终端">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./3.20Linux Shell trap命令捕获信号实例演示_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<h4><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/shell/">Shell</a></h4>
+	<dl id="contents">
+		<dt><a href="http://c.biancheng.net/shell/base/">Shell基础（开胃菜）</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/706.html">Shell是什么</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/731.html">Shell是运维人员必须掌握的技能</a>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_4555.html">常用的Shell有哪些？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/733.html">进入Shell的两种方式</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/3163.html">Shell命令的基本格式</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3229.html">Shell命令的本质到底是什么？如何自己实现一个命令？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3230.html">Shell命令的选项和参数在本质上是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/3175.html">Shell命令提示符</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3279.html">修改命令提示符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/735.html">第一个Shell脚本</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/739.html">执行Shell脚本</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3231.html">Shell四种运行方式（启动方式）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3232.html">Shell配置文件（配置脚本）的加载</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3233.html">如何编写自己的Shell配置文件？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/program/">Shell编程</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/743.html">Shell变量</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_4558.html">Shell变量的作用域（精讲）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/1164.html">Shell命令替换</a>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/789.html">Shell位置参数</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/806.html">Shell特殊变量</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_4559.html">Shell $*和$@之间的区别</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/808.html">Shell $?</a>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/821.html">Shell字符串详解</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/1114.html">Shell字符串拼接</a>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/1120.html">Shell字符串截取</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/810.html">Shell数组</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/812.html">Shell获取数组长度</a>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/818.html">Shell数组拼接</a>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/819.html">Shell删除数组元素</a>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3234.html">Shell关联数组</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/1136.html">Shell内建命令</a>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/1138.html">Shell alias命令</a>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/1142.html">Shell echo命令</a>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/2991.html">Shell read命令</a>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/1145.html">Shell exit命令</a>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/2709.html">Shell declare和typeset命令</a>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/1169.html">Shell数学计算</a>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/2480.html">Shell (())</a>
+		</dd>
+<dd>24.<a href="http://c.biancheng.net/view/2504.html">Shell let命令</a>
+		</dd>
+<dd>25.<a href="http://c.biancheng.net/view/vip_3235.html">Shell $[]</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>26.<a href="http://c.biancheng.net/view/vip_3236.html">Shell expr命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>27.<a href="http://c.biancheng.net/view/vip_3237.html">Linux bc命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>28.<a href="http://c.biancheng.net/view/vip_3238.html">Shell declare -i</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>29.<a href="http://c.biancheng.net/view/1262.html">Shell if else</a>
+		</dd>
+<dd>30.<a href="http://c.biancheng.net/view/2735.html">Shell退出状态</a>
+		</dd>
+<dd>31.<a href="http://c.biancheng.net/view/2742.html">Shell test命令</a>
+		</dd>
+<dd>32.<a href="http://c.biancheng.net/view/2751.html">Shell [[]]</a>
+		</dd>
+<dd>33.<a href="http://c.biancheng.net/view/2767.html">Shell case in</a>
+		</dd>
+<dd>34.<a href="http://c.biancheng.net/view/1006.html">Shell while</a>
+		</dd>
+<dd>35.<a href="http://c.biancheng.net/view/1007.html">Shell until</a>
+		</dd>
+<dd>36.<a href="http://c.biancheng.net/view/2804.html">Shell for</a>
+		</dd>
+<dd>37.<a href="http://c.biancheng.net/view/2829.html">Shell select in</a>
+		</dd>
+<dd>38.<a href="http://c.biancheng.net/view/1011.html">Shell break和continue</a>
+		</dd>
+<dd>39.<a href="http://c.biancheng.net/view/1009.html">Shell函数</a>
+		</dd>
+<dd>40.<a href="http://c.biancheng.net/view/2860.html">Shell函数参数</a>
+		</dd>
+<dd>41.<a href="http://c.biancheng.net/view/vip_3239.html">Shell函数返回值精讲</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/942.html">Shell重定向</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3240.html">Linux中的文件描述符到底是什么？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3241.html">结合文件描述符谈重定向，彻底理解重定向的本质！</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/vip_3242.html">使用exec命令操作文件描述符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/vip_3243.html">Shell代码块重定向</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3244.html">Shell Here Document</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3245.html">Shell Here String</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/vip_3246.html">Shell组命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3247.html">Shell进程替换</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/3131.html">Linux管道</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/3472.html">Shell过滤器</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3248.html">子Shell和子进程到底有什么区别？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3249.html">如何检测子Shell和子进程？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3520.html">Linux中的信号是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3522.html">Bash Shell中的信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/vip_3521.html">Linux进程简明教程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/vip_3495.html">使用什么命令查看进程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/vip_3497.html">Shell向进程发送信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/vip_3499.html">使用trap命令获取信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd class="active">20.<a href="http://c.biancheng.net/view/vip_3506.html">trap命令捕获信号实例演示</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/vip_3507.html">移除（重置）信号捕获</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/vip_3508.html">关于进程、信号和捕获的总结</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/vip_3250.html">Shell模块化（把代码分散到多个脚本文件中）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/shortcut/">Bash Shell快捷键</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/vip_3509.html">Bash Shell快捷键大全</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3510.html">Bash Shell命令自动补全功能</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3512.html">Bash Shell历史命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+
+	</dl>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/shell/">Shell</a> &gt; <a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></span>
+	<span class="read-num">阅读：1,897</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux Shell trap命令捕获信号实例演示</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3499.html">使用trap命令获取信号</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3507.html">移除（重置）信号捕获</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">通过前面内容的学习，我们已经知道，信号多用于以友好的方式结束一个进程的执行，即允许进程在退出之前有机会做一些清理工作。然而，信号同样还可用于其他用途。例如，当终端窗口的大小改变时，在此窗口中运行的 Shell 都会接收到信号 SIGWINCH。通常，这个信号是被忽略的，但是，如果一个程序关心窗口大小的变化，它就可以捕获这个信号，并用特定的方式处理它。
+<blockquote>
+	注意：除 SIGKILL 信号以外，其他任何信号都可以被捕获并通过调用C语言函数 signal 处理。</blockquote>
+接下来，我就以一个脚本为实例演示捕获并处理 SIGWINCH 信号。我们创建名为 sigwinch_handler.sh 的脚本，其内容如下所示：
+<div class="snippet-container" style="undefined;"><div class="sh_bright snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display: none;"><pre><a class="snippet-copy sh_url" href="http://c.biancheng.net/view/vip_3506.html#" style="display: none;">复制</a><a class="snippet-text sh_url" href="http://c.biancheng.net/view/vip_3506.html#">纯文本</a><a class="snippet-window sh_url" href="http://c.biancheng.net/view/vip_3506.html#">复制</a></pre></div><pre class="sh sh_sh snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#!/bin/bash</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#打印信息</span></li><li>echo <span class="sh_string">"Adjust the size of your window now."</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#捕获SIGWINCH信号</span></li><li><span class="sh_keyword">trap</span> <span class="sh_string">"echo Window size changed."</span> SIGWINCH</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#定义变量</span></li><li>COUNT <span class="sh_variable">COUNT</span><span class="sh_symbol">=</span><span class="sh_number">0</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#while循环30次</span></li><li><span class="sh_keyword">while</span> <span class="sh_symbol">[</span> <span class="sh_variable">$C0UNT</span> <span class="sh_normal">-lt</span> <span class="sh_number">30</span> <span class="sh_symbol">];</span> <span class="sh_keyword">do</span></li><li>    <span class="sh_comment">#将COUNT变量的值加1</span></li><li>    <span class="sh_variable">COUNT</span><span class="sh_symbol">=</span><span class="sh_variable">$(</span><span class="sh_symbol">(</span><span class="sh_variable">$C0UNT</span> <span class="sh_symbol">+</span> <span class="sh_number">1</span><span class="sh_symbol">))</span></li><li>    <span class="sh_comment">#休眠1秒</span></li><li>    sleep <span class="sh_number">1</span></li><li><span class="sh_keyword">done</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">#!/bin/bash
+
+#打印信息
+echo "Adjust the size of your window now."
+
+#捕获SIGWINCH信号
+trap "echo Window size changed." SIGWINCH
+
+#定义变量
+COUNT COUNT=0
+
+#while循环30次
+while [ $C0UNT -lt 30 ]; do
+    #将COUNT变量的值加1
+    COUNT=$(($C0UNT + 1))
+    #休眠1秒
+    sleep 1
+done</pre></div></div>
+当上述的 Shell 脚本运行时，若改变了此脚本运行所在终端窗口的大小，脚本的进程就会收到 SIGWINCH 信号，从而调用 chwinsize 函数，以作出相应的处理。此脚本的运行结果将类似如下所示：
+<pre class="info-box">[c.biancheng.net]$ chmod +x sigwinch_handler.sh
+[c.biancheng.net]$ ./sigwinch_handler.sh
+Adjust the size of your window now.
+Window size changed.
+Window size changed.</pre>
+<br>
+我们通过上一节《<a href="http://c.biancheng.net/view/3499.html" target="_blank">trap命令</a>》的学习已经知道，在 trap 命令中可以调用函数来处理相应的信号。下面我们就以脚本 trapbg_clearup.sh 为例，来进一步学习如何使用 trap 语句调用函数来处理信号，其脚本内容如下所示：
+<div class="snippet-container" style="undefined;"><div class="sh_bright snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre><a class="snippet-copy sh_url" href="http://c.biancheng.net/view/vip_3506.html#" style="display: none;">复制</a><a class="snippet-text sh_url" href="http://c.biancheng.net/view/vip_3506.html#">纯文本</a><a class="snippet-window sh_url" href="http://c.biancheng.net/view/vip_3506.html#">复制</a></pre></div><pre class="sh sh_sh snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#!/bin/bash</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#捕获INT和QUIT信号，如果收到这两个信号，则执行函数 my_exit 后退出</span></li><li><span class="sh_keyword">trap</span> <span class="sh_string">'my_exit; exit'</span> SIGINT SIGQUIT</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#捕获HUP信号</span></li><li><span class="sh_keyword">trap</span> <span class="sh_string">'echo Going down on a SIGHUP - signal 1, no exiting...; exit'</span> SIGHUP</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#定义count变量</span></li><li><span class="sh_variable">count</span><span class="sh_symbol">=</span><span class="sh_number">0</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#创建临时文件</span></li><li><span class="sh_variable">tmp_file</span><span class="sh_symbol">=</span>`mktemp <span class="sh_normal">/tmp/file</span><span class="sh_symbol">.</span><span class="sh_variable">$$</span><span class="sh_symbol">.</span>XXXXXX`</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#定义函数my_exit</span></li><li><span class="sh_function">my_exit()</span></li><li>{</li><li>    echo <span class="sh_string">"You hit Ctrl-C/CtrI-</span><span class="sh_specialchar">\,</span><span class="sh_string"> now exiting..."</span></li><li>    <span class="sh_comment">#清除临时文件</span></li><li>    rm <span class="sh_normal">-f</span> <span class="sh_variable">$tmp_file</span> <span class="sh_symbol">&gt;&amp;</span> <span class="sh_normal">/dev/null</span></li><li>}</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#向临时文件写入信息</span></li><li>echo <span class="sh_string">"Do someting..."</span> <span class="sh_symbol">&gt;</span> <span class="sh_variable">$tmp_file</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#执行无限while循环</span></li><li><span class="sh_keyword">while</span> <span class="sh_symbol">:</span></li><li><span class="sh_keyword">do</span></li><li>    <span class="sh_comment">#休眠1秒</span></li><li>    sleep <span class="sh_number">1</span></li><li>    <span class="sh_comment">#将count变量的值加1</span></li><li>    <span class="sh_variable">count</span><span class="sh_symbol">=</span><span class="sh_variable">$(</span>expr <span class="sh_variable">$count</span> <span class="sh_symbol">+</span> <span class="sh_number">1</span><span class="sh_symbol">)</span></li><li>    <span class="sh_comment">#打印count变量的值</span></li><li>    echo <span class="sh_variable">$count</span></li><li><span class="sh_keyword">done</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">#!/bin/bash
+
+#捕获INT和QUIT信号，如果收到这两个信号，则执行函数 my_exit 后退出
+trap 'my_exit; exit' SIGINT SIGQUIT
+
+#捕获HUP信号
+trap 'echo Going down on a SIGHUP - signal 1, no exiting...; exit' SIGHUP
+
+#定义count变量
+count=0
+
+#创建临时文件
+tmp_file=`mktemp /tmp/file.$$.XXXXXX`
+
+#定义函数my_exit
+my_exit()
+{
+    echo "You hit Ctrl-C/CtrI-\, now exiting..."
+    #清除临时文件
+    rm -f $tmp_file &gt;&amp; /dev/null
+}
+
+#向临时文件写入信息
+echo "Do someting..." &gt; $tmp_file
+
+#执行无限while循环
+while :
+do
+    #休眠1秒
+    sleep 1
+    #将count变量的值加1
+    count=$(expr $count + 1)
+    #打印count变量的值
+    echo $count
+done</pre></div></div>
+当上述脚本运行时，接收到 SIGINT 或 SIGQUIT 信号后会调用 my_exit 函数后退出（trap 命令列表中的 exit 命令），my_exit 函数会做一些清理临时文件的操作。我们运行此脚本，然后在另一个终端窗口中查看此脚本创建的临时文件：
+<p class="info-box">
+	[c.biancheng.net]$ ls -trl /tmp/ | tail -l</p>
+将会看到类似如下的文件信息：
+<p class="info-box">
+	-rw------- 1 mozhiyan mozhiyan 15 Feb 6 22:09 file.6668.RI6669</p>
+<br>
+现在，在脚本运行的终端窗口，我们输入 Ctrl+C 或 Ctrl+\ 组合键来终结或退出此脚本， 将会看到类似如下的信息：
+<pre class="info-box">[c.biancheng.net]$ ./trapbg_clearup.sh
+1
+2
+3
+4
+5
+6
+7
+8
+9
+You hit Ctrl+C/Ctrl+\, now exiting...</pre>
+<br>
+然后我们再查看一下脚本创建的临时文件是否巳被清理：
+<pre class="info-box">[c.biancheng.net]$ ls -l /tmp/file.6668.RI6669
+ls: /tmp/file.6668.RI6669: No such file or directory</pre>
+<br>
+当脚本运行在后台时，同样可以捕获信号。我们将上例中的脚本 trapbg_clearup.sh 放在后台运行：
+<pre class="info-box">[c.biancheng.net]$ ./trapbg_clearup.sh &amp;
+[1] 16957
+[c.biancheng.net]$ 1
+2
+3</pre>
+<br>
+现在从另一个终端窗口，发送 HUP 信号来杀掉这个运行脚本的进程：
+<pre class="info-box">[c.biancheng.net]$ kill -l 16957</pre>
+<br>
+现在，在脚本运行的终端窗口，将看到类似如下的信息：
+<pre class="info-box">[c.biancheng.net]$ ./trapbg_clearup.sh &amp;
+[1] 16957
+[c.biancheng.net]$ 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+Going down on a SIGHUP - signal 1, now exiting...
+[1]+ Done    ./trapbg_clearup.sh</pre>
+<h2>
+	LINENO 和 BASH_COMMAND 变量</h2>
+Bash Shell 中有两个内部变量可以方便地在处理信号时，为我们提供更多的与脚本终结相关的信息。这两个变埴分别是 LINENO 和 BASH_COMMAND。BASH_COMMAND是 Bash 中特有的。这两个变量分别用于报告脚本当前执行的行号和脚本当前运行的命令。<br>
+<br>
+下面，我们以脚本 trap_report.sh 为实例，学习如何在脚本中使用变量 LINENO 和 BASH_COMMAND 在脚本终结时为我们提供更多的错误信息，其脚本内容类似如下所示：
+<div class="snippet-container" style="undefined;"><div class="sh_bright snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre><a class="snippet-copy sh_url" href="http://c.biancheng.net/view/vip_3506.html#" style="display: none;">复制</a><a class="snippet-text sh_url" href="http://c.biancheng.net/view/vip_3506.html#">纯文本</a><a class="snippet-window sh_url" href="http://c.biancheng.net/view/vip_3506.html#">复制</a></pre></div><pre class="sh sh_sh snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#!/bin/bash</span></li><li><span class="sh_comment">#捕获SIGHUP、SIGINT和SIGQUIT信号。如果收到这些信号，将执行函数my_exit后退出</span></li><li><span class="sh_keyword">trap</span> <span class="sh_string">'my_exit $LINENO $BASH_COMMAND; exit'</span> SIGHUP SIGINT SIGQUIT</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#函数my_exit</span></li><li><span class="sh_function">my_exit()</span></li><li>{</li><li>    <span class="sh_comment">#打印脚本名称，及信号被捕获时所运行的命令和行号</span></li><li>    echo <span class="sh_string">"$(basename $0) caught error on line : $1 command was: $2"</span></li><li><span style="display:none;">&nbsp;</span></li><li>    <span class="sh_comment">#将信息记录到系统日志中</span></li><li>    logger <span class="sh_normal">-p</span> notice <span class="sh_string">"script: $(basename $0) was terminated: line: $1, command was $2"</span></li><li><span style="display:none;">&nbsp;</span></li><li>    <span class="sh_comment">#其他一些清埋命令</span></li><li>}</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#执行无限while循环</span></li><li><span class="sh_keyword">while</span> <span class="sh_symbol">:</span></li><li><span class="sh_keyword">do</span></li><li>    <span class="sh_comment">#休眠1秒</span></li><li>    sleep <span class="sh_number">1</span></li><li>    <span class="sh_comment">#将变量count的值加1</span></li><li>    <span class="sh_variable">count</span><span class="sh_symbol">=</span><span class="sh_variable">$(</span>expr <span class="sh_variable">$count</span> <span class="sh_symbol">+</span> <span class="sh_number">1</span><span class="sh_symbol">)</span></li><li>    <span class="sh_comment">#打印count变量的值</span></li><li>    echo <span class="sh_variable">$count</span></li><li><span class="sh_keyword">done</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">#!/bin/bash
+#捕获SIGHUP、SIGINT和SIGQUIT信号。如果收到这些信号，将执行函数my_exit后退出
+trap 'my_exit $LINENO $BASH_COMMAND; exit' SIGHUP SIGINT SIGQUIT
+
+#函数my_exit
+my_exit()
+{
+    #打印脚本名称，及信号被捕获时所运行的命令和行号
+    echo "$(basename $0) caught error on line : $1 command was: $2"
+
+    #将信息记录到系统日志中
+    logger -p notice "script: $(basename $0) was terminated: line: $1, command was $2"
+
+    #其他一些清埋命令
+}
+
+#执行无限while循环
+while :
+do
+    #休眠1秒
+    sleep 1
+    #将变量count的值加1
+    count=$(expr $count + 1)
+    #打印count变量的值
+    echo $count
+done</pre></div></div>
+当上述脚本运行时，向脚本发送 SIGHUP、SIGINT 和 SIGQUIT 信号后，脚本将会调用 my_exit 函数，此函数将解析参数 $l(LINENO) 和 $2(BASH_COMMAND)，显示信号被捕获时脚本所运行的命令及其行号，同样 logger 语句会记录信息到日志文件 /var/log/messages 中。如果需要，还可以在此函数中执行一些清理命令，然后脚本将会退出（trap 命令列表中的 exit 命令）。<br>
+<br>
+此脚木的运行结果将会类似如下所示：
+<pre class="info-box">[c.biancheng.net]$ ./trap_report.sh
+1
+2
+3
+4
+5
+trap_report.sh caught error on line : 34 command was: sleep</pre>
+<br>
+在 /var/log/messages 文件中，将会看到一条类似如下的记录：
+<p class="info-box">
+	Feb 7 16:48:13 localhost mozhiyan: script: trap_report.sh was terminated: line: 34, command was sleep</p>
+<br>
+我们在上一节《<a href="http://c.biancheng.net/view/3499.html" target="_blank">trap命令</a>》中已经学习了，使用 trap 语句可以忽略信号。你也同样可以在脚本的—部分中忽略某些信号，然后，当你希望捕获这些信号时，可以重新定义它们来采取一些行动。我们以脚本 trapoff_on.sh 为例，在此脚本中我们将忽略信号 SIGINT 和 SIGQUIT，直到 sleep 命令结束运行后为止。然后当下一个 sleep 命令开始时，如果接收到终结信号，trap 语句将采取相应的行动。<br>
+<br>
+其脚木的内容如下所示：
+<div class="snippet-container" style="undefined;"><div class="sh_bright snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre><a class="snippet-copy sh_url" href="http://c.biancheng.net/view/vip_3506.html#" style="display: none;">复制</a><a class="snippet-text sh_url" href="http://c.biancheng.net/view/vip_3506.html#">纯文本</a><a class="snippet-window sh_url" href="http://c.biancheng.net/view/vip_3506.html#">复制</a></pre></div><pre class="sh sh_sh snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_comment">#!/bin/bash</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#忽略SIGINT和SIGQUIT信号</span></li><li><span class="sh_keyword">trap</span> <span class="sh_string">' '</span> SIGINT SIGQUIT</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#打印提示信息</span></li><li>echo <span class="sh_string">"You cannot terminate using ctrl+c or ctrl+</span><span class="sh_specialchar">\!</span><span class="sh_string">"</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#休眠10秒</span></li><li>sleep <span class="sh_number">10</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#重新捕获SIGINT和SIGQUIT信号。如果捕获到这两个信号，则打印信息后退出</span></li><li><span class="sh_comment">#现在可以中断脚本了</span></li><li><span class="sh_keyword">trap</span> <span class="sh_string">'echo Terminated!; exit'</span> SIGINT SIGQUIT</li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#打印提示信息</span></li><li>echo <span class="sh_string">"OK! You can now terminate me using those keystrokes"</span></li><li><span style="display:none;">&nbsp;</span></li><li><span class="sh_comment">#休眠10秒</span></li><li>sleep <span class="sh_number">10</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">#!/bin/bash
+
+#忽略SIGINT和SIGQUIT信号
+trap ' ' SIGINT SIGQUIT
+
+#打印提示信息
+echo "You cannot terminate using ctrl+c or ctrl+\!"
+
+#休眠10秒
+sleep 10
+
+#重新捕获SIGINT和SIGQUIT信号。如果捕获到这两个信号，则打印信息后退出
+#现在可以中断脚本了
+trap 'echo Terminated!; exit' SIGINT SIGQUIT
+
+#打印提示信息
+echo "OK! You can now terminate me using those keystrokes"
+
+#休眠10秒
+sleep 10</pre></div></div>
+此脚本的运行结果将类似如下所示：
+<pre class="info-box">[c.biancheng.net]$ chmod +x trapoff_on.sh
+[c.biancheng.net]$ ./trapoff_on.sh
+You cannot terminate using ctrl+c or ctrl+\!
+OK! You can now terminate me using those keystrokes.
+Terminated!</pre>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./3.20Linux Shell trap命令捕获信号实例演示_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3499.html">使用trap命令获取信号</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3507.html">移除（重置）信号捕获</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/915.html" title="Java统计商品信息">Java统计商品信息</a></li>
+<li><a href="http://c.biancheng.net/view/925.html" title="Java sort()数组排序（升序和降序）">Java sort()数组排序（升序和降序）</a></li>
+<li><a href="http://c.biancheng.net/view/1131.html" title="linux phpmyadmin安装及配置过程（超详细）">linux phpmyadmin安装及配置过程（超详细）</a></li>
+<li><a href="http://c.biancheng.net/view/1533.html" title="C++ getline函数用法（无师自通）">C++ getline函数用法（无师自通）</a></li>
+<li><a href="http://c.biancheng.net/view/2835.html" title="C# IndexOf和LastIndexOf：查找字符串中的字符">C# IndexOf和LastIndexOf：查找字符串中的字符</a></li>
+<li><a href="http://c.biancheng.net/view/3577.html" title="使用汇编语言实现IF语句">使用汇编语言实现IF语句</a></li>
+<li><a href="http://c.biancheng.net/view/4669.html" title="Python创建包，导入包（入门必读）">Python创建包，导入包（入门必读）</a></li>
+<li><a href="http://c.biancheng.net/view/8237.html" title="PHP MySQL事务处理">PHP MySQL事务处理</a></li>
+<li><a href="http://c.biancheng.net/view/8310.html" title="成为一名DBA需要具备什么能力？">成为一名DBA需要具备什么能力？</a></li>
+<li><a href="http://c.biancheng.net/view/9347.html" title="JS for of循环语句的用法">JS for of循环语句的用法</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 3506;
+window.arcId = "47baWNkV4lvE3+pIGLNKRRzvz9307ft7eYasS+pNizwb11+nuhnmHks2uPs";
+window.typeidChain = "300|78";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./3.20Linux Shell trap命令捕获信号实例演示_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./3.20Linux Shell trap命令捕获信号实例演示_files/jquery1.12.4.min.js.下载"></script>
+<script src="./3.20Linux Shell trap命令捕获信号实例演示_files/common.js.下载"></script>
+<span style="display:none;"><script src="./3.20Linux Shell trap命令捕获信号实例演示_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

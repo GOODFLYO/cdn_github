@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_5062.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./5.11Vim配置文件（.vimrc）详解_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./5.11Vim配置文件（.vimrc）详解_files/common.css" rel="stylesheet">
+<title>Vim配置文件（.vimrc）详解</title>
+<meta name="description" content="Vim 启动时，会根据配置文件（.vimrc）来设置 Vim，因此我们可以通过此文件来定制适合自己的 Vim。 Vim 配置文件分为系统配置文件和用户配置文件： 系统配置文件位于 Vim 的安装目录（默">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./5.11Vim配置文件（.vimrc）详解_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">5</span> <a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a> </dd><dl class="dl-sub"><dd>5.1 <a href="http://c.biancheng.net/view/3005.html">Vim及其安装</a></dd><dd>5.2 <a href="http://c.biancheng.net/view/vip_5059.html">Vi和Vim之间到底有什么关系？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>5.3 <a href="http://c.biancheng.net/view/804.html">Linux Vim三种工作模式</a></dd><dd>5.4 <a href="http://c.biancheng.net/view/805.html">Linux Vim基本操作</a></dd><dd>5.5 <a href="http://c.biancheng.net/view/3008.html">Vim移动光标命令汇总</a></dd><dd>5.6 <a href="http://c.biancheng.net/view/6332.html">Linux Vim撤销和恢复撤销快捷键</a></dd><dd>5.7 <a href="http://c.biancheng.net/view/6355.html">Linux Vim可视化模式</a></dd><dd>5.8 <a href="http://c.biancheng.net/view/vip_5060.html">Vim多窗口编辑模式</a><span class="glyphicon glyphicon-usd"></span></dd><dd>5.9 <a href="http://c.biancheng.net/view/813.html">Linux Vim批量注释和自定义注释</a></dd><dd>5.10 <a href="http://c.biancheng.net/view/vip_5061.html">Vim显示行号</a><span class="glyphicon glyphicon-usd"></span></dd><dd class="active">5.11 <a href="http://c.biancheng.net/view/vip_5062.html">Vim配置文件（.vimrc）详解</a><span class="glyphicon glyphicon-usd"></span></dd><dd>5.12 <a href="http://c.biancheng.net/view/vip_7659.html">如何在Vim中执行Linux命令？</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a></span>
+	<span class="read-num">阅读：7,383</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Vim配置文件（.vimrc）详解</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5061.html">Vim显示行号</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_7659.html">如何在Vim中执行Linux命令？</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">Vim 启动时，会根据配置文件（.vimrc）来设置 Vim，因此我们可以通过此文件来定制适合自己的 Vim。<br>
+<br>
+Vim 配置文件分为系统配置文件和用户配置文件：<br>
+<ul>
+	<li>
+		系统配置文件位于 Vim 的安装目录（默认路径为 /etc/.vimrc）；</li>
+	<li>
+		用户配置文件位于主目录 ~/.vimrc，即通过执行 <code>vim ~/.vimrc</code> 命令即可对此配置文件进行合理修改。通常情况下，Vim 用户配置文件需要自己手动创建。</li>
+</ul>
+<br>
+注意，Vim 用户配置文件比系统配置文件的优先级高，换句话说，Vim 启动时，会优先读取 Vim 用户配置文件（位于主目录中的），所以我们只需要修改用户配置文件即可（不建议直接修改系统配置文件）。<br>
+<br>
+Vim 提供的环境配置参数有很多，本节不一一列举，大家可以在 Vim 中输入“：set all”指令来查询，本节仅对常用的几个功能设置做详细介绍。<br>
+<br>
+<table>
+	<caption>
+		表 1 Vim环境设置参数</caption>
+	<tbody>
+		<tr>
+			<th>
+				设置参数</th>
+			<th>
+				功能描述</th>
+		</tr>
+		<tr>
+			<td>
+				set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936<br>
+				set termencoding=utf-8<br>
+				set encoding=utf-8</td>
+			<td>
+				设置编码格式，encoding 选项用于缓存的文本、寄存器、Vim 脚本文件等；fileencoding 选项是 Vim 写入文件时采用的编码类型；termencoding 选项表示输出到终端时采用的编码类型。</td>
+		</tr>
+		<tr>
+			<td>
+				set nu<br>
+				set number</td>
+			<td>
+				nu 是 number 的缩写，所以上面两个配置命令是完全等效的，二选一即可。取消行号可使用 set nonu。</td>
+		</tr>
+		<tr>
+			<td>
+				set cursorline</td>
+			<td>
+				突出显示当前行。</td>
+		</tr>
+		<tr>
+			<td>
+				set mouse=a<br>
+				set selection=exclusive<br>
+				set selectmode=mouse,key</td>
+			<td>
+				Vim 编辑器里默认是不启用鼠标的，通过此设置即可启动鼠标。</td>
+		</tr>
+		<tr>
+			<td>
+				set autoindent</td>
+			<td>
+				设置自动缩进，即每行的缩进同上一节相同。</td>
+		</tr>
+		<tr>
+			<td>
+				set tabstop=4</td>
+			<td>
+				设置 Tab 键宽度为 4 个空格。</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+注意，表中各配置参数前面可以添加冒号（：），也可以省略，两种写法都可以。<br>
+<br>
+通过以上方式，可以对用户配置文件（.vimrc）进行编辑，进而实现对 Vim 的永久自定义。
+<p class="info-box">
+	在 Vim 编辑模式中，通过 “:set nu” 命令也可以让 Vim 显示行号，但只是临时有效，下次使用 Vim 编辑文件还是不显示行号。而本节介绍的编辑配置文件设置 Vim 的方式，对 Vim 的设置是永久的。</p>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./5.11Vim配置文件（.vimrc）详解_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5061.html">Vim显示行号</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_7659.html">如何在Vim中执行Linux命令？</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/linux/Vim.html" title="Vim">Vim</a></li>
+<li><a href="http://c.biancheng.net/view/1301.html" title="CSS注释">CSS注释</a></li>
+<li><a href="http://c.biancheng.net/view/1495.html" title="JSP config对象">JSP config对象</a></li>
+<li><a href="http://c.biancheng.net/mysql/ceil_celing.html" title="MySQL CEIL和CELING函数：向上取整">MySQL CEIL和CELING函数：向上取整</a></li>
+<li><a href="http://c.biancheng.net/view/3456.html" title="CPU处理器架构和工作原理浅析">CPU处理器架构和工作原理浅析</a></li>
+<li><a href="http://c.biancheng.net/view/7224.html" title="3D游戏引擎的原理和架构">3D游戏引擎的原理和架构</a></li>
+<li><a href="http://c.biancheng.net/view/7547.html" title="Django模板变量精讲">Django模板变量精讲</a></li>
+<li><a href="http://c.biancheng.net/jstl/c-out.html" title="&lt;c:out&gt;标签">&lt;c:out&gt;标签</a></li>
+<li><a href="http://c.biancheng.net/matplotlib/axes-formatting.html" title="Matplotlib坐标轴格式">Matplotlib坐标轴格式</a></li>
+<li><a href="http://c.biancheng.net/pygame/sprite.html" title="Pygame精灵和碰撞检测">Pygame精灵和碰撞检测</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 5062;
+window.arcId = "1a02eRxVr7Dz0/mWuQnnH+2EyCk/CK6wlocnUTqIdLMeAN82s2Wp7YqqwtA";
+window.typeidChain = "83|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./5.11Vim配置文件（.vimrc）详解_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./5.11Vim配置文件（.vimrc）详解_files/jquery1.12.4.min.js.下载"></script>
+<script src="./5.11Vim配置文件（.vimrc）详解_files/common.js.下载"></script>
+<span style="display:none;"><script src="./5.11Vim配置文件（.vimrc）详解_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

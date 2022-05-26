@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_3248.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./3.12子Shell和子进程到底有什么区别？_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./3.12子Shell和子进程到底有什么区别？_files/common.css" rel="stylesheet">
+<title>子Shell和子进程到底有什么区别？</title>
+<meta name="description" content="Shell 中有很多方法产生子进程，比如以新进程的方式运行 Shell 脚本，使用组命令、管道、命令替换等，但是这些子进程是有区别的。 子进程的概念是由父进程的概念引申而来的。在 L">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./3.12子Shell和子进程到底有什么区别？_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<h4><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/shell/">Shell</a></h4>
+	<dl id="contents">
+		<dt><a href="http://c.biancheng.net/shell/base/">Shell基础（开胃菜）</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/706.html">Shell是什么</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/731.html">Shell是运维人员必须掌握的技能</a>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_4555.html">常用的Shell有哪些？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/733.html">进入Shell的两种方式</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/3163.html">Shell命令的基本格式</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3229.html">Shell命令的本质到底是什么？如何自己实现一个命令？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3230.html">Shell命令的选项和参数在本质上是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/3175.html">Shell命令提示符</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3279.html">修改命令提示符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/735.html">第一个Shell脚本</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/739.html">执行Shell脚本</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3231.html">Shell四种运行方式（启动方式）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3232.html">Shell配置文件（配置脚本）的加载</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3233.html">如何编写自己的Shell配置文件？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/program/">Shell编程</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/743.html">Shell变量</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_4558.html">Shell变量的作用域（精讲）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/1164.html">Shell命令替换</a>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/789.html">Shell位置参数</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/806.html">Shell特殊变量</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_4559.html">Shell $*和$@之间的区别</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/808.html">Shell $?</a>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/821.html">Shell字符串详解</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/1114.html">Shell字符串拼接</a>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/1120.html">Shell字符串截取</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/810.html">Shell数组</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/812.html">Shell获取数组长度</a>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/818.html">Shell数组拼接</a>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/819.html">Shell删除数组元素</a>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3234.html">Shell关联数组</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/1136.html">Shell内建命令</a>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/1138.html">Shell alias命令</a>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/1142.html">Shell echo命令</a>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/2991.html">Shell read命令</a>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/1145.html">Shell exit命令</a>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/2709.html">Shell declare和typeset命令</a>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/1169.html">Shell数学计算</a>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/2480.html">Shell (())</a>
+		</dd>
+<dd>24.<a href="http://c.biancheng.net/view/2504.html">Shell let命令</a>
+		</dd>
+<dd>25.<a href="http://c.biancheng.net/view/vip_3235.html">Shell $[]</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>26.<a href="http://c.biancheng.net/view/vip_3236.html">Shell expr命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>27.<a href="http://c.biancheng.net/view/vip_3237.html">Linux bc命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>28.<a href="http://c.biancheng.net/view/vip_3238.html">Shell declare -i</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>29.<a href="http://c.biancheng.net/view/1262.html">Shell if else</a>
+		</dd>
+<dd>30.<a href="http://c.biancheng.net/view/2735.html">Shell退出状态</a>
+		</dd>
+<dd>31.<a href="http://c.biancheng.net/view/2742.html">Shell test命令</a>
+		</dd>
+<dd>32.<a href="http://c.biancheng.net/view/2751.html">Shell [[]]</a>
+		</dd>
+<dd>33.<a href="http://c.biancheng.net/view/2767.html">Shell case in</a>
+		</dd>
+<dd>34.<a href="http://c.biancheng.net/view/1006.html">Shell while</a>
+		</dd>
+<dd>35.<a href="http://c.biancheng.net/view/1007.html">Shell until</a>
+		</dd>
+<dd>36.<a href="http://c.biancheng.net/view/2804.html">Shell for</a>
+		</dd>
+<dd>37.<a href="http://c.biancheng.net/view/2829.html">Shell select in</a>
+		</dd>
+<dd>38.<a href="http://c.biancheng.net/view/1011.html">Shell break和continue</a>
+		</dd>
+<dd>39.<a href="http://c.biancheng.net/view/1009.html">Shell函数</a>
+		</dd>
+<dd>40.<a href="http://c.biancheng.net/view/2860.html">Shell函数参数</a>
+		</dd>
+<dd>41.<a href="http://c.biancheng.net/view/vip_3239.html">Shell函数返回值精讲</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/942.html">Shell重定向</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3240.html">Linux中的文件描述符到底是什么？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3241.html">结合文件描述符谈重定向，彻底理解重定向的本质！</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/vip_3242.html">使用exec命令操作文件描述符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/vip_3243.html">Shell代码块重定向</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3244.html">Shell Here Document</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3245.html">Shell Here String</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/vip_3246.html">Shell组命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3247.html">Shell进程替换</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/3131.html">Linux管道</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/3472.html">Shell过滤器</a>
+		</dd>
+<dd class="active">12.<a href="http://c.biancheng.net/view/vip_3248.html">子Shell和子进程到底有什么区别？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3249.html">如何检测子Shell和子进程？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3520.html">Linux中的信号是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3522.html">Bash Shell中的信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/vip_3521.html">Linux进程简明教程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/vip_3495.html">使用什么命令查看进程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/vip_3497.html">Shell向进程发送信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/vip_3499.html">使用trap命令获取信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/vip_3506.html">trap命令捕获信号实例演示</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/vip_3507.html">移除（重置）信号捕获</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/vip_3508.html">关于进程、信号和捕获的总结</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/vip_3250.html">Shell模块化（把代码分散到多个脚本文件中）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/shortcut/">Bash Shell快捷键</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/vip_3509.html">Bash Shell快捷键大全</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3510.html">Bash Shell命令自动补全功能</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3512.html">Bash Shell历史命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+
+	</dl>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/shell/">Shell</a> &gt; <a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></span>
+	<span class="read-num">阅读：3,901</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>子Shell和子进程到底有什么区别？</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/3472.html">Shell过滤器</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3249.html">如何检测子Shell和子进程？</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">Shell 中有很多方法产生子进程，比如以新进程的方式运行 Shell 脚本，使用组命令、管道、命令替换等，但是这些子进程是有区别的。<br>
+<br>
+子进程的概念是由父进程的概念引申而来的。在 Linux 系统中，系统运行的应用程序几乎都是从 init（pid为 1 的进程）进程派生而来的，所有这些应用程序都可以视为 init 进程的子进程，而 init 则为它们的父进程。<br>
+<br>
+使用<code style="font-size: 14px;">pstree -p</code>命令就可以看到 init 及系统中其他进程的进程树信息（包括 pid）：
+<pre class="info-box">systemd(1)─┬─ModemManager(796)─┬─{ModemManager}(821)
+            │                     └─{ModemManager}(882)
+            ├─NetworkManager(975)─┬─{NetworkManager}(1061)
+            │                       └─{NetworkManager}(1077)
+            ├─abrt-watch-log(774)
+            ├─abrt-watch-log(776)
+            ├─abrtd(773)
+            ├─accounts-daemon(806)─┬─{accounts-daemon}(839)
+            │                        └─{accounts-daemon}(883)
+            ├─alsactl(768)
+            ├─at-spi-bus-laun(1954)─┬─dbus-daemon(1958)───{dbus-daemon}(1960)
+            │                         ├─{at-spi-bus-laun}(1955)
+            │                         ├─{at-spi-bus-laun}(1957)
+            │                         └─{at-spi-bus-laun}(1959)
+            ├─at-spi2-registr(1962)───{at-spi2-registr}(1965)
+            ├─atd(842)
+            ├─auditd(739)─┬─audispd(753)─┬─sedispatch(757)
+            │               │                └─{audispd}(759)
+            │               └─{auditd}(752)</pre>
+本教程基于 CentOS 7 编写，CentOS 7 为了提高启动速度使用&nbsp;systemd 替代了 init。CentOS 7 之前的版本依然使用 init。<br>
+<br>
+Shell 脚本是从上至下、从左至右依次执行的，即执行完一个命令之后再执行下一个。如果在 Shell 脚本中遇到子脚本（即脚本嵌套，但是必须以新进程的方式运行）或者外部命令，就会向系统内核申请创建一个新的进程，以便在该进程中执行子脚本或者外部命令，这个新的进程就是子进程。子进程执行完毕后才能回到父进程，才能继续执行父脚本中后续的命令及语句。<br>
+<br>
+<div style="text-align: center;">
+	<img alt="子Shell和子进程" src="./3.12子Shell和子进程到底有什么区别？_files/1-1Z4191AJ2A0.gif"></div>
+<h2>
+	子进程的创建</h2>
+了解 Linux 编程的读者应该知道，使用 fork() 函数可以创建一个子进程；除了 PID（进程ID）等极少的参数不同外，子进程的一切都来自父进程，包括代码、数据、堆栈、打开的文件等，就连代码的执行位置（状态）都是一样的。<br>
+<br>
+也就是说，fork() 克隆了一个一模一样的自己，身高、体重、颜值、嗓音、年龄等各种属性都相同。当然，后期随着各自的发展轨迹不同，两者会变得不一样，比如 A 好吃懒做越来越肥，B 经常健身成了一个肌肉男；但是在 fork() 出来的那一刻，两者都是一样的。<br>
+<br>
+Linux 还有一种创建子进程的方式，就是子进程被 fork() 出来以后立即调用 exec() 函数加载新的可执行文件，而不使用从父进程继承来的一切。什么意思呢？<br>
+<br>
+比如在 ~/bin 目录下有两个可执行文件分别叫 a.out 和 b.out。现在我运行 a.out，就会产生一个进程，比如叫做 A。在进程 A 中我又调用 fork() 函数创建了一个进程 B，那么 B 就是 A 的子进程，此时它们是一模一样的。但是，我调用 fork() 后立即又调用 exec() 去加载 b.out，这可就坏事了，B 进程中的一切（包括代码、数据、堆栈等）都会被销毁，然后再根据 b.out 重建建立一切。这样一折腾，B 进程除了 ID 没有变，其它的都变了，再也没有属于 A 的东西了。<br>
+<br>
+你看，同样是创建子进程，但是结果却大相径庭：
+<ul>
+	<li>
+		第一种只使用 fork() 函数，子进程和父进程几乎是一模一样的，父进程中的函数、变量、别名等在子进程中仍然有效。</li>
+	<li>
+		第二种使用 fork() 和 exec() 函数，子进程和父进程之间除了硬生生地维持一种“父子关系”外，再也没有任何联系了，它们就是两个完全不同的程序。</li>
+</ul>
+<br>
+对于 Shell 来说，以新进程的方式运行脚本文件，比如<code>bash ./test.sh</code>、<code>chmod +x ./test.sh; ./test.sh</code>，或者在当前 Shell 中使用 bash 命令启动新的 Shell，它们都属于第二种创建子进程的方式，所以子进程除了能继承父进程的环境变量外，基本上也不能使用父进程的什么东西了，比如，父进程的全局变量、局部变量、文件描述符、别名等在子进程中都无效。<br>
+<br>
+但是，组命令、命令替换、管道这几种语法都使用第一种方式创建进程，所以子进程可以使用父进程的一切，包括全局变量、局部变量、别名等。我们将这种子进程称为<span style="color:#006400;"><strong>子 Shell（sub shell）</strong></span>。<br>
+<br>
+子 Shell 虽然能使用父 Shell 的的一切，但是如果子 Shell 对数据做了修改，比如修改了全局变量，那么这种修改只能停留在子 Shell，无法传递给父 Shell。不管是子进程还是子 Shell，都是“传子不传父”。
+<h2>
+	总结</h2>
+子 Shell 才是真正继承了父进程的一切，这才像“一个模子刻出来的”；普通子进程和父进程是完全不同的两个程序，只是维持着父子关系而已。<br>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./3.12子Shell和子进程到底有什么区别？_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/3472.html">Shell过滤器</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3249.html">如何检测子Shell和子进程？</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/244.html" title="C++重载()（强制类型转换运算符）">C++重载()（强制类型转换运算符）</a></li>
+<li><a href="http://c.biancheng.net/view/1080.html" title="Linux nohup命令：后台命令脱离终端运行">Linux nohup命令：后台命令脱离终端运行</a></li>
+<li><a href="http://c.biancheng.net/view/1156.html" title="SELinux策略规则查看方法（seinfo和sesearch）详解">SELinux策略规则查看方法（seinfo和sesearch）详解</a></li>
+<li><a href="http://c.biancheng.net/view/1404.html" title="C++类对象作为函数参数传递详解">C++类对象作为函数参数传递详解</a></li>
+<li><a href="http://c.biancheng.net/view/3569.html" title="Hadoop HDFS分布式文件系统简介">Hadoop HDFS分布式文件系统简介</a></li>
+<li><a href="http://c.biancheng.net/view/vip_5905.html" title="C语言贪吃蛇小游戏源码下载和思路解析">C语言贪吃蛇小游戏源码下载和思路解析</a></li>
+<li><a href="http://c.biancheng.net/view/vip_6000.html" title="Python元组和列表的区别">Python元组和列表的区别</a></li>
+<li><a href="http://c.biancheng.net/spring_mvc/controller-requestmapping.html" title="Spring MVC @Controller和@RequestMapping注解">Spring MVC @Controller和@RequestMapping注解</a></li>
+<li><a href="http://c.biancheng.net/redis2/hincrby.html" title="Redis HINCRBY命令">Redis HINCRBY命令</a></li>
+<li><a href="http://c.biancheng.net/redis2/incrbyfloat.html" title="Redis INCRBYFLOAT命令">Redis INCRBYFLOAT命令</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 3248;
+window.arcId = "776c2ljFivwPakZ3+IYSZZHUq+l7pO4qnJhrVT9sO1OdZQu0+Ewc2n6igIk";
+window.typeidChain = "300|78";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./3.12子Shell和子进程到底有什么区别？_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./3.12子Shell和子进程到底有什么区别？_files/jquery1.12.4.min.js.下载"></script>
+<script src="./3.12子Shell和子进程到底有什么区别？_files/common.js.下载"></script>
+<span style="display:none;"><script src="./3.12子Shell和子进程到底有什么区别？_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

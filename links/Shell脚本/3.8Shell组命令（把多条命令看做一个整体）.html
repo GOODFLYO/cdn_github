@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_3246.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./3.8Shell组命令（把多条命令看做一个整体）_files/core.php"></script><script async="" src="./3.8Shell组命令（把多条命令看做一个整体）_files/click.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./3.8Shell组命令（把多条命令看做一个整体）_files/common.css" rel="stylesheet">
+<title>Shell组命令（把多条命令看做一个整体）</title>
+<meta name="description" content="所谓组命令，就是将多个命令划分为一组，或者看成一个整体。 Shell 组命令的写法有两种： { command1; command2; command3; . . . } (command1; command2; command3;. . . ) 两种写法的区别在于：由花括号">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./3.8Shell组命令（把多条命令看做一个整体）_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<h4><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/shell/">Shell</a></h4>
+	<dl id="contents">
+		<dt><a href="http://c.biancheng.net/shell/base/">Shell基础（开胃菜）</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/706.html">Shell是什么</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/731.html">Shell是运维人员必须掌握的技能</a>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_4555.html">常用的Shell有哪些？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/733.html">进入Shell的两种方式</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/3163.html">Shell命令的基本格式</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3229.html">Shell命令的本质到底是什么？如何自己实现一个命令？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3230.html">Shell命令的选项和参数在本质上是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/3175.html">Shell命令提示符</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3279.html">修改命令提示符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/735.html">第一个Shell脚本</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/739.html">执行Shell脚本</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3231.html">Shell四种运行方式（启动方式）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3232.html">Shell配置文件（配置脚本）的加载</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3233.html">如何编写自己的Shell配置文件？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/program/">Shell编程</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/743.html">Shell变量</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_4558.html">Shell变量的作用域（精讲）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/1164.html">Shell命令替换</a>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/789.html">Shell位置参数</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/806.html">Shell特殊变量</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_4559.html">Shell $*和$@之间的区别</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/808.html">Shell $?</a>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/821.html">Shell字符串详解</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/1114.html">Shell字符串拼接</a>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/1120.html">Shell字符串截取</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/810.html">Shell数组</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/812.html">Shell获取数组长度</a>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/818.html">Shell数组拼接</a>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/819.html">Shell删除数组元素</a>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3234.html">Shell关联数组</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/1136.html">Shell内建命令</a>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/1138.html">Shell alias命令</a>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/1142.html">Shell echo命令</a>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/2991.html">Shell read命令</a>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/1145.html">Shell exit命令</a>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/2709.html">Shell declare和typeset命令</a>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/1169.html">Shell数学计算</a>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/2480.html">Shell (())</a>
+		</dd>
+<dd>24.<a href="http://c.biancheng.net/view/2504.html">Shell let命令</a>
+		</dd>
+<dd>25.<a href="http://c.biancheng.net/view/vip_3235.html">Shell $[]</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>26.<a href="http://c.biancheng.net/view/vip_3236.html">Shell expr命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>27.<a href="http://c.biancheng.net/view/vip_3237.html">Linux bc命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>28.<a href="http://c.biancheng.net/view/vip_3238.html">Shell declare -i</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>29.<a href="http://c.biancheng.net/view/1262.html">Shell if else</a>
+		</dd>
+<dd>30.<a href="http://c.biancheng.net/view/2735.html">Shell退出状态</a>
+		</dd>
+<dd>31.<a href="http://c.biancheng.net/view/2742.html">Shell test命令</a>
+		</dd>
+<dd>32.<a href="http://c.biancheng.net/view/2751.html">Shell [[]]</a>
+		</dd>
+<dd>33.<a href="http://c.biancheng.net/view/2767.html">Shell case in</a>
+		</dd>
+<dd>34.<a href="http://c.biancheng.net/view/1006.html">Shell while</a>
+		</dd>
+<dd>35.<a href="http://c.biancheng.net/view/1007.html">Shell until</a>
+		</dd>
+<dd>36.<a href="http://c.biancheng.net/view/2804.html">Shell for</a>
+		</dd>
+<dd>37.<a href="http://c.biancheng.net/view/2829.html">Shell select in</a>
+		</dd>
+<dd>38.<a href="http://c.biancheng.net/view/1011.html">Shell break和continue</a>
+		</dd>
+<dd>39.<a href="http://c.biancheng.net/view/1009.html">Shell函数</a>
+		</dd>
+<dd>40.<a href="http://c.biancheng.net/view/2860.html">Shell函数参数</a>
+		</dd>
+<dd>41.<a href="http://c.biancheng.net/view/vip_3239.html">Shell函数返回值精讲</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/942.html">Shell重定向</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3240.html">Linux中的文件描述符到底是什么？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3241.html">结合文件描述符谈重定向，彻底理解重定向的本质！</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/vip_3242.html">使用exec命令操作文件描述符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/vip_3243.html">Shell代码块重定向</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3244.html">Shell Here Document</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3245.html">Shell Here String</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd class="active">8.<a href="http://c.biancheng.net/view/vip_3246.html">Shell组命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3247.html">Shell进程替换</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/3131.html">Linux管道</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/3472.html">Shell过滤器</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3248.html">子Shell和子进程到底有什么区别？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3249.html">如何检测子Shell和子进程？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3520.html">Linux中的信号是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3522.html">Bash Shell中的信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/vip_3521.html">Linux进程简明教程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/vip_3495.html">使用什么命令查看进程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/vip_3497.html">Shell向进程发送信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/vip_3499.html">使用trap命令获取信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/vip_3506.html">trap命令捕获信号实例演示</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/vip_3507.html">移除（重置）信号捕获</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/vip_3508.html">关于进程、信号和捕获的总结</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/vip_3250.html">Shell模块化（把代码分散到多个脚本文件中）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/shortcut/">Bash Shell快捷键</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/vip_3509.html">Bash Shell快捷键大全</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3510.html">Bash Shell命令自动补全功能</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3512.html">Bash Shell历史命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+
+	</dl>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/shell/">Shell</a> &gt; <a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></span>
+	<span class="read-num">阅读：4,650</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Shell组命令（把多条命令看做一个整体）</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3245.html">Shell Here String</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3247.html">Shell进程替换</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">所谓组命令，就是将多个命令划分为一组，或者看成一个整体。<br>
+<br>
+Shell 组命令的写法有两种：
+<p class="info-box">
+	{ command1; command2; command3; . . .&nbsp; }<br>
+	(command1; command2; command3;. . . )</p>
+两种写法的区别在于：由花括号<code>{}</code>包围起来的组命名在当前 Shell 进程中执行，而由小括号<code>()</code>包围起来的组命令会创建一个子 Shell，所有命令都在子 Shell 中执行。<br>
+<br>
+对于第一种写法，花括号和命令之间必须有一个空格，并且最后一个命令必须用一个分号或者一个换行符结束。<br>
+<br>
+子 Shell 就是一个子进程，是通过当前 Shell 进程创建的一个新进程。但是子 Shell 和一般的子进程（比如<code>bash ./test.sh</code>创建的子进程）还是有差别的，我们将在《<a href="http://c.biancheng.net/view/vip_3248.html" target="_blank">子Shell和子进程</a>》一节中深入讲解，读者暂时把子 Shell 和子进程等价起来就行。<br>
+<br>
+<span style="color:#b22222;">组命令可以将多条命令的输出结果合并在一起，在使用重定向和管道时会特别方便。</span><br>
+<br>
+例如，下面的代码将多个命令的输出重定向到 out.txt：
+<div class="snippet-container" style="undefined;"><div class="sh_bright snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display: none;"><pre><a class="snippet-copy sh_url" href="http://c.biancheng.net/view/vip_3246.html#" style="display: none;">复制</a><a class="snippet-text sh_url" href="http://c.biancheng.net/view/vip_3246.html#">纯文本</a><a class="snippet-window sh_url" href="http://c.biancheng.net/view/vip_3246.html#">复制</a></pre></div><pre class="sh sh_sh snippet-formatted sh_sourceCode"><ol class="snippet-num"><li>ls <span class="sh_normal">-l</span> <span class="sh_symbol">&gt;</span> out<span class="sh_symbol">.</span>txt  <span class="sh_comment">#&gt;表示覆盖</span></li><li>echo <span class="sh_string">"http://c.biancheng.net/shell/"</span> <span class="sh_symbol">&gt;&gt;</span> out<span class="sh_symbol">.</span>txt  <span class="sh_comment">#&gt;&gt;表示追加</span></li><li>cat readme<span class="sh_symbol">.</span>txt <span class="sh_symbol">&gt;&gt;</span> out<span class="sh_symbol">.</span>txt</li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">ls -l &gt; out.txt  #&gt;表示覆盖
+echo "http://c.biancheng.net/shell/" &gt;&gt; out.txt  #&gt;&gt;表示追加
+cat readme.txt &gt;&gt; out.txt</pre></div></div>
+本段代码共使用了三次重定向。<br>
+<br>
+借助组命令，我们可以将以上三条命令合并在一起，简化成一次重定向：
+<p class="info-box">
+	{ ls -l; echo "http://c.biancheng.net/shell/"; cat readme.txt; } &gt; out.txt</p>
+或者写作：
+<p class="info-box">
+	(ls -l;&nbsp;echo "http://c.biancheng.net/shell/";&nbsp;cat readme.txt) &gt; out.txt</p>
+使用组命令技术，我们节省了一些打字时间。<br>
+<br>
+类似的道理，我们也可以将组命令和管道结合起来：
+<p class="info-box">
+	{ ls -l; echo "http://c.biancheng.net/shell/"; cat readme.txt; } | lpr</p>
+这里我们把三个命令的输出结果合并在一起，并把它们用管道输送给命令 lpr 的输入，以便产生一个打印报告。
+<h2>
+	两种组命令形式的对比</h2>
+虽然两种 Shell 组命令形式看起来相似，它们都能用在重定向中合并输出结果，但两者之间有一个很重要的不同：由<code>{}</code>包围的组命令在当前 Shell 进程中执行，由<code>()</code>包围的组命令会创建一个子Shell，所有命令都会在这个子 Shell 中执行。<br>
+<br>
+在子 Shell 中执行意味着，运行环境被复制给了一个新的 shell 进程，当这个子 Shell 退出时，新的进程也会被销毁，环境副本也会消失，所以在子 Shell 环境中的任何更改都会消失（包括给变量赋值）。因此，在大多数情况下，除非脚本要求一个子 Shell，否则使用<code>{}</code>比使用<code>()</code>更受欢迎，并且<code>{}</code>的进行速度更快，占用的内存更少。<br>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./3.8Shell组命令（把多条命令看做一个整体）_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3245.html">Shell Here String</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3247.html">Shell进程替换</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/1397.html" title="访问者模式（Visitor模式）详解">访问者模式（Visitor模式）详解</a></li>
+<li><a href="http://c.biancheng.net/view/2847.html" title="C#数组简介">C#数组简介</a></li>
+<li><a href="http://c.biancheng.net/view/3107.html" title="Shell代码块重定向">Shell代码块重定向</a></li>
+<li><a href="http://c.biancheng.net/view/3998.html" title="ServletConfig和ServletContext接口及其使用方法详解（附带实例）">ServletConfig和ServletContext接口及其使用方法详解（附带实例）</a></li>
+<li><a href="http://c.biancheng.net/view/6253.html" title="PHP异常处理（Exception）">PHP异常处理（Exception）</a></li>
+<li><a href="http://c.biancheng.net/view/6261.html" title="PHP imagesx()和imagesy()：获取图像的宽度和高度">PHP imagesx()和imagesy()：获取图像的宽度和高度</a></li>
+<li><a href="http://c.biancheng.net/view/7039.html" title="Python整数类型（int）详解">Python整数类型（int）详解</a></li>
+<li><a href="http://c.biancheng.net/view/7287.html" title="PHP函数参数传递的四种方式">PHP函数参数传递的四种方式</a></li>
+<li><a href="http://c.biancheng.net/view/7597.html" title="HTML复选框">HTML复选框</a></li>
+<li><a href="http://c.biancheng.net/view/7951.html" title="jQuery fadeTo()方法的用法">jQuery fadeTo()方法的用法</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 3246;
+window.arcId = "53dejAwHIsufmkLUaFn2FPyQfdZk98/8AWrGFpBHJXGuYvgnN14Uj/D/Ur0";
+window.typeidChain = "300|78";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./3.8Shell组命令（把多条命令看做一个整体）_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./3.8Shell组命令（把多条命令看做一个整体）_files/jquery1.12.4.min.js.下载"></script>
+<script src="./3.8Shell组命令（把多条命令看做一个整体）_files/common.js.下载"></script>
+<span style="display:none;"><script src="./3.8Shell组命令（把多条命令看做一个整体）_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

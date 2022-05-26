@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_7658.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./3.21Linux PATH环境变量是什么，有什么用？（入门必读）_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./3.21Linux PATH环境变量是什么，有什么用？（入门必读）_files/common.css" rel="stylesheet">
+<title>Linux PATH环境变量是什么，有什么用？（入门必读）</title>
+<meta name="description" content="在讲解 PATH 环境变量之前，首先介绍一下 which 命令，它用于查找某个命令所在的绝对路径。例如： [root@localhost ~]# which rm/bin/rm[root@localhost ~]# which rmdir/bin/rmdir[root@localhost ~]# which lsalias">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./3.21Linux PATH环境变量是什么，有什么用？（入门必读）_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">3</span> <a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a> </dd><dl class="dl-sub"><dd>3.1 <a href="http://c.biancheng.net/view/3546.html">Linux文件系统的层次结构</a></dd><dd>3.2 <a href="http://c.biancheng.net/view/vip_5048.html">Linux文件系统到底有什么用处？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.3 <a href="http://c.biancheng.net/view/5862.html">Linux绝对路径和相对路径</a></dd><dd>3.4 <a href="http://c.biancheng.net/view/3608.html">Linux文件（目录）命名规则</a></dd><dd>3.5 <a href="http://c.biancheng.net/view/vip_7655.html">Linux命令行下，如何识别文件类型？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.6 <a href="http://c.biancheng.net/view/720.html">Linux命令基本格式</a></dd><dd>3.7 <a href="http://c.biancheng.net/view/722.html">Linux切换目录（cd命令）</a></dd><dd>3.8 <a href="http://c.biancheng.net/view/3620.html">Linux显示当前工作路径（pwd命令）</a></dd><dd>3.9 <a href="http://c.biancheng.net/view/721.html">linux查看目录中的文件（ls命令）</a></dd><dd>3.10 <a href="http://c.biancheng.net/view/723.html">Linux创建目录（mkdir命令）</a></dd><dd>3.11 <a href="http://c.biancheng.net/view/725.html">Linux删除空目录（rmdir命令）</a></dd><dd>3.12 <a href="http://c.biancheng.net/view/726.html">Linux创建文件及修改文件时间戳（touch命令）</a></dd><dd>3.13 <a href="http://c.biancheng.net/view/6313.html">Linux建立软/硬链接文件(ln命令)</a></dd><dd>3.14 <a href="http://c.biancheng.net/view/vip_7654.html">深度剖析Linux硬链接和软链接，直击它们的本质！</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.15 <a href="http://c.biancheng.net/view/746.html">Linux复制文件和目录（cp命令）</a></dd><dd>3.16 <a href="http://c.biancheng.net/view/744.html">Linux删除文件或目录（rm命令）</a></dd><dd>3.17 <a href="http://c.biancheng.net/view/749.html">Linux移动或重命名文件和目录（mv命令）</a></dd><dd>3.18 <a href="http://c.biancheng.net/view/vip_7656.html">Linux懒人神器：命令自动补全功能！</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.19 <a href="http://c.biancheng.net/view/vip_7657.html">Linux命令的执行过程是怎样的？（新手必读）</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.20 <a href="http://c.biancheng.net/view/5970.html">什么是环境变量，Linux环境变量有哪些？</a></dd><dd class="active">3.21 <a href="http://c.biancheng.net/view/vip_7658.html">Linux PATH环境变量是什么，有什么用？（入门必读）</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a></span>
+	<span class="read-num">阅读：7,971</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux PATH环境变量是什么，有什么用？（入门必读）</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/5970.html">什么是环境变量，Linux环境变量有哪些？</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">在讲解 PATH 环境变量之前，首先介绍一下 which 命令，它用于查找某个命令所在的绝对路径。例如：<br>
+<pre class="info-box">[root@localhost ~]# which rm
+/bin/rm
+[root@localhost ~]# which rmdir
+/bin/rmdir
+[root@localhost ~]# which ls
+alias ls='ls --color=auto'
+        /bin/ls</pre>
+注意，ls 是一个相对特殊的命令，它使用 alias 命令做了别名，也就是说，我们常用的 ls 实际上执行的是 ls --color=auto。<br>
+<br>
+通过使用 which 命令，可以查找各个外部命令（和 Shell 内置命令相对）所在的绝对路径。学到这里，读者是否有这样一个疑问，为什么前面在使用 rm、rmdir、ls 等命令时，无论当前位于哪个目录，都可以直接使用，而无需指明命令的执行文件所在的位置（绝对路径）呢？其实，这是 PATH 环境变量在起作用。<br>
+<br>
+首先，执行如下命令：
+<pre class="info-box">[root@localhost ~]# echo $PATH
+/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin:/root/bin</pre>
+这里的 echo 命令用来输出 PATH 环境变量的值（这里的 $ 是 PATH 的前缀符号），PATH 环境变量的内容是由一堆目录组成的，各目录之间用冒号“:”隔开。当执行某个命令时，Linux 会依照 PATH 中包含的目录依次搜寻该命令的可执行文件，一旦找到，即正常执行；反之，则提示无法找到该命令。
+<blockquote>
+	<p>
+		如果在 PATH 包含的目录中，有多个目录都包含某命令的可执行文件，那么会执行先搜索到的可执行文件。</p>
+</blockquote>
+从执行结果中可以看到，/bin 目录已经包含在 PATH 环境变量中，因此在使用类似 rm、rmdir、ls等命令时，即便直接使用其命令名，Linux 也可以找到该命令。<br>
+<br>
+为了印证以上观点，下面举个反例，如果我们将 ls 命令移动到 /root 目录下，由于 PATH 环境变量中没有包含此目录，所有当直接使用 ls 命令名执行时，Linux 将无法找到此命令的可执行文件，并提示 No such file or directory，示例命令如下：
+<pre class="info-box">[root@localhost ~]# mv /bin/ls /root
+[root@localhost ~]# ls
+bash: /bin/ls: No such file or directory</pre>
+<br>
+此时，如果仍想使用 ls 命令，有 2 种方法，一种是直接将 /root 添加到 PATH 环境变量中，例如：
+<pre class="info-box">[root@localhost ~]# PATH=$PATH:/root
+[root@localhost ~]# echo $PATH
+/usr/local/sbin:/usr/sbin:/usr/local/bin:/usr/bin:/bin:/root/bin:/root
+[root@localhost ~]# ls
+Desktop    Downloads    Music    post-install     Public    Videos
+Documents  ls           Pictures post-install.org Templates</pre>
+<blockquote>
+	<p>
+		注意，这种方式只是临时有效，一旦退出下次再登陆的时候，$PATH 就恢复成了默认值。</p>
+</blockquote>
+<br>
+另一种方法是以绝对路径的方式使用此命令，例如：
+<pre class="info-box">[root@localhost ~]# /root/ls
+Desktop    Downloads    Music    post-install     Public    Videos
+Documents  ls           Pictures post-install.org Templates</pre>
+<p>
+	&nbsp;</p>
+<p>
+	为了不影响系统的正常使用，强烈建议大家将移动后的 ls 文件还原，命令如下：</p>
+<pre class="info-box">[root@localhost ~]# mv /root/ls /bin</pre>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./3.21Linux PATH环境变量是什么，有什么用？（入门必读）_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/5970.html">什么是环境变量，Linux环境变量有哪些？</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/1028.html" title="Java局部内部类">Java局部内部类</a></li>
+<li><a href="http://c.biancheng.net/view/3585.html" title="汇编语言.IF、.ELSE、.ELSEIF、.ENDIF伪指令">汇编语言.IF、.ELSE、.ELSEIF、.ENDIF伪指令</a></li>
+<li><a href="http://c.biancheng.net/view/3612.html" title="汇编语言SBB指令：带借位减法">汇编语言SBB指令：带借位减法</a></li>
+<li><a href="http://c.biancheng.net/view/3715.html" title="Apriori算法和FP-Tree算法简介">Apriori算法和FP-Tree算法简介</a></li>
+<li><a href="http://c.biancheng.net/view/4301.html" title="Python format()格式化输出方法详解">Python format()格式化输出方法详解</a></li>
+<li><a href="http://c.biancheng.net/view/4544.html" title="Redis watch命令——监控事务">Redis watch命令——监控事务</a></li>
+<li><a href="http://c.biancheng.net/view/5683.html" title="Python eval()和exec()函数详解">Python eval()和exec()函数详解</a></li>
+<li><a href="http://c.biancheng.net/view/5714.html" title="Go语言Context（上下文）">Go语言Context（上下文）</a></li>
+<li><a href="http://c.biancheng.net/view/7612.html" title="文件的文本打开方式和二进制打开方式有什么区别？">文件的文本打开方式和二进制打开方式有什么区别？</a></li>
+<li><a href="http://c.biancheng.net/css3/2d-3d-transform.html" title="CSS 2D转换（5种形式）">CSS 2D转换（5种形式）</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 7658;
+window.arcId = "a9d8e2bMJvBaXa0joi95LshUKXP5fgXZRwR4VU3FL6B4ryrXZptgH3uktgg";
+window.typeidChain = "267|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./3.21Linux PATH环境变量是什么，有什么用？（入门必读）_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./3.21Linux PATH环境变量是什么，有什么用？（入门必读）_files/jquery1.12.4.min.js.下载"></script>
+<script src="./3.21Linux PATH环境变量是什么，有什么用？（入门必读）_files/common.js.下载"></script>
+<span style="display:none;"><script src="./3.21Linux PATH环境变量是什么，有什么用？（入门必读）_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

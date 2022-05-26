@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_5081.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./10.8给Linux系统挂载U盘_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./10.8给Linux系统挂载U盘_files/common.css" rel="stylesheet">
+<title>给Linux系统挂载U盘</title>
+<meta name="description" content="挂载 U 盘和挂载光盘的方式是一样的，只不过光盘的设备文件名是固定的（/dev/sr0 或 /dev/cdrom），而 U 盘的设备文件名是在插入 U 盘后系统自动分配的。 因为 U 盘使用的是硬盘的设备文">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./10.8给Linux系统挂载U盘_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">10</span> <a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a> </dd><dl class="dl-sub"><dd>10.1 <a href="http://c.biancheng.net/view/879.html">深度探究硬盘的内部结构</a></dd><dd>10.2 <a href="http://c.biancheng.net/view/vip_7665.html">Linux常见的文件系统有哪些，CentOS采用哪种文件系统？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.3 <a href="http://c.biancheng.net/view/vip_5079.html">Linux系统是如何识别硬盘设备和硬盘分区的？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.4 <a href="http://c.biancheng.net/view/883.html">Linux查看文件系统硬盘使用情况（df命令）</a></dd><dd>10.5 <a href="http://c.biancheng.net/view/884.html">Linux统计目录或文件所占磁盘空间大小（du命令）</a></dd><dd>10.6 <a href="http://c.biancheng.net/view/885.html">Linux挂载文件系统（mount命令）</a></dd><dd>10.7 <a href="http://c.biancheng.net/view/vip_5080.html">给Linux系统挂载光盘</a><span class="glyphicon glyphicon-usd"></span></dd><dd class="active">10.8 <a href="http://c.biancheng.net/view/vip_5081.html">给Linux系统挂载U盘</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.9 <a href="http://c.biancheng.net/view/vip_5082.html">Linux开机自动挂载硬件设备（配置/etc/fstab文件）</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.10 <a href="http://c.biancheng.net/view/vip_5083.html">修改/etc/fstab文件出错导致Linux不能启动，该怎么办？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.11 <a href="http://c.biancheng.net/view/886.html">Linux卸载文件系统（umount命令）</a></dd><dd>10.12 <a href="http://c.biancheng.net/view/887.html">Linux检测和修复文件系统（fsck命令）</a></dd><dd>10.13 <a href="http://c.biancheng.net/view/889.html">Linux查看文件系统详细信息（dumpe2fs命令）</a></dd><dd>10.14 <a href="http://c.biancheng.net/view/891.html">Linux给硬盘分区（fdisk命令）</a></dd><dd>10.15 <a href="http://c.biancheng.net/view/vip_5087.html">Linux fdisk创建分区（主分区、扩展分区和逻辑分区）</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.16 <a href="http://c.biancheng.net/view/905.html">Linux对大容量硬盘分区（parted命令）</a></dd><dd>10.17 <a href="http://c.biancheng.net/view/898.html">linux格式化分区（mkfs命令）</a></dd><dd>10.18 <a href="http://c.biancheng.net/view/3706.html">Linux格式化分区（mke2fs命令）</a></dd><dd>10.19 <a href="http://c.biancheng.net/view/6105.html">Linux虚拟内存和物理内存</a></dd><dd>10.20 <a href="http://c.biancheng.net/view/vip_7666.html">Linux如何建立交换分区（swap分区）？</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a></span>
+	<span class="read-num">阅读：3,557</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>给Linux系统挂载U盘</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5080.html">给Linux系统挂载光盘</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_5082.html">Linux开机自动挂载硬件设备（配置/etc/fstab文件）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">挂载 U 盘和挂载光盘的方式是一样的，只不过光盘的设备文件名是固定的（/dev/sr0 或 /dev/cdrom），而 U 盘的设备文件名是在插入 U 盘后系统自动分配的。<br>
+<br>
+因为 U 盘使用的是硬盘的设备文件名，而每台服务器上插入的硬盘数量和分区方式都是不一样的，所以 U 盘的设备号需要单独检测与分配，以免和硬盘的设备文件名产生冲突。<br>
+<br>
+U 盘的设备文件名是系统自动分配的，我们只要查找出来然后挂载可以了。首先把 U 盘插入 Linux 系统中，这里需要注意的是，如果是虚拟机，则需要先把鼠标点入虚拟机再插入 U 盘。<br>
+<br>
+通过使用 fdisk 命令，即可查看到 U 盘的设备文件名，执行命令如下：<br>
+<p class="info-box">
+	[root@localhost ~]# fdisk -l<br>
+	Disk /dev/sda: 21.5GB, 21474836480 bytes<br>
+	#系统硬盘<br>
+	…省略部分输出…<br>
+	Disk/dev/sdb: 8022 MB, 8022654976 bytes<br>
+	#这就是识别的U盘，大小为8GB<br>
+	94 heads, 14 sectors/track, 11906 cylinders<br>
+	Units = cylinders of 1316 * 512 = 673792 bytes<br>
+	Sector size (logical/physical): 512 bytes / 512 bytes<br>
+	I/O size (minimum/optimal): 512 bytes / 512 bytes<br>
+	Disk identifier: 0x00000000<br>
+	Device Boot Start End Blocks Id System<br>
+	/dev/sdb1 1 11907 7834608 b W95 FAT32<br>
+	#系统给U盘分配的设备文件名</p>
+查看到 U 盘的设备文件名，接下来就要创建挂载点了。命令如下：
+<p class="info-box">
+	[root@localhost ~]# mkdir /mnt/usb</p>
+然后就是挂载了，挂载命令如下：
+<p class="info-box">
+	[root@localhost ~]# mount -t vfat /dev/sdb1 /mnt/usb/<br>
+	挂载U盘。因为是Windows分区，所以是vfat文件系统格式<br>
+	[root@localhost ~]# cd /mnt/usb/<br>
+	#去挂载点访问U盘数据<br>
+	[root@localhost usb]# ls<br>
+	#输出为乱码<br>
+	#之所以出现乱码，是因为编码格式不同</p>
+之所以出现乱码，是因为 U 盘是 Windows 中保存的数据，而 Windows 中的中文编码格式和 Linux 中的不一致，只需在挂载的时候指定正确的编码格式就可以解决乱码问题，命令如下：
+<p class="info-box">
+	[root@localhost ~]# mount -t vfat -o iocharset=utf8 /dev/sdb1 /mnt/usb/<br>
+	#挂载U盘，指定中文编码格式为UTF-8<br>
+	[root@localhost ~]# cd /mnt/usb/<br>
+	[root@localhost usb]# ls<br>
+	1111111年度总结及计划表.xls ZsyqlHL7osKSPBoGshZBr6.mp4 协议书<br>
+	12月21日.doc 恭喜发财(定）.mp4 新年VCR(定).mp4<br>
+	#可以正确地查看中文了</p>
+因为我们的 Linux 在安装时采用的是 UTF-8 编码格式，所以要让 U 盘在挂载时也指定为 UTF-8 编码格式，才能正确显示。
+<p class="info-box">
+	[root@localhost ~]# echo $LANG<br>
+	zh_CN.UTF-8<br>
+	#查看一下Linux默认的编码格式</p>
+注意，Linux 默认是不支持 NTFS 文件系统的，所以默认是不能挂载 NTFS 格式的移动硬盘的。要想让 Linux 支持移动硬盘，主要有三种方法：
+<ol>
+	<li>
+		重新编译内核，加入 ntfs 模块，然后安装 ntfs 模块即可；</li>
+	<li>
+		不自己编译内核，而是下载已经编译好的内核，直接安装即可；</li>
+	<li>
+		安装 NTFS 文件系统的第三方插件，也可以支持 NTFS 文件系统；</li>
+</ol>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./10.8给Linux系统挂载U盘_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5080.html">给Linux系统挂载光盘</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_5082.html">Linux开机自动挂载硬件设备（配置/etc/fstab文件）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/1471.html" title="指针变量是什么，C++指针变量详解">指针变量是什么，C++指针变量详解</a></li>
+<li><a href="http://c.biancheng.net/view/2386.html" title="启动MySQL服务">启动MySQL服务</a></li>
+<li><a href="http://c.biancheng.net/view/2861.html" title="C#继承：基类和派生类">C#继承：基类和派生类</a></li>
+<li><a href="http://c.biancheng.net/view/vip_3438.html" title="哈希查找算法（C语言实现）">哈希查找算法（C语言实现）</a></li>
+<li><a href="http://c.biancheng.net/view/3453.html" title="多路平衡归并排序（胜者树、败者树）算法详解">多路平衡归并排序（胜者树、败者树）算法详解</a></li>
+<li><a href="http://c.biancheng.net/view/3584.html" title="Hadoop HBase数据库简介">Hadoop HBase数据库简介</a></li>
+<li><a href="http://c.biancheng.net/view/4516.html" title="在Java程序中使用Redis">在Java程序中使用Redis</a></li>
+<li><a href="http://c.biancheng.net/view/4856.html" title="JSP Out.clearBuffer()方法：清除缓冲区中的数据并输出到客户端">JSP Out.clearBuffer()方法：清除缓冲区中的数据并输出到客户端</a></li>
+<li><a href="http://c.biancheng.net/view/7135.html" title="MySQL安装配置教程（Windows系统）">MySQL安装配置教程（Windows系统）</a></li>
+<li><a href="http://c.biancheng.net/algorithm/bubble-sort.html" title="冒泡排序算法">冒泡排序算法</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 5081;
+window.arcId = "196acw7ysRwKEXxECnMH1/y5eAtGlZXW3U5YvGETw45ZIwA768NIU1r1hsA";
+window.typeidChain = "87|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./10.8给Linux系统挂载U盘_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./10.8给Linux系统挂载U盘_files/jquery1.12.4.min.js.下载"></script>
+<script src="./10.8给Linux系统挂载U盘_files/common.js.下载"></script>
+<span style="display:none;"><script src="./10.8给Linux系统挂载U盘_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

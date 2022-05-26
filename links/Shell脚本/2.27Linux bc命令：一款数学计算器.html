@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_3237.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./2.27Linux bc命令：一款数学计算器_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./2.27Linux bc命令：一款数学计算器_files/common.css" rel="stylesheet">
+<title>Linux bc命令：一款数学计算器</title>
+<meta name="description" content="Bash Shell 内置了对整数运算的支持，但是并不支持浮点运算，而 Linux bc 命令可以很方便的进行浮点运算，当然整数运算也不再话下。 bc 甚至可以称得上是一种编程语言了，它支持变量、">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./2.27Linux bc命令：一款数学计算器_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<h4><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/shell/">Shell</a></h4>
+	<dl id="contents">
+		<dt><a href="http://c.biancheng.net/shell/base/">Shell基础（开胃菜）</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/706.html">Shell是什么</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/731.html">Shell是运维人员必须掌握的技能</a>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_4555.html">常用的Shell有哪些？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/733.html">进入Shell的两种方式</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/3163.html">Shell命令的基本格式</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3229.html">Shell命令的本质到底是什么？如何自己实现一个命令？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3230.html">Shell命令的选项和参数在本质上是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/3175.html">Shell命令提示符</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3279.html">修改命令提示符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/735.html">第一个Shell脚本</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/739.html">执行Shell脚本</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3231.html">Shell四种运行方式（启动方式）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3232.html">Shell配置文件（配置脚本）的加载</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3233.html">如何编写自己的Shell配置文件？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/program/">Shell编程</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/743.html">Shell变量</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_4558.html">Shell变量的作用域（精讲）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/1164.html">Shell命令替换</a>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/789.html">Shell位置参数</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/806.html">Shell特殊变量</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_4559.html">Shell $*和$@之间的区别</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/808.html">Shell $?</a>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/821.html">Shell字符串详解</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/1114.html">Shell字符串拼接</a>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/1120.html">Shell字符串截取</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/810.html">Shell数组</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/812.html">Shell获取数组长度</a>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/818.html">Shell数组拼接</a>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/819.html">Shell删除数组元素</a>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3234.html">Shell关联数组</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/1136.html">Shell内建命令</a>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/1138.html">Shell alias命令</a>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/1142.html">Shell echo命令</a>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/2991.html">Shell read命令</a>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/1145.html">Shell exit命令</a>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/2709.html">Shell declare和typeset命令</a>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/1169.html">Shell数学计算</a>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/2480.html">Shell (())</a>
+		</dd>
+<dd>24.<a href="http://c.biancheng.net/view/2504.html">Shell let命令</a>
+		</dd>
+<dd>25.<a href="http://c.biancheng.net/view/vip_3235.html">Shell $[]</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>26.<a href="http://c.biancheng.net/view/vip_3236.html">Shell expr命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd class="active">27.<a href="http://c.biancheng.net/view/vip_3237.html">Linux bc命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>28.<a href="http://c.biancheng.net/view/vip_3238.html">Shell declare -i</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>29.<a href="http://c.biancheng.net/view/1262.html">Shell if else</a>
+		</dd>
+<dd>30.<a href="http://c.biancheng.net/view/2735.html">Shell退出状态</a>
+		</dd>
+<dd>31.<a href="http://c.biancheng.net/view/2742.html">Shell test命令</a>
+		</dd>
+<dd>32.<a href="http://c.biancheng.net/view/2751.html">Shell [[]]</a>
+		</dd>
+<dd>33.<a href="http://c.biancheng.net/view/2767.html">Shell case in</a>
+		</dd>
+<dd>34.<a href="http://c.biancheng.net/view/1006.html">Shell while</a>
+		</dd>
+<dd>35.<a href="http://c.biancheng.net/view/1007.html">Shell until</a>
+		</dd>
+<dd>36.<a href="http://c.biancheng.net/view/2804.html">Shell for</a>
+		</dd>
+<dd>37.<a href="http://c.biancheng.net/view/2829.html">Shell select in</a>
+		</dd>
+<dd>38.<a href="http://c.biancheng.net/view/1011.html">Shell break和continue</a>
+		</dd>
+<dd>39.<a href="http://c.biancheng.net/view/1009.html">Shell函数</a>
+		</dd>
+<dd>40.<a href="http://c.biancheng.net/view/2860.html">Shell函数参数</a>
+		</dd>
+<dd>41.<a href="http://c.biancheng.net/view/vip_3239.html">Shell函数返回值精讲</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/942.html">Shell重定向</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3240.html">Linux中的文件描述符到底是什么？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3241.html">结合文件描述符谈重定向，彻底理解重定向的本质！</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/vip_3242.html">使用exec命令操作文件描述符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/vip_3243.html">Shell代码块重定向</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3244.html">Shell Here Document</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3245.html">Shell Here String</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/vip_3246.html">Shell组命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3247.html">Shell进程替换</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/3131.html">Linux管道</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/3472.html">Shell过滤器</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3248.html">子Shell和子进程到底有什么区别？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3249.html">如何检测子Shell和子进程？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3520.html">Linux中的信号是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3522.html">Bash Shell中的信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/vip_3521.html">Linux进程简明教程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/vip_3495.html">使用什么命令查看进程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/vip_3497.html">Shell向进程发送信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/vip_3499.html">使用trap命令获取信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/vip_3506.html">trap命令捕获信号实例演示</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/vip_3507.html">移除（重置）信号捕获</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/vip_3508.html">关于进程、信号和捕获的总结</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/vip_3250.html">Shell模块化（把代码分散到多个脚本文件中）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/shortcut/">Bash Shell快捷键</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/vip_3509.html">Bash Shell快捷键大全</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3510.html">Bash Shell命令自动补全功能</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3512.html">Bash Shell历史命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+
+	</dl>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/shell/">Shell</a> &gt; <a href="http://c.biancheng.net/shell/program/">Shell编程</a></span>
+	<span class="read-num">阅读：7,775</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux bc命令：一款数学计算器</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3236.html">Shell expr命令</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3238.html">Shell declare -i</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">Bash Shell 内置了对整数运算的支持，但是并不支持浮点运算，而 Linux bc 命令可以很方便的进行浮点运算，当然整数运算也不再话下。<br>
+<br>
+bc 甚至可以称得上是一种编程语言了，它支持变量、数组、输入输出、分支结构、循环结构、函数等基本的编程元素，所以 Linux 手册中是这样来描述 bc 的：
+<p class="info-box">
+	An arbitrary precision calculator language</p>
+翻译过来就是“一个任意精度的计算器语言”。<br>
+<br>
+在终端输入<code>bc</code>命令，然后回车即可进入 bc 进行交互式的数学计算。在 Shell 编程中，我们也可以通过管道和输入重定向来使用 bc。<br>
+<br>
+本节我们先学习如何在交互式环境下使用 bc，然后再学习如何在 Shell 编程中使用 bc，这样就易如反掌了。
+<h2>
+	从终端进入 bc</h2>
+在终端输入 bc 命令，然后回车，就可以进入 bc，请看下图：
+<div style="text-align: center;">
+	<img alt="进入bc" src="./2.27Linux bc命令：一款数学计算器_files/1-1Z30GK451193.gif"></div>
+bc 命令还有一些选项，可能你会用到，请看下表。<br>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				选项</th>
+			<th>
+				说明</th>
+		</tr>
+		<tr>
+			<td>
+				-h | --help</td>
+			<td>
+				帮助信息</td>
+		</tr>
+		<tr>
+			<td>
+				-v | --version</td>
+			<td>
+				显示命令版本信息</td>
+		</tr>
+		<tr>
+			<td>
+				-l | --mathlib</td>
+			<td>
+				使用标准数学库</td>
+		</tr>
+		<tr>
+			<td>
+				-i | --interactive</td>
+			<td>
+				强制交互</td>
+		</tr>
+		<tr>
+			<td>
+				-w | --warn</td>
+			<td>
+				显示 POSIX 的警告信息</td>
+		</tr>
+		<tr>
+			<td>
+				-s | --standard</td>
+			<td>
+				使用 POSIX 标准来处理</td>
+		</tr>
+		<tr>
+			<td>
+				-q | --quiet</td>
+			<td>
+				不显示欢迎信息</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+例如你不想输入 bc 命令后显示一堆没用的信息，那么可以输入<code>bc -q</code>：
+<div style="text-align: center;">
+	<img alt="输入bc -q命令" src="./2.27Linux bc命令：一款数学计算器_files/1-1Z30GP243363.gif"></div>
+<h2>
+	在交互式环境下使用 bc</h2>
+使用 bc 进行数学计算是非常容易的，像平常一样输入数学表达式，然后按下回车键就可以看到结果，请看下图。
+<div style="text-align: center;">
+	<img alt="使用bc进行数学计算" src="./2.27Linux bc命令：一款数学计算器_files/1-1Z30Q30253434.gif"></div>
+值得一提的是，我们定义了一个变量 n，然后在计算中也使用了 n，可见 bc 是支持变量的。<br>
+<br>
+除了变量，bc 还支持函数、循环结构、分支结构等常见的编程元素，它们和其它编程语言的语法类似。下面我们定义一个求阶乘的函数：
+<div style="text-align: center;">
+	<img alt="在bc中定义函数" src="./2.27Linux bc命令：一款数学计算器_files/1-1Z30Q3323G03.gif"></div>
+其实我们很少使用这么复杂的功能，大部分情况下还是把 bc 作为普通的数学计算器，求一下表达式的值而已，所以大家不必深究，了解一下即可。
+<h4>
+	内置变量</h4>
+bc 有四个内置变量，我们在计算时会经常用到，如下表所示：<br>
+<table>
+	<thead>
+		<tr>
+			<th>
+				变量名</th>
+			<th>
+				作 用</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+				scale</td>
+			<td>
+				指定精度，也即小数点后的位数；默认为 0，也即不使用小数部分。</td>
+		</tr>
+		<tr>
+			<td>
+				ibase</td>
+			<td>
+				指定输入的数字的进制，默认为十进制。</td>
+		</tr>
+		<tr>
+			<td>
+				obase</td>
+			<td>
+				指定输出的数字的进制，默认为十进制。</td>
+		</tr>
+		<tr>
+			<td>
+				last 或者 .</td>
+			<td>
+				表示最近打印的数字</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+【实例1】scale 变量用法举例：
+<div style="text-align: center;">
+	<img alt="scale变量的用法举例" src="./2.27Linux bc命令：一款数学计算器_files/1-1Z30Q44553426.gif"></div>
+刚开始的时候，10/3 的值为 3，不带小数部分，就是因为 scale 变量的默认值为 0；后边给 scale 指定了一个大于 0 的值，就能看到小数部分了。<br>
+<br>
+【实例2】ibase 和&nbsp;obase 变量用法举例：
+<div style="text-align: center;">
+	<img alt="ibase 和 obase 用法示例" src="./2.27Linux bc命令：一款数学计算器_files/1-1Z30Q4593D16.gif"></div>
+<span style="color:#b22222;">注意：obase 要尽量放在 ibase 前面，因为 ibase 设置后，后面的数字都是以 ibase 的进制来换算的。</span>
+<h4>
+	内置函数</h4>
+除了内置变量，bc 还有一些内置函数，如下表所示：<br>
+<table>
+	<tbody>
+		<tr>
+			<th>
+				函数名</th>
+			<th>
+				作用</th>
+		</tr>
+		<tr>
+			<td>
+				s(x)</td>
+			<td>
+				计算 x 的正弦值，x 是弧度值。</td>
+		</tr>
+		<tr>
+			<td>
+				c(x)</td>
+			<td>
+				计算 x 的余弦值，x 是弧度值。</td>
+		</tr>
+		<tr>
+			<td>
+				a(x)</td>
+			<td>
+				计算 x 的反正切值，返回弧度值。</td>
+		</tr>
+		<tr>
+			<td>
+				l(x)</td>
+			<td>
+				计算 x 的自然对数。</td>
+		</tr>
+		<tr>
+			<td>
+				e(x)</td>
+			<td>
+				求 e 的 x 次方。</td>
+		</tr>
+		<tr>
+			<td>
+				j(n, x)</td>
+			<td>
+				贝塞尔函数，计算从 n 到 x 的阶数。</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+要想使用这些数学函数，在输入 bc 命令时需要使用<code>-l</code>选项，表示启用数学库。请看下面的例子：
+<div style="text-align: center;">
+	<img alt="在 bc 中使用数学函数" src="./2.27Linux bc命令：一款数学计算器_files/1-1Z30Q51426233.gif"></div>
+<h4>
+	在一行中使用多个表达式</h4>
+在前边的例子中，我们基本上是一行一个表达式，这样看起来更加舒服；如果你愿意，也可以将多个表达式放在一行，只要用分号<code>;</code>隔开就行。请看下面的例子：
+<div style="text-align: center;">
+	<img alt="在一行中使用多个表达式" src="./2.27Linux bc命令：一款数学计算器_files/1-1Z30Q52355M4.gif"></div>
+<h2>
+	在 Shell 中使用 bc 计算器</h2>
+在 Shell 脚本中，我们可以借助管道或者输入重定向来使用 bc 计算器。
+<ul>
+	<li>
+		管道是 Linux 进程间的一种通信机制，它可以将前一个命令（进程）的输出作为下一个命令（进程）的输入，两个命令之间使用竖线<code>|</code>分隔。</li>
+	<li>
+		通常情况下，一个命令从终端获得用户输入的内容，如果让它从其他地方（比如文件）获得输入，那么就需要重定向。</li>
+</ul>
+<br>
+此处我们并不打算展开讲解管道和重定向，不了解的小伙伴请自行百度。
+<h4>
+	借助管道使用 bc 计算器</h4>
+如果读者希望直接输出 bc 的计算结果，那么可以使用下面的形式：
+<p class="info-box">
+	echo "expression" | bc</p>
+<code>expression</code>就是希望计算的数学表达式，它必须符合 bc 的语法，上面我们已经进行了介绍。在 expression 中，还可以使用 Shell 脚本中的变量。<br>
+<br>
+使用下面的形式可以将 bc 的计算结果赋值给 Shell 变量：
+<p class="info-box">
+	variable=$(echo "expression" | bc)</p>
+variable 就是变量名。<br>
+<br>
+【实例1】最简单的形式：
+<pre class="info-box">[c.biancheng.net]$ echo "3*8"|bc
+24
+[c.biancheng.net]$ ret=$(echo "4+9"|bc)
+[c.biancheng.net]$ echo $ret
+13</pre>
+【实例2】使用 bc 中的变量：
+<pre class="info-box">[c.biancheng.net]$ echo "scale=4;3*8/7"|bc
+3.4285
+[c.biancheng.net]$ echo "scale=4;3*8/7;last*5"|bc
+3.4285
+17.1425</pre>
+【实例3】使用 Shell 脚本中的变量：
+<pre class="info-box">[c.biancheng.net]$ x=4
+[c.biancheng.net]$ echo "scale=5;n=$x+2;e(n)"|bc -l
+403.42879</pre>
+在第二条命令中，<code>$x</code>表示使用第一条 Shell 命令中定义的变量，<code>n</code>是在 bc 中定义的新变量，它和 Shell 脚本是没关系的。<br>
+<br>
+【实例4】进制转换：
+<pre class="info-box">#十进制转十六进制
+[mozhiyan@localhost ~]$ m=31
+[mozhiyan@localhost ~]$ n=$(echo "obase=16;$m"|bc)
+[mozhiyan@localhost ~]$ echo $n
+1F
+#十六进制转十进制
+[mozhiyan@localhost ~]$ m=1E
+[mozhiyan@localhost ~]$ n=$(echo "obase=10;ibase=16;$m"|bc)
+[mozhiyan@localhost ~]$ echo $n
+30</pre>
+<h4>
+	借助输入重定向使用 bc 计算器</h4>
+可以使用下面的形式将 bc 的计算结果赋值给 Shell 变量：
+<p class="info-box">
+	variable=$(bc &lt;&lt; EOF<br>
+	expressions<br>
+	EOF<br>
+	)</p>
+其中，<code>variable</code>是 Shell 变量名，<code>express</code>是要计算的数学表达式（可以换行，和进入 bc 以后的书写形式一样），<code>EOF</code>是数学表达式的开始和结束标识（你也可以换成其它的名字，比如 aaa、bbb 等）。<br>
+<br>
+请看下面的例子：
+<pre class="info-box">[c.biancheng.net]$ m=1E
+[c.biancheng.net]$ n=$(bc &lt;&lt; EOF
+&gt; obase=10;
+&gt; ibase=16;
+&gt; print $m
+&gt; EOF
+&gt; )
+[c.biancheng.net]$ echo $n
+30</pre>
+如果你有大量的数学计算，那么使用输入重定向就比较方便，因为数学表达式可以换行，写起来更加清晰明了。<br>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./2.27Linux bc命令：一款数学计算器_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3236.html">Shell expr命令</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_3238.html">Shell declare -i</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/813.html" title="Linux Vim批量注释和自定义注释快捷键">Linux Vim批量注释和自定义注释快捷键</a></li>
+<li><a href="http://c.biancheng.net/view/1105.html" title="Linux日志服务器设置过程">Linux日志服务器设置过程</a></li>
+<li><a href="http://c.biancheng.net/view/1259.html" title="逻辑地址空间和物理地址空间">逻辑地址空间和物理地址空间</a></li>
+<li><a href="http://c.biancheng.net/view/3455.html" title="最佳归并树详解">最佳归并树详解</a></li>
+<li><a href="http://c.biancheng.net/view/4800.html" title="Maven生成站点和报告文档（cmd命令）">Maven生成站点和报告文档（cmd命令）</a></li>
+<li><a href="http://c.biancheng.net/view/5587.html" title="JS截取字符串（3种方法）">JS截取字符串（3种方法）</a></li>
+<li><a href="http://c.biancheng.net/view/5821.html" title="Eclipse+PyDec运行Python程序">Eclipse+PyDec运行Python程序</a></li>
+<li><a href="http://c.biancheng.net/view/vip_6055.html" title="Python函数参数传递机制（超级详细）">Python函数参数传递机制（超级详细）</a></li>
+<li><a href="http://c.biancheng.net/view/vip_7649.html" title="为什么要学Linux，它比Windows好在哪里？">为什么要学Linux，它比Windows好在哪里？</a></li>
+<li><a href="http://c.biancheng.net/maven2/idea-maven-command.html" title="IDEA执行Maven命令">IDEA执行Maven命令</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 3237;
+window.arcId = "89d1cq5nD57/yyXbzf6Cb9haaoz32Vu+SFlkc0hB530r38P1Js5C1jJesUk";
+window.typeidChain = "299|78";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./2.27Linux bc命令：一款数学计算器_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./2.27Linux bc命令：一款数学计算器_files/jquery1.12.4.min.js.下载"></script>
+<script src="./2.27Linux bc命令：一款数学计算器_files/common.js.下载"></script>
+<span style="display:none;"><script src="./2.27Linux bc命令：一款数学计算器_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

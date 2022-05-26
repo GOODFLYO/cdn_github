@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_7656.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./3.18Linux懒人神器：命令自动补全功能！_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./3.18Linux懒人神器：命令自动补全功能！_files/common.css" rel="stylesheet">
+<title>Linux懒人神器：命令自动补全功能！</title>
+<meta name="description" content="文件名（或者目录名）是执行 Linux 命令中最常见的参数，例如前面介绍的 cd、mkdir、cp 等命令，都涉及到了文件名。然而对初学者来说，输入完整的文件名感觉很麻烦，尤其面临文件名">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./3.18Linux懒人神器：命令自动补全功能！_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">3</span> <a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a> </dd><dl class="dl-sub"><dd>3.1 <a href="http://c.biancheng.net/view/3546.html">Linux文件系统的层次结构</a></dd><dd>3.2 <a href="http://c.biancheng.net/view/vip_5048.html">Linux文件系统到底有什么用处？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.3 <a href="http://c.biancheng.net/view/5862.html">Linux绝对路径和相对路径</a></dd><dd>3.4 <a href="http://c.biancheng.net/view/3608.html">Linux文件（目录）命名规则</a></dd><dd>3.5 <a href="http://c.biancheng.net/view/vip_7655.html">Linux命令行下，如何识别文件类型？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.6 <a href="http://c.biancheng.net/view/720.html">Linux命令基本格式</a></dd><dd>3.7 <a href="http://c.biancheng.net/view/722.html">Linux切换目录（cd命令）</a></dd><dd>3.8 <a href="http://c.biancheng.net/view/3620.html">Linux显示当前工作路径（pwd命令）</a></dd><dd>3.9 <a href="http://c.biancheng.net/view/721.html">linux查看目录中的文件（ls命令）</a></dd><dd>3.10 <a href="http://c.biancheng.net/view/723.html">Linux创建目录（mkdir命令）</a></dd><dd>3.11 <a href="http://c.biancheng.net/view/725.html">Linux删除空目录（rmdir命令）</a></dd><dd>3.12 <a href="http://c.biancheng.net/view/726.html">Linux创建文件及修改文件时间戳（touch命令）</a></dd><dd>3.13 <a href="http://c.biancheng.net/view/6313.html">Linux建立软/硬链接文件(ln命令)</a></dd><dd>3.14 <a href="http://c.biancheng.net/view/vip_7654.html">深度剖析Linux硬链接和软链接，直击它们的本质！</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.15 <a href="http://c.biancheng.net/view/746.html">Linux复制文件和目录（cp命令）</a></dd><dd>3.16 <a href="http://c.biancheng.net/view/744.html">Linux删除文件或目录（rm命令）</a></dd><dd>3.17 <a href="http://c.biancheng.net/view/749.html">Linux移动或重命名文件和目录（mv命令）</a></dd><dd class="active">3.18 <a href="http://c.biancheng.net/view/vip_7656.html">Linux懒人神器：命令自动补全功能！</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.19 <a href="http://c.biancheng.net/view/vip_7657.html">Linux命令的执行过程是怎样的？（新手必读）</a><span class="glyphicon glyphicon-usd"></span></dd><dd>3.20 <a href="http://c.biancheng.net/view/5970.html">什么是环境变量，Linux环境变量有哪些？</a></dd><dd>3.21 <a href="http://c.biancheng.net/view/vip_7658.html">Linux PATH环境变量是什么，有什么用？（入门必读）</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a></span>
+	<span class="read-num">阅读：10,171</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux懒人神器：命令自动补全功能！</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/749.html">Linux移动或重命名文件和目录（mv命令）</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_7657.html">Linux命令的执行过程是怎样的？（新手必读）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">文件名（或者目录名）是执行 Linux 命令中最常见的参数，例如前面介绍的 cd、mkdir、cp 等命令，都涉及到了文件名。然而对初学者来说，输入完整的文件名感觉很麻烦，尤其面临文件名（目录名）特别长的时候。<br>
+<br>
+考虑到这种情况，Shell（Bash）提供了一种称为“命令行自动补全”的功能，即在输入文件名的时候，只需要输入该文件名的前几个字符，然后按 Tab 键，Shell 就可以自动将文件名补全。<br>
+<br>
+举个例子，在 /etc 目录下，执行如下命令：<br>
+<p class="info-box">
+	[root@localhost ~]# cd /etc<br>
+	[root@localhost etc]# cd fs &lt;-- 按一次 Tab 键</p>
+当按下 Tab 键时，你会发现 Shell 自动将 "fs" 补全成了 "fatab"，这是因为当前 /etc 目录中只有 fstab 是以 "fs" 开头，因此 Shell 可以确定这里想要输入的文件名称为 fstab。<br>
+<br>
+那么，如果当前目录中含有多个以指定字符（或字符串）开头的目录或文件，Shell 还可以成功辨认吗？答案是否定的，但它会以列表的形式给出所有以指定字符或字符串开头的文件或目录，供用户选择。<br>
+<br>
+例如，还是在 /etc 目录下，执行如下命令：<br>
+<pre class="info-box">[root@localhost etc]# cd b &lt;-- 连续按两次 Tab 键
+bash_completion.d/      blkid/          bonobo-activation/
+bashrc                  bluetooth</pre>
+可以看到，当按一次 Tab 键时，Shell 没有任何反映，原因就是当前目录下以 "b" 为开头的文件或目录有多个（2 个以上），仅凭一个字符 "b" 无法精准判断出具体指的是哪个文件。而当再一次按下 Tab 键时，Shell 会列表的形式显示给用户当前目录下所有以 "b" 开头的文件或目录。<br>
+<br>
+事实上，Shell 提供的命令行补全功能不仅适用于补全文件名，也同样适用于所有 Linux 命令。举个例子，当输入 ca 并连续按下 2 次 Tab 键时，Shell 会罗列出所有以 "ca" 开头的 Linux 命令，如下所示：<br>
+<pre class="info-box">[root@localhost etc]# ca &lt;--连续按两次 Tab 键
+cacertdir_rehash    cache_restore       capsh       catchsegv
+cache_check         cal                 captoinfo
+cache_dump          caller              case
+cache_repair        canberra-gtk-play   cat</pre>
+另外，Shell 还有一套被称作通配符的转用符号（如表 1 所示），这些通配符可以搜索并匹配文件名的一部分，从而大大简化了文件名的输入。<br>
+<br>
+<table>
+	<caption>
+		表 1 Shell 通配符及其作用</caption>
+	<tbody>
+		<tr>
+			<th>
+				符号</th>
+			<th>
+				作用</th>
+		</tr>
+		<tr>
+			<td>
+				*</td>
+			<td>
+				匹配任意数量的字符。</td>
+		</tr>
+		<tr>
+			<td>
+				?</td>
+			<td>
+				匹配任意一个字符。</td>
+		</tr>
+		<tr>
+			<td>
+				[]</td>
+			<td>
+				匹配括号内的任意一个字符，甚至 [] 中还可以包含用 -（短横线）连接的字符或数字，表示一定范围内的字符或数字。</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+为了学习这些通配符的用法，首先需要建立一个空目录（如 test），并在该目录中创建一些文件（供测试用），执行命令如下：<br>
+<p class="info-box">
+	[root@localhost etc]# makdir test<br>
+	[root@localhost etc]# cd test<br>
+	[root@localhost test]# touch apple banana grape grapefruit watermelon<br>
+	[root@localhost test]# ls<br>
+	apple banana grape grapefruit watermelon</p>
+<br>
+在此基础上，继续执行如下命令：
+<p class="info-box">
+	[root@localhost test]# ls a* &lt;--匹配所有以 a 字符开头的文件名<br>
+	apple<br>
+	[root@localhost test]# ls g*t &lt;--匹配所有以 g 字符开头，以 t 字符结尾的文件名<br>
+	grapefruit<br>
+	[root@localhost test]# ls *e* &lt;--匹配所有包含 e 字符的文件名<br>
+	apple grape grapefruit watermelon<br>
+	[root@localhost test]# ls *n* &lt;--匹配所有包含 n 字符的文件名<br>
+	banana watermelon</p>
+结合以上实例，因为 * 可以匹配任何数量的字符，因此可以一一实现实例中标注的功能。<br>
+<br>
+接下来，列举一下使用 ? 匹配文件名的示例：
+<p class="info-box">
+	[root@localhost test]# ls ????e<br>
+	apple grape<br>
+	[root@localhost test]# ls g???e*<br>
+	grape grapefruit</p>
+因为 1 个 ? 只能匹配 1 个任意字符，因此该示例中第一个例子表示的是匹配任意包含 5 个字符但以 e 结尾的文件（apple 和 grape），第二例子表示匹配任何以 g 开头且第 5 个字符为 e 的文件（grape 和 grapefruit）。<br>
+<br>
+最后，列举一些使用括号 [] 匹配文件名的示例：<br>
+<p class="info-box">
+	[root@localhost test]# ls [abw]*<br>
+	apple banana watermelon<br>
+	[root@localhost test]# ls [agw]*[ne]<br>
+	apple grape watermelon</p>
+此示例中，第一个例子表示匹配任何以 a、b 或 w 开头的文件；第二个例子中表示匹配任何以 a、g、w 开头，以 n 或 e 结尾的文件名。<br>
+<br>
+不仅如此，[] 中还可以通过 -（短横线）表示一定范围内的任意字符（或数字），例如：
+<p class="info-box">
+	[root@localhost test]# ls [a-g]*<br>
+	apple banana grape grapefruit</p>
+其中，[a-g]* 表示匹配以字母 a 到&nbsp; g 之间任何一个字母开头的文件名。</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./3.18Linux懒人神器：命令自动补全功能！_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/749.html">Linux移动或重命名文件和目录（mv命令）</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_7657.html">Linux命令的执行过程是怎样的？（新手必读）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/495.html" title="C语言杨辉三角（两种方法）">C语言杨辉三角（两种方法）</a></li>
+<li><a href="http://c.biancheng.net/view/772.html" title="Linux which命令：列出命令的所在路径">Linux which命令：列出命令的所在路径</a></li>
+<li><a href="http://c.biancheng.net/view/1975.html" title="C语言#include的用法详解（文件包含命令）">C语言#include的用法详解（文件包含命令）</a></li>
+<li><a href="http://c.biancheng.net/view/2299.html" title="C++纯虚函数和抽象类详解">C++纯虚函数和抽象类详解</a></li>
+<li><a href="http://c.biancheng.net/view/2727.html" title="Unity 3D UGUI Button控件">Unity 3D UGUI Button控件</a></li>
+<li><a href="http://c.biancheng.net/view/3631.html" title="常用32位编程调用规范简介">常用32位编程调用规范简介</a></li>
+<li><a href="http://c.biancheng.net/view/5331.html" title="Java项目实战之图书馆管理系统（带源码和解析）">Java项目实战之图书馆管理系统（带源码和解析）</a></li>
+<li><a href="http://c.biancheng.net/view/5528.html" title="JS break和continue语句详解">JS break和continue语句详解</a></li>
+<li><a href="http://c.biancheng.net/view/7973.html" title="Django Form表单自定义验证规则">Django Form表单自定义验证规则</a></li>
+<li><a href="http://c.biancheng.net/redis2/bitcount.html" title="Redis BITCOUNT命令">Redis BITCOUNT命令</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 7656;
+window.arcId = "18beB9TOst4Zk3S2GMYabmqbYJmKUEEH7lYvuQ4JDL0srZS67UUq85Nm+n4";
+window.typeidChain = "267|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./3.18Linux懒人神器：命令自动补全功能！_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./3.18Linux懒人神器：命令自动补全功能！_files/jquery1.12.4.min.js.下载"></script>
+<script src="./3.18Linux懒人神器：命令自动补全功能！_files/common.js.下载"></script>
+<span style="display:none;"><script src="./3.18Linux懒人神器：命令自动补全功能！_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

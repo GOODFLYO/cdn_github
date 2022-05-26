@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_3247.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/core.php"></script><script async="" src="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/click.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/common.css" rel="stylesheet">
+<title>Shell进程替换（把一个命令的输出传递给另一个命令）</title>
+<meta name="description" content="进程替换和命令替换非常相似。 命令替换 是把一个命令的输出结果赋值给另一个变量，例如 dir_files=`ls -l` 或 date_time=$(date) ；而进程替换则是把一个命令的输出结果传递给另一个（组）">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<h4><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/shell/">Shell</a></h4>
+	<dl id="contents">
+		<dt><a href="http://c.biancheng.net/shell/base/">Shell基础（开胃菜）</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/706.html">Shell是什么</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/731.html">Shell是运维人员必须掌握的技能</a>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_4555.html">常用的Shell有哪些？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/733.html">进入Shell的两种方式</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/3163.html">Shell命令的基本格式</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3229.html">Shell命令的本质到底是什么？如何自己实现一个命令？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3230.html">Shell命令的选项和参数在本质上是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/3175.html">Shell命令提示符</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/vip_3279.html">修改命令提示符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/735.html">第一个Shell脚本</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/739.html">执行Shell脚本</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3231.html">Shell四种运行方式（启动方式）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3232.html">Shell配置文件（配置脚本）的加载</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3233.html">如何编写自己的Shell配置文件？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/program/">Shell编程</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/743.html">Shell变量</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_4558.html">Shell变量的作用域（精讲）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/1164.html">Shell命令替换</a>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/789.html">Shell位置参数</a>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/806.html">Shell特殊变量</a>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_4559.html">Shell $*和$@之间的区别</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/808.html">Shell $?</a>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/821.html">Shell字符串详解</a>
+		</dd>
+<dd>9.<a href="http://c.biancheng.net/view/1114.html">Shell字符串拼接</a>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/1120.html">Shell字符串截取</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/810.html">Shell数组</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/812.html">Shell获取数组长度</a>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/818.html">Shell数组拼接</a>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/819.html">Shell删除数组元素</a>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3234.html">Shell关联数组</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/1136.html">Shell内建命令</a>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/1138.html">Shell alias命令</a>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/1142.html">Shell echo命令</a>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/2991.html">Shell read命令</a>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/1145.html">Shell exit命令</a>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/2709.html">Shell declare和typeset命令</a>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/1169.html">Shell数学计算</a>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/2480.html">Shell (())</a>
+		</dd>
+<dd>24.<a href="http://c.biancheng.net/view/2504.html">Shell let命令</a>
+		</dd>
+<dd>25.<a href="http://c.biancheng.net/view/vip_3235.html">Shell $[]</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>26.<a href="http://c.biancheng.net/view/vip_3236.html">Shell expr命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>27.<a href="http://c.biancheng.net/view/vip_3237.html">Linux bc命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>28.<a href="http://c.biancheng.net/view/vip_3238.html">Shell declare -i</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>29.<a href="http://c.biancheng.net/view/1262.html">Shell if else</a>
+		</dd>
+<dd>30.<a href="http://c.biancheng.net/view/2735.html">Shell退出状态</a>
+		</dd>
+<dd>31.<a href="http://c.biancheng.net/view/2742.html">Shell test命令</a>
+		</dd>
+<dd>32.<a href="http://c.biancheng.net/view/2751.html">Shell [[]]</a>
+		</dd>
+<dd>33.<a href="http://c.biancheng.net/view/2767.html">Shell case in</a>
+		</dd>
+<dd>34.<a href="http://c.biancheng.net/view/1006.html">Shell while</a>
+		</dd>
+<dd>35.<a href="http://c.biancheng.net/view/1007.html">Shell until</a>
+		</dd>
+<dd>36.<a href="http://c.biancheng.net/view/2804.html">Shell for</a>
+		</dd>
+<dd>37.<a href="http://c.biancheng.net/view/2829.html">Shell select in</a>
+		</dd>
+<dd>38.<a href="http://c.biancheng.net/view/1011.html">Shell break和continue</a>
+		</dd>
+<dd>39.<a href="http://c.biancheng.net/view/1009.html">Shell函数</a>
+		</dd>
+<dd>40.<a href="http://c.biancheng.net/view/2860.html">Shell函数参数</a>
+		</dd>
+<dd>41.<a href="http://c.biancheng.net/view/vip_3239.html">Shell函数返回值精讲</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/942.html">Shell重定向</a>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3240.html">Linux中的文件描述符到底是什么？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3241.html">结合文件描述符谈重定向，彻底理解重定向的本质！</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>4.<a href="http://c.biancheng.net/view/vip_3242.html">使用exec命令操作文件描述符</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>5.<a href="http://c.biancheng.net/view/vip_3243.html">Shell代码块重定向</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>6.<a href="http://c.biancheng.net/view/vip_3244.html">Shell Here Document</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>7.<a href="http://c.biancheng.net/view/vip_3245.html">Shell Here String</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>8.<a href="http://c.biancheng.net/view/vip_3246.html">Shell组命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd class="active">9.<a href="http://c.biancheng.net/view/vip_3247.html">Shell进程替换</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>10.<a href="http://c.biancheng.net/view/3131.html">Linux管道</a>
+		</dd>
+<dd>11.<a href="http://c.biancheng.net/view/3472.html">Shell过滤器</a>
+		</dd>
+<dd>12.<a href="http://c.biancheng.net/view/vip_3248.html">子Shell和子进程到底有什么区别？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>13.<a href="http://c.biancheng.net/view/vip_3249.html">如何检测子Shell和子进程？</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>14.<a href="http://c.biancheng.net/view/vip_3520.html">Linux中的信号是什么</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>15.<a href="http://c.biancheng.net/view/vip_3522.html">Bash Shell中的信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>16.<a href="http://c.biancheng.net/view/vip_3521.html">Linux进程简明教程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>17.<a href="http://c.biancheng.net/view/vip_3495.html">使用什么命令查看进程</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>18.<a href="http://c.biancheng.net/view/vip_3497.html">Shell向进程发送信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>19.<a href="http://c.biancheng.net/view/vip_3499.html">使用trap命令获取信号</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>20.<a href="http://c.biancheng.net/view/vip_3506.html">trap命令捕获信号实例演示</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>21.<a href="http://c.biancheng.net/view/vip_3507.html">移除（重置）信号捕获</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>22.<a href="http://c.biancheng.net/view/vip_3508.html">关于进程、信号和捕获的总结</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>23.<a href="http://c.biancheng.net/view/vip_3250.html">Shell模块化（把代码分散到多个脚本文件中）</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dt><a href="http://c.biancheng.net/shell/shortcut/">Bash Shell快捷键</a></dt>
+		<dd>1.<a href="http://c.biancheng.net/view/vip_3509.html">Bash Shell快捷键大全</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>2.<a href="http://c.biancheng.net/view/vip_3510.html">Bash Shell命令自动补全功能</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+<dd>3.<a href="http://c.biancheng.net/view/vip_3512.html">Bash Shell历史命令</a><span class="glyphicon glyphicon-usd"></span>
+		</dd>
+
+	</dl>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/shell/">Shell</a> &gt; <a href="http://c.biancheng.net/shell/advanced/">Shell高级</a></span>
+	<span class="read-num">阅读：4,038</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Shell进程替换（把一个命令的输出传递给另一个命令）</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3246.html">Shell组命令</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/3131.html">Linux管道</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">进程替换和命令替换非常相似。<a href="http://c.biancheng.net/view/1164.html" target="_blank">命令替换</a>是把一个命令的输出结果赋值给另一个变量，例如<code>dir_files=`ls -l`</code>或<code>date_time=$(date)</code>；而进程替换则是把一个命令的输出结果传递给另一个（组）命令。<br>
+<br>
+为了说明进程替换的必要性，我们先来看一个使用管道的例子：
+<div class="snippet-container" style="undefined;"><div class="sh_bright snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre><a class="snippet-copy sh_url" href="http://c.biancheng.net/view/vip_3247.html#" style="display: none;">复制</a><a class="snippet-text sh_url" href="http://c.biancheng.net/view/vip_3247.html#">纯文本</a><a class="snippet-window sh_url" href="http://c.biancheng.net/view/vip_3247.html#">复制</a></pre></div><pre class="sh sh_sh snippet-formatted sh_sourceCode"><ol class="snippet-num"><li>echo <span class="sh_string">"http://c.biancheng.net/shell/"</span> <span class="sh_symbol">|</span> <span class="sh_keyword">read</span></li><li>echo <span class="sh_variable">$REPLY</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">echo "http://c.biancheng.net/shell/" | read
+echo $REPLY</pre></div></div>
+以上代码输出结果总是为空，因为 echo 命令在父 Shell 中执行，而 read 命令在子 Shell 中执行，当 read 执行结束时，子 Shell 被销毁，REPLY 变量也就消失了。管道中的命令总是在子 Shell 中执行的，任何给变量赋值的命令都会遭遇到这个问题。
+<blockquote>
+	<p>
+		使用 read 读取数据时，如果没有提供变量名，那么读取到的数据将存放到环境变量 REPLY 中，这一点已在《<a href="http://c.biancheng.net/view/2991.html" target="_blank">Shell read</a>》中讲到。</p>
+</blockquote>
+幸运的是，Shell 提供了一种“特异功能”，叫做进程替换，它可以用来解决这种麻烦。<br>
+<br>
+Shell 进程替换有两种写法，一种用来产生标准输出，借助输入重定向，它的输出结果可以作为另一个命令的输入：
+<p class="info-box">
+	&lt;(commands)</p>
+另一种用来接受标准输入，借助输出重定向，它可以接收另一个命令的输出结果：
+<p class="info-box">
+	&gt;(commands)</p>
+commands 是一组命令列表，多个命令之间以分号<code>;</code>分隔。注意，<code>&lt;</code>或<code>&gt;</code>与圆括号之间是没有空格的。<br>
+<br>
+例如，为了解决上面遇到的问题，我们可以像下面这样使用进程替换：
+<div class="snippet-container" style="undefined;"><div class="sh_bright snippet-wrap"><div class="snippet-menu sh_sourceCode" style="display:none;"><pre><a class="snippet-copy sh_url" href="http://c.biancheng.net/view/vip_3247.html#" style="display: none;">复制</a><a class="snippet-text sh_url" href="http://c.biancheng.net/view/vip_3247.html#">纯文本</a><a class="snippet-window sh_url" href="http://c.biancheng.net/view/vip_3247.html#">复制</a></pre></div><pre class="sh sh_sh snippet-formatted sh_sourceCode"><ol class="snippet-num"><li><span class="sh_keyword">read</span> <span class="sh_symbol">&lt;</span> <span class="sh_symbol">&lt;(</span>echo <span class="sh_string">"http://c.biancheng.net/shell/"</span><span class="sh_symbol">)</span></li><li>echo <span class="sh_variable">$REPLY</span></li></ol></pre><pre class="snippet-textonly sh_sourceCode" style="display:none;">read &lt; &lt;(echo "http://c.biancheng.net/shell/")
+echo $REPLY</pre></div></div>
+输出结果：<br>
+http://c.biancheng.net/shell/<br>
+<br>
+整体上来看，Shell 把<code>echo "http://c.biancheng.net/shell/"</code>的输出结果作为 read 的输入。<code>&lt;()</code>用来捕获&nbsp;echo 命令的输出结果，<code>&lt;</code>用来将该结果重定向到 read。<br>
+<br>
+注意，两个<code>&lt;</code>之间是有空格的，第一个<code>&lt;</code>表示输入重定向，第二个<code>&lt;</code>和<code>()</code>连在一起表示进程替换。<br>
+<br>
+本例中的 read 命令和第二个 echo 命令都在当前 Shell 进程中运行，读取的数据也会保存到当前进程的&nbsp;REPLY 变量，大家都在一个进程中，所以使用 echo 能够成功输出。<br>
+<br>
+而在前面的例子中我们使用了管道，echo 命令在父进程中运行，read 命令在子进程中运行，读取的数据也保存在子进程的 REPLY 变量中，echo 命令和 REPLY 变量不在一个进程中，而子进程的环境变量对父进程是不可见的，所以读取失败。<br>
+<br>
+再来看一个进程替换用作「接受标准输入」的例子：
+<p class="info-box">
+	echo "C语言中文网" &gt; &gt;(read; echo "你好，$REPLY")</p>
+运行结果：<br>
+你好，C语言中文网<br>
+<br>
+因为使用了重定向，read 命令从<code>echo "C语言中文网"</code>的输出结果中读取数据。<br>
+<h2>
+	Shell进程替换的本质</h2>
+为了能够在不同进程之间传递数据，实际上进程替换会跟系统中的文件关联起来，这个文件的名字为<code>/dev/fd/n</code>（n 是一个整数）。该文件会作为参数传递给<code>()</code>中的命令，<code>()</code>中的命令对该文件是读取还是写入取决于进程替换格式是<code>&lt;</code>还是<code>&gt;</code>：
+<ul>
+	<li>
+		如果是<code>&gt;()</code>，那么该文件会给<code>()</code>中的命令提供输入；借助输出重定向，要输入的内容可以从其它命令而来。</li>
+	<li>
+		如果是<code>&lt;()</code>，那么该文件会接收<code>()</code>中命令的输出结果；借助输入重定向，可以将该文件的内容作为其它命令的输入。</li>
+</ul>
+<br>
+使用 echo 命令可以查看进程替换对应的文件名：
+<pre class="info-box">[c.biancheng.net]$ echo &gt;(true)
+/dev/fd/63
+[c.biancheng.net]$ echo &lt;(true)
+/dev/fd/63
+[c.biancheng.net]$ echo &gt;(true) &lt;(true)
+/dev/fd/63 /dev/fd/62</pre>
+<code>/dev/fd/</code>目录下有很多序号文件，进程替换一般用的是 63 号文件，该文件是系统内部文件，我们一般查看不到。<br>
+<br>
+我们通过下面的语句进行实例分析：
+<p class="info-box">
+	echo "shellscript" &gt; &gt;(read; echo "hello, $REPLY")</p>
+第一个<code>&gt;</code>表示输出重定向，它把第一个 echo 命令的输出结果重定向到<code>/dev/fd/63</code>文件中。<br>
+<br>
+<code>&gt;()</code>中的第一个命令是 read，它需要从标准输入中读取数据，此时就用<code>/dev/fd/63</code>作为输入文件，把该文件的内容交给 read 命令，接着使用 echo 命令输出 read 读取到的内容。<br>
+<br>
+可以看到，<code>/dev/fd/63</code>文件起到了数据中转或者数据桥梁的作用，借助重定向，它将<code>&gt;()</code>内部的命令和外部的命令联系起来，使得数据能够在这些命令之间流通。<br>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_3246.html">Shell组命令</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/3131.html">Linux管道</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/65.html" title="Go语言结构体定义">Go语言结构体定义</a></li>
+<li><a href="http://c.biancheng.net/view/103.html" title="Go语言使用通道响应计时器的事件">Go语言使用通道响应计时器的事件</a></li>
+<li><a href="http://c.biancheng.net/view/342.html" title="strlen函数与sizeof的区别，C语言strlen与sizeof的区别详解">strlen函数与sizeof的区别，C语言strlen与sizeof的区别详解</a></li>
+<li><a href="http://c.biancheng.net/view/673.html" title="流缓冲区迭代器（输入流缓冲区迭代器和输出流缓冲区迭代器）详解">流缓冲区迭代器（输入流缓冲区迭代器和输出流缓冲区迭代器）详解</a></li>
+<li><a href="http://c.biancheng.net/view/vip_1797.html" title="进入缓冲区（缓存）的世界，破解一切与输入输出有关的疑难杂症">进入缓冲区（缓存）的世界，破解一切与输入输出有关的疑难杂症</a></li>
+<li><a href="http://c.biancheng.net/view/2233.html" title="C++友元函数和友元类（C++ friend关键字）">C++友元函数和友元类（C++ friend关键字）</a></li>
+<li><a href="http://c.biancheng.net/view/6757.html" title="大数据流式计算框架汇总和对比">大数据流式计算框架汇总和对比</a></li>
+<li><a href="http://c.biancheng.net/view/vip_7678.html" title="C++ const常量如何在多文件编程中使用？">C++ const常量如何在多文件编程中使用？</a></li>
+<li><a href="http://c.biancheng.net/view/8275.html" title="Python数据分析学习路线（知识点汇总）">Python数据分析学习路线（知识点汇总）</a></li>
+<li><a href="http://c.biancheng.net/algorithm/dijkstra.html" title="迪杰斯特拉算法（求最短路径）">迪杰斯特拉算法（求最短路径）</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 3247;
+window.arcId = "8f3dIaSx5CjC5r+4MsOYWyCA14HCnWNPaH6LK/Cw/o5cSFT42ISCr6yTz1M";
+window.typeidChain = "300|78";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/jquery1.12.4.min.js.下载"></script>
+<script src="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/common.js.下载"></script>
+<span style="display:none;"><script src="./3.9Shell进程替换（把一个命令的输出传递给另一个命令）_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

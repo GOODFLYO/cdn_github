@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_5038.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./1.4类UNIX系统是什么鬼？_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./1.4类UNIX系统是什么鬼？_files/common.css" rel="stylesheet">
+<title>类UNIX系统是什么鬼？</title>
+<meta name="description" content="上节《 UNIX和Linux的区别 》中讲到了 UNIX 系统的历史，UNIX 是操作系统的开山鼻祖，是操作系统的发源地，后来的 Windows 和 Linux 都参考了 UNIX。 有人说，这个世界上只有两种操作系统：">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./1.4类UNIX系统是什么鬼？_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		<dd class="this"> <span class="channel-num">1</span> <a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a> </dd><dl class="dl-sub"><dd>1.1 <a href="http://c.biancheng.net/view/705.html">操作系统是什么</a></dd><dd>1.2 <a href="http://c.biancheng.net/view/6423.html">Linux是什么，有哪些特点？</a></dd><dd>1.3 <a href="http://c.biancheng.net/view/707.html">Linux和UNIX的关系及区别</a></dd><dd class="active">1.4 <a href="http://c.biancheng.net/view/vip_5038.html">类UNIX系统是什么鬼？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>1.5 <a href="http://c.biancheng.net/view/vip_7648.html">Linux中大量使用脚本语言，而不是C语言！</a><span class="glyphicon glyphicon-usd"></span></dd><dd>1.6 <a href="http://c.biancheng.net/view/vip_7649.html">Windows很好啊，为什么要学Linux？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>1.7 <a href="http://c.biancheng.net/view/709.html">Linux的优缺点</a></dd><dd>1.8 <a href="http://c.biancheng.net/view/710.html">常见Linux发行版本有哪些？</a></dd><dd>1.9 <a href="http://c.biancheng.net/view/5853.html">这么多Linux发行版，哪个最适合初学者？</a></dd><dd>1.10 <a href="http://c.biancheng.net/view/2912.html">Linux桌面环境大比拼[附带优缺点]</a></dd><dd>1.11 <a href="http://c.biancheng.net/view/vip_5039.html">Linux的主要应用领域有哪些？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>1.12 <a href="http://c.biancheng.net/view/vip_5040.html">Linux已经霸占了服务器领域！</a><span class="glyphicon glyphicon-usd"></span></dd><dd>1.13 <a href="http://c.biancheng.net/view/2943.html">开源软件是什么？有哪些？</a></dd><dd>1.14 <a href="http://c.biancheng.net/view/2947.html">开源协议是什么？有哪些？</a></dd><dd>1.15 <a href="http://c.biancheng.net/view/vip_5041.html">开源就等于免费吗？用事实来说话</a><span class="glyphicon glyphicon-usd"></span></dd><dd>1.16 <a href="http://c.biancheng.net/view/713.html">如何学习Linux（新手必看）</a></dd><dd>1.17 <a href="http://c.biancheng.net/view/vip_7650.html">想学好Linux，这些习惯必须养成（初学者必读）</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a></span>
+	<span class="read-num">阅读：63,884</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>类UNIX系统是什么鬼？</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/707.html">Linux和UNIX的关系及区别</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_7648.html">Linux中大量使用脚本语言，而不是C语言！</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">上节《<a href="http://c.biancheng.net/view/707.html" target="_blank">UNIX和Linux的区别</a>》中讲到了 UNIX 系统的历史，UNIX 是操作系统的开山鼻祖，是操作系统的发源地，后来的 Windows 和 Linux 都参考了 UNIX。<br>
+<br>
+有人说，这个世界上只有两种操作系统：
+<ul>
+	<li>
+		UNIX 和类 UNIX 操作系统；</li>
+	<li>
+		其它操作系统。</li>
+</ul>
+<br>
+类 UNIX 系统（英文 Unix-like）既包括各种传统的 UNIX 系统，比如 FreeBSD、OpenBSD、Sun Solaris 等，还包括与 UNIX 相似的系统，比如 Linux、QNX、Minix 等，它们都相当程度地继承了原始 UNIX 的特性，有很多相似之处，并且都在一定程度上遵守 POSIX 规范（UNIX 可移植接口规范）。<br>
+<br>
+类 UNIX 系统不都是免费的，有相当一部分是收费的，而且还比较昂贵。<br>
+<br>
+Linux 几乎是最著名的一个类 UNIX 系统，现在风头正盛，甚至有点“喧宾夺主”，剥夺了原来属于 UNIX 的市场份额，但是 UNIX 也经历了时间的考验，其在操作系统发展历程中的地位是不可否认的。<br>
+<br>
+几乎每一门科学学到深入都是要接触 Linux 的，很多专业的软件甚至针对 Linux 做了大量的优化。<br>
+<br>
+除去 Windows，几乎你所知道的每一个系统都是 UNIX 和类 UNIX，而且它们在 PC 普及前就大放异彩。Windows 仅仅占领了 PC，而别的方方面面都被 UNIX 和类 UNIX 占领了，至于其他的操作系统更是不值一提。比如：
+<ul>
+	<li>
+		服务器、超级计算机、嵌入式、机顶盒领域都有 Linux 的身影；</li>
+	<li>
+		在手机领域，Android 和 iOS 都是类 UNIX 系统。</li>
+</ul>
+<br>
+<span style="color:#b22222;">总之，除了 Windows，几乎你能叫的出名的都是 UNIX 和类 UNIX 系统。</span><br>
+<br>
+<div style="text-align: center;">
+	<img alt="维基百科对类UNIX系统的简单" src="./1.4类UNIX系统是什么鬼？_files/1-1Z305132R0558.gif"><br>
+	图1：维基百科对 UNIX 和类 UNIX 系统的简单<br>
+	<br>
+	<img alt="类 UNIX 系统发展史" src="./1.4类UNIX系统是什么鬼？_files/1-1Z30513305D57.gif"><br>
+	图2：类 UNIX 系统发展史（简明版）</div>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./1.4类UNIX系统是什么鬼？_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/707.html">Linux和UNIX的关系及区别</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_7648.html">Linux中大量使用脚本语言，而不是C语言！</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/1183.html" title="操作系统组织数据的方法（详解版）">操作系统组织数据的方法（详解版）</a></li>
+<li><a href="http://c.biancheng.net/view/1704.html" title="C++入门视频教程（菜鸟也疯狂）">C++入门视频教程（菜鸟也疯狂）</a></li>
+<li><a href="http://c.biancheng.net/view/1972.html" title="OpenAI Gym安装和使用详解">OpenAI Gym安装和使用详解</a></li>
+<li><a href="http://c.biancheng.net/view/vip_2080.html" title="调试的概念以及调试器的选择">调试的概念以及调试器的选择</a></li>
+<li><a href="http://c.biancheng.net/view/2596.html" title="MySQL删除存储过程（DROP PROCEDURE）">MySQL删除存储过程（DROP PROCEDURE）</a></li>
+<li><a href="http://c.biancheng.net/view/6412.html" title="构造ICMP请求包进行路由跟踪">构造ICMP请求包进行路由跟踪</a></li>
+<li><a href="http://c.biancheng.net/view/6940.html" title="网站导航该如何设置？">网站导航该如何设置？</a></li>
+<li><a href="http://c.biancheng.net/view/7139.html" title="Makefile变量的高级用法">Makefile变量的高级用法</a></li>
+<li><a href="http://c.biancheng.net/css3/2d-3d-transform.html" title="CSS 2D转换（5种形式）">CSS 2D转换（5种形式）</a></li>
+<li><a href="http://c.biancheng.net/springcloud/what-is-cloud.html" title="Spring Cloud是什么">Spring Cloud是什么</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 5038;
+window.arcId = "d22dnknLPLvInT/+GG4+I7kLdbPYJj6Y5TBEK1QYUsMGpeGPZB/NT4SQm/k";
+window.typeidChain = "80|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./1.4类UNIX系统是什么鬼？_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./1.4类UNIX系统是什么鬼？_files/jquery1.12.4.min.js.下载"></script>
+<script src="./1.4类UNIX系统是什么鬼？_files/common.js.下载"></script>
+<span style="display:none;"><script src="./1.4类UNIX系统是什么鬼？_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

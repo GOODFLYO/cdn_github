@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_7659.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./5.12如何在Vim中执行Linux命令？_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./5.12如何在Vim中执行Linux命令？_files/common.css" rel="stylesheet">
+<title>如何在Vim中执行Linux命令？</title>
+<meta name="description" content="Vim 编辑器不仅提供了大量的命令来方便和加快我们的文件编辑工作，在此编辑器中，我们还可以直接使用 Linux 命令来进一步提高文件编辑的效率，这就是 Vim 编辑器的所谓过滤功能。">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./5.12如何在Vim中执行Linux命令？_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">5</span> <a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a> </dd><dl class="dl-sub"><dd>5.1 <a href="http://c.biancheng.net/view/3005.html">Vim及其安装</a></dd><dd>5.2 <a href="http://c.biancheng.net/view/vip_5059.html">Vi和Vim之间到底有什么关系？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>5.3 <a href="http://c.biancheng.net/view/804.html">Linux Vim三种工作模式</a></dd><dd>5.4 <a href="http://c.biancheng.net/view/805.html">Linux Vim基本操作</a></dd><dd>5.5 <a href="http://c.biancheng.net/view/3008.html">Vim移动光标命令汇总</a></dd><dd>5.6 <a href="http://c.biancheng.net/view/6332.html">Linux Vim撤销和恢复撤销快捷键</a></dd><dd>5.7 <a href="http://c.biancheng.net/view/6355.html">Linux Vim可视化模式</a></dd><dd>5.8 <a href="http://c.biancheng.net/view/vip_5060.html">Vim多窗口编辑模式</a><span class="glyphicon glyphicon-usd"></span></dd><dd>5.9 <a href="http://c.biancheng.net/view/813.html">Linux Vim批量注释和自定义注释</a></dd><dd>5.10 <a href="http://c.biancheng.net/view/vip_5061.html">Vim显示行号</a><span class="glyphicon glyphicon-usd"></span></dd><dd>5.11 <a href="http://c.biancheng.net/view/vip_5062.html">Vim配置文件（.vimrc）详解</a><span class="glyphicon glyphicon-usd"></span></dd><dd class="active">5.12 <a href="http://c.biancheng.net/view/vip_7659.html">如何在Vim中执行Linux命令？</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a></span>
+	<span class="read-num">阅读：4,167</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>如何在Vim中执行Linux命令？</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5062.html">Vim配置文件（.vimrc）详解</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">Vim 编辑器不仅提供了大量的命令来方便和加快我们的文件编辑工作，在此编辑器中，我们还可以直接使用 Linux 命令来进一步提高文件编辑的效率，这就是 Vim 编辑器的所谓过滤功能。<br>
+<br>
+由于 Vim 编辑器中支持直接执行 Linux 命令，从而可以方便快捷地对文件完成以下操作：
+<ol>
+	<li>
+		将一个命令的输出结果存入正在编辑的文件；</li>
+	<li>
+		将正在编辑的文件中的一些数据作为某个指定 Linux 命令的输入。</li>
+</ol>
+<br>
+下面，通过一个简单的例子，来演示如何在 Vim 编辑器中执行 Linux 命令。<br>
+<br>
+首先，我们新建一个 demo.txt 文件，并手动输入如下内容，并将光标移动至下一行开头：
+<p class="info-box">
+	http://c.biancheng.net</p>
+在此基础上，按 Esc 令 Vim 返回到命令模式，再按下<code>!!</code>，这时在窗口的左下角会出现<code>:.!</code>的提示信息，这就表明我们可以输入 Linux 命令了。例如，我们输入 date 命令，如图 1 所示：
+<div style="text-align: center;">
+	<br>
+	<img alt="" src="./5.12如何在Vim中执行Linux命令？_files/2-1911121HP1191.gif"><br>
+	图 1 向文件中输入命令的执行结果</div>
+<br>
+注意，窗口左下角的<code>:.!</code>表示操作文本的范围，其中 . 表示从光标所在行开始，! 表示后续会执行 Linux 命令，整体表示命令的执行结果将插入到光标所在行的位置，因此，如果光标所在位置处有数据，就会被命令的执行结果直接覆盖掉。<br>
+<br>
+确认光标位置无误后，按 Enter（回车）键，这时会发现系统当前的日期和时间写到了 demo.txt 文件中第 2 行的位置：
+<p class="info-box">
+	http://c.biancheng.net<br>
+	Tue Nov 12 07:20:49 PST 2017</p>
+在此基础上，再向该文件中手动输入以下数据：
+<p class="info-box">
+	http://c.biancheng.net<br>
+	Tue Nov 12 07:20:49 PST 2017<br>
+	1 C语言中文网<br>
+	3 c.biancheng.net<br>
+	2 Linux教程</p>
+输出完成之后，将光标调整至第 3 行第 1 个字符的位置，然后按 Esc 使 Vim 进行命令模式，并按下<code>!}</code>组合键，你会看到窗口的左下角出现<code>:.,$!</code>的提示信息，如图 2 所示。
+<div style="text-align: center;">
+	<br>
+	<img alt="" src="./5.12如何在Vim中执行Linux命令？_files/2-1911121I9495Q.gif"><br>
+	图 2 Vim命令模式下按 !} 的提示信息</div>
+<blockquote>
+	<p>
+		其中 . 表示光标所在的当前行，$ 表示文件最后一行，因此和之前不同，这次选取的是文件中第 3 行及之后的所有内容。</p>
+</blockquote>
+在此基础上，我们使用 sort 命令对选中文本按照第 1 列进行降序排序，执行命令如下：
+<p class="info-box">
+	:.,$!sort -nr -k1</p>
+<blockquote>
+	<p>
+		有关 sort 命令的用法，由于不是本节重点，这里不再做过多讲解。</p>
+</blockquote>
+按 Enter（回车）键，可以看到，demo.txt 文件中的内容变成：<br>
+<p class="info-box">
+	http://c.biancheng.net<br>
+	Tue Nov 12 07:20:49 PST 2017<br>
+	3 c.biancheng.net<br>
+	2 Linux教程<br>
+	1 C语言中文网</p>
+由此，通过将所选文件作为 sort 命令的输入，实现了对该部分文本的降序排序操作。<br>
+<br>
+除此之外，表 3 罗列出了常用的几种 Vim 和 Linux 命令搭配使用的方式<br>
+<br>
+<table>
+	<caption>
+		表 3 Vim执行Linux命令的方式</caption>
+	<tbody>
+		<tr>
+			<th>
+				格式</th>
+			<th>
+				功能</th>
+		</tr>
+		<tr>
+			<td>
+				:!命令</td>
+			<td>
+				直接运行一个 Linux 命令，运行完毕之后，即可返回到 Vim 中。</td>
+		</tr>
+		<tr>
+			<td>
+				:w!命令</td>
+			<td>
+				将 Vim 中所有的文本内容作为指定命令的输入。但命令的执行结果不会写入到当前文件中。</td>
+		</tr>
+		<tr>
+			<td>
+				:r!命令</td>
+			<td>
+				将命令执行的结果写入到当前 Vim 中，例如 :!ls 表示将 ls 的执行结果输入到 Vim 中。</td>
+		</tr>
+		<tr>
+			<td>
+				:nr!命令</td>
+			<td>
+				其中 n 为数字，表示将命令的执行结果写入到 Vim 第 n 行的位置。例如，:3r!date 表示将 date 命令的执行结果写入到第 3 行文本处。</td>
+		</tr>
+		<tr>
+			<td>
+				:n,m!命令</td>
+			<td>
+				其中 n 表示起始行号，m为结束行号，功能是将 Vim 中指定的部分文本作为某个命令的输入，同时将命令的输出也插入到当前指定的位置。</td>
+		</tr>
+		<tr>
+			<td>
+				:n,m w!命令</td>
+			<td>
+				其中 n 表示起始行号，m为结束行号，其功能是 Vim 中指定的部分文本作为某个命令的输入，但命令的执行结果不会写入到文件中。</td>
+		</tr>
+		<tr>
+			<td>
+				!!date</td>
+			<td>
+				向 Vim 中插入当前时间。</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./5.12如何在Vim中执行Linux命令？_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5062.html">Vim配置文件（.vimrc）详解</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/453.html" title="VS2015下载地址和安装教程（图解）">VS2015下载地址和安装教程（图解）</a></li>
+<li><a href="http://c.biancheng.net/view/1477.html" title="JSP request对象：获取客户端的请求信息">JSP request对象：获取客户端的请求信息</a></li>
+<li><a href="http://c.biancheng.net/view/3117.html" title="Linux初始组和附加组">Linux初始组和附加组</a></li>
+<li><a href="http://c.biancheng.net/view/3221.html" title="Docker Linux安全技术简介">Docker Linux安全技术简介</a></li>
+<li><a href="http://c.biancheng.net/view/3423.html" title="伙伴系统管理动态内存">伙伴系统管理动态内存</a></li>
+<li><a href="http://c.biancheng.net/view/3857.html" title="汇编语言处理器操作数大小前缀作用及意义">汇编语言处理器操作数大小前缀作用及意义</a></li>
+<li><a href="http://c.biancheng.net/view/4097.html" title="Linux awk命令高级用法完全攻略">Linux awk命令高级用法完全攻略</a></li>
+<li><a href="http://c.biancheng.net/view/6157.html" title="PHP count()：获取数组长度">PHP count()：获取数组长度</a></li>
+<li><a href="http://c.biancheng.net/view/6246.html" title="PHP preg_match()：执行正则表达式匹配">PHP preg_match()：执行正则表达式匹配</a></li>
+<li><a href="http://c.biancheng.net/view/6625.html" title="MATLAB R2016b的帮助系统">MATLAB R2016b的帮助系统</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 7659;
+window.arcId = "66d4EFE689rwICQfrmMStZ5JYn7ChKwgU7oMU46oInB9Bhypk8WdG3WoKb4";
+window.typeidChain = "83|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./5.12如何在Vim中执行Linux命令？_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./5.12如何在Vim中执行Linux命令？_files/jquery1.12.4.min.js.下载"></script>
+<script src="./5.12如何在Vim中执行Linux命令？_files/common.js.下载"></script>
+<span style="display:none;"><script src="./5.12如何在Vim中执行Linux命令？_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

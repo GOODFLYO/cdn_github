@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_5082.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./10.9Linux开机自动挂载硬件设备（配置_etc_fstab文件）_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./10.9Linux开机自动挂载硬件设备（配置_etc_fstab文件）_files/common.css" rel="stylesheet">
+<title>Linux开机自动挂载硬件设备（配置/etc/fstab文件）</title>
+<meta name="description" content="了解了 mount 命令之后，读者可能会问，系统如何在开机时自动挂载硬盘，它又是怎么知道哪些分区是需要挂载的呢？ 很简单，Linux 通过 /etc/fstab 配置文件来确定这些信息，这个配置文件">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./10.9Linux开机自动挂载硬件设备（配置_etc_fstab文件）_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">10</span> <a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a> </dd><dl class="dl-sub"><dd>10.1 <a href="http://c.biancheng.net/view/879.html">深度探究硬盘的内部结构</a></dd><dd>10.2 <a href="http://c.biancheng.net/view/vip_7665.html">Linux常见的文件系统有哪些，CentOS采用哪种文件系统？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.3 <a href="http://c.biancheng.net/view/vip_5079.html">Linux系统是如何识别硬盘设备和硬盘分区的？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.4 <a href="http://c.biancheng.net/view/883.html">Linux查看文件系统硬盘使用情况（df命令）</a></dd><dd>10.5 <a href="http://c.biancheng.net/view/884.html">Linux统计目录或文件所占磁盘空间大小（du命令）</a></dd><dd>10.6 <a href="http://c.biancheng.net/view/885.html">Linux挂载文件系统（mount命令）</a></dd><dd>10.7 <a href="http://c.biancheng.net/view/vip_5080.html">给Linux系统挂载光盘</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.8 <a href="http://c.biancheng.net/view/vip_5081.html">给Linux系统挂载U盘</a><span class="glyphicon glyphicon-usd"></span></dd><dd class="active">10.9 <a href="http://c.biancheng.net/view/vip_5082.html">Linux开机自动挂载硬件设备（配置/etc/fstab文件）</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.10 <a href="http://c.biancheng.net/view/vip_5083.html">修改/etc/fstab文件出错导致Linux不能启动，该怎么办？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.11 <a href="http://c.biancheng.net/view/886.html">Linux卸载文件系统（umount命令）</a></dd><dd>10.12 <a href="http://c.biancheng.net/view/887.html">Linux检测和修复文件系统（fsck命令）</a></dd><dd>10.13 <a href="http://c.biancheng.net/view/889.html">Linux查看文件系统详细信息（dumpe2fs命令）</a></dd><dd>10.14 <a href="http://c.biancheng.net/view/891.html">Linux给硬盘分区（fdisk命令）</a></dd><dd>10.15 <a href="http://c.biancheng.net/view/vip_5087.html">Linux fdisk创建分区（主分区、扩展分区和逻辑分区）</a><span class="glyphicon glyphicon-usd"></span></dd><dd>10.16 <a href="http://c.biancheng.net/view/905.html">Linux对大容量硬盘分区（parted命令）</a></dd><dd>10.17 <a href="http://c.biancheng.net/view/898.html">linux格式化分区（mkfs命令）</a></dd><dd>10.18 <a href="http://c.biancheng.net/view/3706.html">Linux格式化分区（mke2fs命令）</a></dd><dd>10.19 <a href="http://c.biancheng.net/view/6105.html">Linux虚拟内存和物理内存</a></dd><dd>10.20 <a href="http://c.biancheng.net/view/vip_7666.html">Linux如何建立交换分区（swap分区）？</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a></span>
+	<span class="read-num">阅读：3,506</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux开机自动挂载硬件设备（配置/etc/fstab文件）</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5081.html">给Linux系统挂载U盘</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_5083.html">修改/etc/fstab文件出错导致Linux不能启动，该怎么办？</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">了解了 mount 命令之后，读者可能会问，系统如何在开机时自动挂载硬盘，它又是怎么知道哪些分区是需要挂载的呢？<br>
+<br>
+很简单，Linux 通过 /etc/fstab 配置文件来确定这些信息，这个配置文件对所有用户可读，但只有 root 用户有权修改此文件。也就是说，如果我们想实现开机自动挂载某个硬件设备，只需要使用 root 身份在 /etc/fstab 文件中添加此设备即可。<br>
+<br>
+首先，我们打开这个文件看看吧，执行如下命令：
+<p class="info-box">
+	[root@localhost ~]# vi /etc/fstab<br>
+	UUID=c2ca6f57-b15c-43ea-bca0-f239083d8bd2 / ext4 defaults 1 1<br>
+	UUID=0b23d315-33a7-48a4-bd37-9248e5c44345 /boot ext4 defaults 1 2<br>
+	UUID=4021be19-2751-4dd2-98cc-383368c39edb swap swap defaults 0 0<br>
+	#只有这三个是真正的硬盘分区，下面的都是虚拟文件系统或交换分区<br>
+	tmpfs /dev/shm tmpfs defaults 0 0<br>
+	devpts /dev/pts devpts gid=5, mode=620 0 0<br>
+	sysfs /sys sysfe defaults 0 0<br>
+	proc /proc proc defaults 0 0</p>
+目前，大家可以忽略 tmpfs、devpts、sysfs 和 proc 这几行，它们分别是与共享内存、终端窗口、设备信息和内核参数相关联的特殊设备。<br>
+<br>
+可以看到，在 fstab 文件中，每行数据都分为了 6 个字段，它们的含义分别是：
+<ol>
+	<li>
+		用来挂载每个文件系统的分区设备文件名或 UUID（用于指代设备名）；</li>
+	<li>
+		挂载点；</li>
+	<li>
+		文件系统的类型；</li>
+	<li>
+		各种挂载参数；</li>
+	<li>
+		指定分区是否被 dump 备份；</li>
+	<li>
+		指定分区是否被 fsck 检测；</li>
+</ol>
+下面，我们一一进行讲解。
+<h2>
+	/etc/fstab文件各字段的含义</h2>
+首先介绍第一个字段，什么是 UUID 呢？UUID 即通用唯一标识符，是一个 128 位比特的数字，可以理解为就是硬盘的 ID，UUID 由系统自动生成和管理。<br>
+<br>
+这个字段在 CentOS 5.5 系统中是写入分区的卷标名或分区设备文件名的，现在变成了硬盘的 UUID。这样做的好处是当硬盘増加了新的分区，或者分区的顺序改变，或者内核升级后，仍然能够保证分区能够正确地加载，而不至于造成启动障碍。<br>
+<br>
+那么，每个分区的 UUID 到底是什么呢？用 dumpe2fs 命令（后续会讲）就可以查看到，具体执行命令如下：
+<p class="info-box">
+	[root@localhost ~]# dumpe2fs /dev/sdb5<br>
+	dumpe2fs 1.41.12 (17-May-2010)<br>
+	Filesystem volume name: test_label<br>
+	Last mounted on: &lt;not available&gt;<br>
+	Filesystem UUID: 63f238f0-a715-4821-8ed1-b3d18756a3ef<br>
+	#UUID<br>
+	...省略部分输出...</p>
+另外，也可以通过查看每个硬盘UUID的链接文件名来确定UUID，命令如下：
+<p class="info-box">
+	[root@localhost ~]# ls -l /dev/disk/by-uuid/<br>
+	总用量 0<br>
+	Irwxrwxrwx. 1 root root 10 4 月 11 00:17 0b23d315-33a7-48a4-bd37-9248e5c44345<br>
+	-&gt; ../../sdal<br>
+	Irwxrwxrwx. 1 root root 10 4 月 11 00:17 4021 be19-2751 -4dd2-98cc-383368c39edb<br>
+	-&gt; ../../sda2<br>
+	Irwxrwxrwx. 1 root root 10 4 月 11 00:17 63f238f0-a715-4821-8ed1-b3d18756a3ef<br>
+	-&gt; ../../sdb5<br>
+	Irwxrwxrwx. 1 root root 10 4月 11 00:17 6858b440-ad9e-45cb-b411 -963c5419e0e8<br>
+	-&gt; ../../sdb6<br>
+	Irwxrwxrwx. 1 root root 10 4月 11 00:17 c2ca6f57-b15c-43ea-bca0-f239083d8bd2<br>
+	-&gt; ../../sda3</p>
+<blockquote>
+	<p>
+		还可以使用 blkid 命令查看所有磁盘分区的 UUID，有关此命令的具体用法，本节不再详细介绍，有兴趣的读者可自定查阅资料做详细了解。</p>
+</blockquote>
+第二个字段关于挂载点的含义，我们已经在 《<a href="http://c.biancheng.net/view/2859.html" target="_blank">Linux挂载</a>》 和 《<a href="http://c.biancheng.net/view/885.html" target="_blank">Linux mount命令</a>》 章节中讲解，所以这里不再赘述。但需要强调的是，挂载点一定要是已经建立的空目录。<br>
+<br>
+第三个字段为文件系统名称，CentOS 6.3 的默认文件系统应该是 ext4。<br>
+<br>
+第四个字段是挂载参数，这个参数和 mount 命令的挂载参数一致。<br>
+<br>
+第五个字段表示“指定分区是否被 dump 备份”，0 代表不备份，1 代表备份，2 代表不定期备份。<br>
+<br>
+第六个字段表示“指定分区是否被 fsck 检测”，0 代表不检测，其他数字代表检测的优先级，1 的优先级比 2 高。所以先检测 1 的分区，再检测 2 的分区。一般分区的优先级是 1，其他分区的优先级是 2。
+<h2>
+	配置 /etc/fstab 文件</h2>
+能看懂这个文件了吧？我们把 /dev/sdb5 和 /dev/sdb6 两个分区加入 /etc/fstab 文件，执行命令如下：
+<p class="info-box">
+	[root@localhost ~]# vi /etc/fstab<br>
+	UUID=c2ca6f57-b15c-43ea-bca0-t239083d8bd2 ext4 defaults 1 1<br>
+	UUID=0b23d315-33a7-48a4-bd37-9248e5c44345 I boot ext4 defaults 1 2<br>
+	UUID=4021be19-2751-4dd2-98cc-383368c39edb swap swap defaults 0 0<br>
+	tmpfs /dev/shm tmpfs defaults 0 0<br>
+	devpts /dev/pts devpts gid=5, mode=620 0 0<br>
+	sysfs /sys sysfs defaults 0 0<br>
+	proc /proc proc defaults 0 0<br>
+	/dev/sdb5 /disk5 ext4 defaults 1 2<br>
+	/dev/sdb6 /disk6 ext4 defaults 1 2</p>
+可以看到，这里并没有使用分区的 UUID，而是直接写入分区设备文件名，也是可以的。不过，如果不写 UUID，就要注意，在修改了磁盘顺序后，/etc/fstab 文件也要相应的改变。<br>
+<p class="info-box">
+	这里直接使用分区的设备文件名作为此文件的第一个字段，当然也可以写分区的 UUID。只不过 UUID 更加先进，设备文件名稍微简单一点。</p>
+至此，分区就建立完成了，接下来只要重新启动，测试一下系统是否可以正常启动就可以了。只要 /etc/fstab 文件修改正确，就不会出现任何问题。</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./10.9Linux开机自动挂载硬件设备（配置_etc_fstab文件）_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5081.html">给Linux系统挂载U盘</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_5083.html">修改/etc/fstab文件出错导致Linux不能启动，该怎么办？</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/858.html" title="Linux groupdel命令：刪除用户组">Linux groupdel命令：刪除用户组</a></li>
+<li><a href="http://c.biancheng.net/view/2773.html" title="Unity 3D障碍物（Nav Mesh Obstacle）">Unity 3D障碍物（Nav Mesh Obstacle）</a></li>
+<li><a href="http://c.biancheng.net/view/3616.html" title="汇编语言AAS指令：减法后的ASXII调整">汇编语言AAS指令：减法后的ASXII调整</a></li>
+<li><a href="http://c.biancheng.net/view/5028.html" title="JSP JSTL &lt;x:parse&gt;标签：解析指定的XML内容">JSP JSTL &lt;x:parse&gt;标签：解析指定的XML内容</a></li>
+<li><a href="http://c.biancheng.net/view/5126.html" title="Hibernate addClass方法：加载实体类">Hibernate addClass方法：加载实体类</a></li>
+<li><a href="http://c.biancheng.net/view/5192.html" title="Hibernate clear方法：清空缓存">Hibernate clear方法：清空缓存</a></li>
+<li><a href="http://c.biancheng.net/view/5807.html" title="Java分割字符串（spilt()）">Java分割字符串（spilt()）</a></li>
+<li><a href="http://c.biancheng.net/view/7268.html" title="PHP运算符">PHP运算符</a></li>
+<li><a href="http://c.biancheng.net/jstl/sql-transaction.html" title="&lt;sql:transaction&gt;标签">&lt;sql:transaction&gt;标签</a></li>
+<li><a href="http://c.biancheng.net/view/9444.html" title="大学是最好的学习时间，错过了悔恨终生！">大学是最好的学习时间，错过了悔恨终生！</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 5082;
+window.arcId = "e0c6TnD90w39HmfC9wOavH4pkTyD7dAXqaacSjQr9nr6XJBqvgLTze81puI";
+window.typeidChain = "87|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./10.9Linux开机自动挂载硬件设备（配置_etc_fstab文件）_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./10.9Linux开机自动挂载硬件设备（配置_etc_fstab文件）_files/jquery1.12.4.min.js.下载"></script>
+<script src="./10.9Linux开机自动挂载硬件设备（配置_etc_fstab文件）_files/common.js.下载"></script>
+<span style="display:none;"><script src="./10.9Linux开机自动挂载硬件设备（配置_etc_fstab文件）_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

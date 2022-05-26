@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_5047.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./2.17新手必看的Linux服务器管理和维护注意事项_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./2.17新手必看的Linux服务器管理和维护注意事项_files/common.css" rel="stylesheet">
+<title>新手必看的Linux服务器管理和维护注意事项</title>
+<meta name="description" content="本节介绍有关服务器管理和维护过程中的一些注意事项，都是笔者的经验之谈，相信对新手会有一定的启发和帮助。 很多初学者接触 Linux 时间不长，还未完整地学习一遍 Linux，理解本节">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./2.17新手必看的Linux服务器管理和维护注意事项_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">2</span> <a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a> </dd><dl class="dl-sub"><dd>2.1 <a href="http://c.biancheng.net/view/6309.html">安装Linux系统对硬件有什么要求？</a></dd><dd>2.2 <a href="http://c.biancheng.net/view/6448.html">虚拟机是什么</a></dd><dd>2.3 <a href="http://c.biancheng.net/view/714.html">VMware虚拟机安装Linux系统</a></dd><dd>2.4 <a href="http://c.biancheng.net/view/vip_5042.html">使用U盘安装Linux系统</a><span class="glyphicon glyphicon-usd"></span></dd><dd>2.5 <a href="http://c.biancheng.net/view/vip_5043.html">使用dd命令安装Linux系统</a><span class="glyphicon glyphicon-usd"></span></dd><dd>2.6 <a href="http://c.biancheng.net/view/vip_5044.html">使用LiveCD从光盘直接运行Linux，无需安装</a><span class="glyphicon glyphicon-usd"></span></dd><dd>2.7 <a href="http://c.biancheng.net/view/6458.html">建议初学者使用虚拟机安装Linux</a></dd><dd>2.8 <a href="http://c.biancheng.net/view/vip_7651.html">忘记root账户密码怎么办？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>2.9 <a href="http://c.biancheng.net/view/vip_7652.html">使用系统光盘修复Linux系统</a><span class="glyphicon glyphicon-usd"></span></dd><dd>2.10 <a href="http://c.biancheng.net/view/vip_7653.html">破解密码这么简单，Linux是安全的操作系统吗？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>2.11 <a href="http://c.biancheng.net/view/2845.html">Linux远程管理协议（4种）</a></dd><dd>2.12 <a href="http://c.biancheng.net/view/717.html">Linux远程管理工具（PuTTY和SecureCRT）</a></dd><dd>2.13 <a href="http://c.biancheng.net/view/vip_5045.html">新手必读的Linux使用注意事项</a><span class="glyphicon glyphicon-usd"></span></dd><dd>2.14 <a href="http://c.biancheng.net/view/2833.html">Linux文件目录结构一览表</a></dd><dd>2.15 <a href="http://c.biancheng.net/view/vip_5046.html">Linux中一切皆文件[包含优缺点]</a><span class="glyphicon glyphicon-usd"></span></dd><dd>2.16 <a href="http://c.biancheng.net/view/2859.html">Linux挂载详解</a></dd><dd class="active">2.17 <a href="http://c.biancheng.net/view/vip_5047.html">新手必看的Linux服务器管理和维护注意事项</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a></span>
+	<span class="read-num">阅读：17,013</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>新手必看的Linux服务器管理和维护注意事项</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/2859.html">Linux挂载详解</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">本节介绍有关服务器管理和维护过程中的一些注意事项，都是笔者的经验之谈，相信对新手会有一定的启发和帮助。
+<div>
+	&nbsp;</div>
+很多初学者接触 Linux 时间不长，还未完整地学习一遍 Linux，理解本节内容可能有些困难，可以先跳过本节，阅读完整套教程后再回过头来阅读。
+<h2>
+	远程服务器关机及重启时的注意事项</h2>
+为什么远程服务器不能关机？原因很简单，远程服务器没有放置在本地，关机后谁帮你按开机电源键启动服务器？虽然计算机技术曰新月异，但是像插入电源和开机这样的工作还是需要手工进行的。如果服务器在远程，一旦关机，就只能求助托管机房的管理人员帮你开机了。<br>
+<br>
+远程服务器重启时需要注意两点。<br>
+<h4>
+	1) 远程服务器在重启前，要中止正在执行的服务</h4>
+计算机的硬盘最怕在高速存储时断电或重启，非常容易造成硬盘损坏。所以，在重启前先中止你的服务，甚至可以考虑暂时断开对外提供服务的网络。<br>
+<br>
+可能你会觉得服务器有这么娇贵吗？我的笔记本电脑经常强行关机，也没有发现硬盘损坏啊？这是因为你的个人计算机没有很多人访问，强制断电时硬盘并没有进行数据交换。小心驶得万年船！
+<h4>
+	2) 重启命令的选用</h4>
+Linux 可以识别的重启命令有很多条，但是建议大家使用 "shutdown-r now" 命令重启。这条命令在重启时会正常保存和中止服务器中正在运行的程序，是安全命令。<br>
+<br>
+最好在重启前执行几次 "sync" 命令，这条命令是数据同步命令，可以让暂时保存在内存中的数据同步到硬盘上。<br>
+<br>
+重启和关机也是服务器需要注意的操作规范，不正确的重启和关机造成服务器故障的不在少数。<br>
+<h2>
+	不要在服务器访问高峰运行高负载命令</h2>
+在服务器访问高峰，如果使用一些对服务器压力较大的命令，有可能会造成服务器响应缓慢甚至死机。<br>
+<br>
+哪些命令是高负载命令呢？如果大家使用过 Windows 操作系统，则也会留意一些操作会给计算机带来较大的运算压力，道理都是一样的，如复制大量的数据、压缩或者解压缩大文件、大范围的硬盘搜索等。<br>
+<br>
+服务器的访问高峰期一般认为是在 17:00-24:00。当然，每台服务器具体提供的服务不同，访问高峰期有时也会有所出入。比如，服务器主要是供美国人民访问的，那就要考虑时差的问题；或者服务器提供的服务很特殊，访问高峰期可能也不同。<br>
+<br>
+高负载命令一般建议在凌晨的 4:00-5:00 执行。那么，是不是说我们需要在凌晨上班？当然不是，这谁受得了啊？我们可以使用系统的计划任务，让操作自动在指定的时间段执行。<br>
+<h2>
+	远程配置防火墙时不要把自己踢出服务器</h2>
+防火墙是指将内网和外网分开，并依照数据包的 IP 地址、端口号和数据包中的数据来判断是否允许数据包通过的网络设备。<br>
+<br>
+防火墙可以是硬件防火墙设备，也可以是服务器上安装的防火墙软件。<br>
+<br>
+简单来讲，防火墙就是根据数据包自身的参数来判断是否允许数据包通过的网络设备。我们的服务器要想在公网中安全地使用，就需要使用防火墙过滤有害的数据包。<br>
+<br>
+但在配置防火墙时，如果管理员对防火墙不是很熟悉，就有可能把自己的正常访问数据包和有害数据包全部过滤掉，导致自己也无法正常登录服务器。比如说，防火墙关闭了远程连接的 SSH 服务的端口。<br>
+<br>
+防火墙配置完全是靠手工命令完成的，配置规则和配置命令相对也比较复杂，万一设置的时候心不在焉，悲剧就发生了。如何避免这种趟尬的情况发生呢？<br>
+<br>
+最好的方法当然是在服务器本地配置防火墙，这样就算不小视自己的远程登录给过滤了，还可以通过本机登录来进行恢复。如果服务器已经在远程登录了，要配置防火墙，那么最好在本地测试完善后再进行上传，这样会把发生故障的概率降到最低。<br>
+<br>
+虽然在本地测试好了，但是传到远程服务器上时仍有可能发生问题。于是笔者想到一个笨办法，如果需要远程配置防火墙，那么先写一个系统定时任务，让它每 5 分钟清空一下防火墙规则，就算写错了也还有反悔的机会，等测试没有问题了再刪除这个系统定时任务。<br>
+<br>
+总之，大家可以使用各种方法，只要留意不要在配置防火墙时把自己踢出服务器就好了。<br>
+<h2>
+	指定合理的密码规范并定期更新</h2>
+除了前面给大家介绍设置密码需要遵守复杂性、易记忆和时效性的三原则外，还需要注意密码的保存。<br>
+<br>
+日常使用的密码，我们最简单的原则是写下来。服务器可能有很多，不可能所有的服务器都使用同样的密码，最好每台服务器的密码都不尽相同（但是在实际的工作中也不现实）。一般的做法是给服务器分类，每类服务器的密码一致，这样可以有效地减少密码的数量。但是在有大量服务器的情况下，密码的数量还是很可怕的。<br>
+<br>
+比如，当年笔者从事游戏运维的时候，有超过 2000 台服务器，再加上交换机和路由器等网络设备，虽然采用了每类服务器相同密码的方法，但是密码的总数量还是超过了 100 个……这时把密码一次性记忆下来基本上是一项不可能完成的任务。那么，该如何保存这些密码呢？只能通过文档来保存了，当然这些文档不能是明文保存的，而是要加密的。<br>
+<br>
+总之，合理的密码还要有合适的保存方式，这些在构建服务器架构的时候都是必须考虑的内容。<br>
+<h2>
+	合理分配权限</h2>
+<span style="color: rgb(178, 34, 34);">管理服务器要遵守一个最基本的原则，“给予用户最小的权限”。</span><br>
+<br>
+初次接触服务器的人会很迷惑，我们所有同事都使用管理员 root 账户登录多好，省得还要学习如何添加用户、设置权限。这样操作，如果是对个人计算机来讲问题不大，如日常使用的 Windows 桌面系统，但如果是服务器，就会出现重大的安全隐患。<br>
+<br>
+在实际的工作中，因为给内部员工分配的权限不合理而导致数据泄密甚至触犯法律的情况屡见不鲜。所以，在服务器上，合理的权限规划必不可少！而且就算只有你是这台服务器的 root，我们也建议在管理服务器时，能使用普通用户完成的操作都使用普通用户，确实完成不了的操作要么进行授权，要么再切换到 root 执行。因为 Linux 上的 root 用户权限实在过大，一旦误操作，后果是严重的，下场是惨淡的。<br>
+<br>
+在实际的工作中，越是重要的服务器，对权限的管理越严格。原则上，在能够完成工作的前提下，分配的权限越小越安全。当然，权限越小，你需要做的规划和权限分配任务就越多，但是服务器也越可靠。<br>
+<h2>
+	定期备份重要数据和日志</h2>
+没有备份的服务器，就是在作死!<br>
+<br>
+我身边有很多人，手机坏了或丟了，通讯录就没了；自己电脑的硬盘坏了，上面的资料就再也找不到了，一点备份的意识也没有。个人的损失往往可以承受，但是公司服务器的损失可能会非常惊人。<br>
+<br>
+有的人知道备份重要，但是因为懒情或忘记，结果后悔莫及。很多事情都是知易行难的，备份来不得半点侥幸心理。如果公司的主要盈利项目是在互联网上的业务，那么数据的丟失就有可能造成公司的直接利益损失。</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./2.17新手必看的Linux服务器管理和维护注意事项_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/2859.html">Linux挂载详解</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/3491.html" title="Google Play Store（ Android Market）发布简介">Google Play Store（ Android Market）发布简介</a></li>
+<li><a href="http://c.biancheng.net/view/3725.html" title="汇编语言实例：封装器">汇编语言实例：封装器</a></li>
+<li><a href="http://c.biancheng.net/view/6449.html" title="IP地址分配（静态分配+动态分配+零配置）">IP地址分配（静态分配+动态分配+零配置）</a></li>
+<li><a href="http://c.biancheng.net/view/6943.html" title="网站收录是怎么回事？">网站收录是怎么回事？</a></li>
+<li><a href="http://c.biancheng.net/view/vip_7045.html" title="Java和C/C++到底有什么关系，它们有什么区别？">Java和C/C++到底有什么关系，它们有什么区别？</a></li>
+<li><a href="http://c.biancheng.net/view/7193.html" title="MySQL IN和NOT IN用法详解">MySQL IN和NOT IN用法详解</a></li>
+<li><a href="http://c.biancheng.net/view/8037.html" title="Servlet生命周期（图解）">Servlet生命周期（图解）</a></li>
+<li><a href="http://c.biancheng.net/servlet2/tomcat-directory.html" title="Tomcat目录结构">Tomcat目录结构</a></li>
+<li><a href="http://c.biancheng.net/css3/at-rule.html" title="CSS @规则（详细）">CSS @规则（详细）</a></li>
+<li><a href="http://c.biancheng.net/redis/cache.html" title="Redis缓存问题（图解：三种缓存问题）">Redis缓存问题（图解：三种缓存问题）</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 5047;
+window.arcId = "a18cdYg2gd5hyh+1ZJw/OwdgUZiLZAbYh0BTc/AK7GJWJcXfW93BRSGJsAM";
+window.typeidChain = "81|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./2.17新手必看的Linux服务器管理和维护注意事项_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./2.17新手必看的Linux服务器管理和维护注意事项_files/jquery1.12.4.min.js.下载"></script>
+<script src="./2.17新手必看的Linux服务器管理和维护注意事项_files/common.js.下载"></script>
+<span style="display:none;"><script src="./2.17新手必看的Linux服务器管理和维护注意事项_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

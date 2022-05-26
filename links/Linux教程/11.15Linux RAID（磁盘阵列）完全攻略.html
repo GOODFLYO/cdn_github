@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_5093.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./11.15Linux RAID（磁盘阵列）完全攻略_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./11.15Linux RAID（磁盘阵列）完全攻略_files/common.css" rel="stylesheet">
+<title>Linux RAID（磁盘阵列）完全攻略</title>
+<meta name="description" content="LVM 最大的优势在于可以在不卸载分区和不损坏数据的情况下进行分区容量的调整，但是万一硬盘损坏了，那么数据一定会丟失。 本节讲的 RAID（磁盘阵列） 的优势在于硬盘读写性能更好">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./11.15Linux RAID（磁盘阵列）完全攻略_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">6</span>
+				<a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">11</span> <a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a> </dd><dl class="dl-sub"><dd>11.1 <a href="http://c.biancheng.net/view/908.html">磁盘配额是什么</a></dd><dd>11.2 <a href="http://c.biancheng.net/view/3732.html">磁盘配额启动前的准备工作</a></dd><dd>11.3 <a href="http://c.biancheng.net/view/3739.html">Linux扫描文件系统并建立磁盘配额记录文件（quotacheck命令）</a></dd><dd>11.4 <a href="http://c.biancheng.net/view/3743.html">Linux开启磁盘配额限制（quotaon命令）</a></dd><dd>11.5 <a href="http://c.biancheng.net/view/3745.html">Linux关闭磁盘配额限制（quotaoff命令）</a></dd><dd>11.6 <a href="http://c.biancheng.net/view/3751.html">Linux修改用户（群组）的磁盘配额（edquota命令）</a></dd><dd>11.7 <a href="http://c.biancheng.net/view/912.html">Linux非交互式设置磁盘配额（setquota命令）</a></dd><dd>11.8 <a href="http://c.biancheng.net/view/909.html">Linux查询已建立好的磁盘配额（quota和repquota命令）</a></dd><dd>11.9 <a href="http://c.biancheng.net/view/vip_7667.html">Linux如何判断磁盘配额是否生效？</a><span class="glyphicon glyphicon-usd"></span></dd><dd>11.10 <a href="http://c.biancheng.net/view/911.html">Linux LVM逻辑卷管理机制</a></dd><dd>11.11 <a href="http://c.biancheng.net/view/914.html">Linux PV物理卷</a></dd><dd>11.12 <a href="http://c.biancheng.net/view/918.html">Linux VG卷组</a></dd><dd>11.13 <a href="http://c.biancheng.net/view/920.html">Linux LV逻辑卷</a></dd><dd>11.14 <a href="http://c.biancheng.net/view/vip_5092.html">Linux LVM（逻辑卷管理）的删除</a><span class="glyphicon glyphicon-usd"></span></dd><dd class="active">11.15 <a href="http://c.biancheng.net/view/vip_5093.html">Linux RAID（磁盘阵列）完全攻略</a><span class="glyphicon glyphicon-usd"></span></dd><dd>11.16 <a href="http://c.biancheng.net/view/vip_5095.html">使用图形界面来配置RAID</a><span class="glyphicon glyphicon-usd"></span></dd><dd>11.17 <a href="http://c.biancheng.net/view/vip_5097.html">使用mdadm命令来配置RAID</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a></span>
+	<span class="read-num">阅读：2,418</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux RAID（磁盘阵列）完全攻略</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5092.html">Linux LVM（逻辑卷管理）的删除</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_5095.html">使用图形界面来配置RAID</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">LVM 最大的优势在于可以在不卸载分区和不损坏数据的情况下进行分区容量的调整，但是万一硬盘损坏了，那么数据一定会丟失。 本节讲的<span style="color: rgb(0, 128, 0);">&nbsp;RAID（磁盘阵列）</span>的优势在于硬盘读写性能更好，而且有一定的数据冗余功能。<br>
+<p class="info-box">
+	RAID 功能已经内置在 Linux 2.0及以后的内核中，为了使用这项功能，还需要特定的工具来管理 RAID，在绝对多数 Linux 发行版本中，更多的是使用 mdadm，读者可以自行下载并安装这个工具。</p>
+<h2>
+	RAID 简介</h2>
+<span style="color: rgb(178, 34, 34);">RAID（Redundant Arrays of Inexpensive Disks，磁盘阵列），翻译过来就是廉价的、具有冗余功能的磁盘阵列。</span>其原理是通过软件或硬件将多块较小的分区组合成一个容量较大的磁盘组。这个较大的磁盘组读写性能更好，更重要的是具有数据冗余功能。<br>
+<br>
+那什么是<span style="color: rgb(0, 128, 0);">数据冗余</span>呢？从字面上理解，冗余就是多余的、重复的。在磁盘阵列中，冗余是指由多块硬盘组成一个磁盘组，在这个磁盘组中，数据存储在多块硬盘的不同地方，这样即使某块硬盘出现问题，数据也不会丟失，也就是磁盘数据具有了保护功能。<br>
+<br>
+读者也可以这样理解，RAID 用于在多个硬盘上分散存储数据，并且能够“恰当”地重复存储数据，从而保证其中某块硬盘发生故障后，不至于影响整个系统的运转。RAID 将几块独立的硬盘组合在一起，形成一个逻辑上的 RAID 硬盘，这块“硬盘”在外界（用户、LVM 等）看来，和真实的硬盘一样，没有任何区别。<br>
+<p class="info-box">
+	RAID 的组成可以是几块硬盘，所以我们在讲解原理时使用硬盘举例，但是大家要知道不同的分区也可以组成 RAID。</p>
+RAID 根据组合方式的不同，有多种设计解决方案，以下介绍几种常见的 RAID 方案（RAID级别）。<br>
+<h2>
+	RAID 0</h2>
+<span style="color: rgb(178, 34, 34);">RAID 0 也叫 Stripe 或 Striping（带区卷），是 RAID 级别中存储性能最好的一个。</span>RAID 0 最好由相同容量的两块或两块以上的硬盘组成。如果组成 RAID 0 的两块硬盘大小不一致，则会影响 RAID 0 的性能。<br>
+<br>
+这种模式下会先把硬盘分隔出大小相等的区块，当有数据需要写入硬盘时，会把数据也切割成相同大小的区块，然后分别写入各块硬盘。这样就相当于把一个文件分成几个部分同时向不同的硬盘中写入，数据的读/写速度当然就会非常快。<br>
+<br>
+从理论上讲，由几块硬盘组成 RAID 0，比如由 3 块硬盘组成 RAID 0，数据的写入速度就是同样的数据向一块硬盘中写入速度的3倍。我们画一张 RAID 0 的示意图，如图 1 所示。
+<div style="text-align: center;">
+	<br>
+	<img alt="RAID 0示意图" src="./11.15Linux RAID（磁盘阵列）完全攻略_files/2-1Q0161614334I.jpg"><br>
+	图 1 RAID 0 示意图</div>
+<br>
+解释一下这张示意图。我们准备了 3 块硬盘组成了 RAID 0，每块硬盘都划分了相等的区块。当有数据要写入 RAID 0 时，首先把数据按照区块大小进行分割，然后再把数据依次写入不同的硬盘。每块硬盘负责的数据写入量都是整体数据的 1/3，当然写入时间也只有原始时间的 1/3。所以，从理论上讲，由几块硬盘组成 RAID 0，数据的写入速度就是数据只写入一块硬盘速度的几倍。<br>
+<br>
+RAID 0 的优点如下：
+<ul>
+	<li>
+		通过把多块硬盘合并成一块大的逻辑硬盘，实现了数据跨硬盘存储。</li>
+	<li>
+		通过把数据分割成等大小的区块，分别存入不同的硬盘，加快了数据的读写速度。数据的读/写性能是几种 RAID 中最好的。</li>
+	<li>
+		多块硬盘合并成 RAID 0，几块小硬盘组成了更大容量的硬盘，而且没有容量损失。RAID 0 的总容量就是几块硬盘的容量之和。</li>
+</ul>
+<br>
+RAID 0 有一个明显的缺点，那就是没有数据冗余功能，RAID 0 中的任何一块硬盘损坏，RAID 0 中所有的数据都将丟失。也就是说，由几块硬盘组成 RAID 0，数据的损毁概率就是只写入一块硬盘的几倍。<br>
+<br>
+我们刚刚说了，组成 RAID 0 的硬盘的大小最好都是一样的。那有人说我只有两块不一样大小的硬盘，难道就不能组成 RAID 0 吗？<br>
+<br>
+答案是可以的。假设有两块硬盘，一块大小是 100GB，另一块大小是 200GB。由这两块硬盘组成 RAID 0，那么当最初的 200G 数据写入时，是分别存放在两块硬盘当中的；但是当数据大于 200GB 之后，第一块硬盘就写满了，以后的数据就只能写入第二块硬盘中，读/写性能也就随之下降了。<br>
+<br>
+一般不建议企业用户使用 RAID 0，因为数据损毁的概率更高。如果对数据的读/写性能要求非常高，但对数据安全要求不高时，RAID 0 就非常合适了。<br>
+<h2>
+	RAID 1</h2>
+<span style="color: rgb(178, 34, 34);">RAID 1也叫 Mirror 或 Mirroring（镜像卷），由两块硬盘组成。两块硬盘的大小最好一致，否则总容量以容量小的那块硬盘为主。</span>RAID 1 就具备了数据冗余功能，因为这种模式是把同一份数据同时写入两块硬盘。<br>
+<br>
+比如有两块硬盘，组成了 RAID 1，当有数据写入时，相同的数据既写入硬盘 1，也写入硬盘 2。这样相当于给数据做了备份，所以任何一块硬盘损坏，数据都可以在另一块硬盘中找回。RAID 1 的示意图如图 2 所示。
+<div style="text-align: center;">
+	<br>
+	<img alt="RAID 1示意图" src="./11.15Linux RAID（磁盘阵列）完全攻略_files/2-1Q0161616125B.jpg"><br>
+	图 2 RAID 1 示意图</div>
+<br>
+RAID 1 具有了数据冗余功能，但是硬盘的容量却减少了 50%，因为两块硬盘当中保存的数据是一样的，所以两块硬盘际上只保存了一块硬盘那么多的数据，这也是我们把 RAID 1 称作镜像卷的原因。<br>
+<br>
+RAID 1 的优点如下：<br>
+<ul>
+	<li>
+		具备了数据冗余功能，任何一块硬盘出现故障，数据都不会丟失。</li>
+	<li>
+		数据的读取性能虽然不如RAID 0，但是比单一硬盘要好，因为数据有两份备份在不同的硬盘上，当多个进程读取同一数据时，RAID会自动分配读取进程。</li>
+</ul>
+<br>
+RAID 1 的缺点也同样明显：
+<ul>
+	<li>
+		RAID 1 的容量只有两块硬盘容量的 50%，因为每块硬盘中保存的数据都一样。</li>
+	<li>
+		数据写入性能较差，因为相同的数据会写入两块硬盘当中，相当于写入数据的总容量变大了。虽然 CPU 的速度足够快，但是负责数据写入的芯片只有一个。</li>
+</ul>
+<h2>
+	RAID 10 或 RAID 01</h2>
+我们发现，RAID 0 虽然数据读/写性能非常好，但是没有数据冗余功能；而 RAID 1 虽然具有了数据冗余功能，但是数据写入速度实在是太慢了（尤其是软 RAID）。<br>
+<br>
+那么，我们能不能把 RAID 0 和 RAID 1 组合起来使用？当然可以，这样我们就即拥有了 RAID 0 的性能，又拥有了 RAID 1 的数据冗余功能。<br>
+<br>
+我们先用两块硬盘组成 RAID 1，再用两块硬盘组成另一个 RAID 1，最后把这两个 RAID 1组成 RAID 0，这种 RAID 方法称作<span style="color: rgb(0, 128, 0);">&nbsp;RAID 10</span>。<span style="color: rgb(178, 34, 34);">那先组成 RAID 0，再组成 RAID 1 的方法我们作</span><span style="color: rgb(0, 128, 0);">&nbsp;RAID 01</span><span style="color: rgb(178, 34, 34);">。</span>我们通过示意图 3 来看看 RAID 10。
+<div style="text-align: center;">
+	<br>
+	<img alt="RAID 10示意图" src="./11.15Linux RAID（磁盘阵列）完全攻略_files/2-1Q016161P0413.jpg"><br>
+	图 3 RAID 10 示意图</div>
+<br>
+我们把硬盘 1 和硬盘 2 组成了第一个 RAID 1，把硬盘 3 和硬盘 4 组成了第二个 RAID 1，这两个 RAID 1组成了 RAID 0。因为先组成 RAID 1，再组成 RAID 0，所以这个 RAID 是 RAID 10。<br>
+<br>
+当有数据写入时，首先写入的是 RAID 0（RAID 0 后组成，所以数据先写入），所以数据 1 和数据 3 写入了第一个 RAID 1，而数据 2 和数据 4 写入了第二个 RAID 1。当数据 1 和数据 3 写入第一个 RAID 1 时，<br>
+<br>
+因为写入的是 RAID 1，所以在硬盘 1 和硬盘 2 中各写入了一份。数据 2 和数据 4 也一样。<br>
+<br>
+这样的组成方式，既有了 RAID 0 的性能优点，也有了 RAID 1 的数据冗余优点。但是大家要注意，虽然我们有了 4 块硬盘，但是由于 RAID 1 的缺点，所以真正的容量只有 4 块硬盘的 50%，另外的一半是用来备份的。<br>
+<h2>
+	RAID 5</h2>
+RAID 5 最少需要由 3 块硬盘组成，当然硬盘的容量也应当一致。当组成 RAID 5 时，同样需要把硬盘分隔成大小相同的区块。当有数据写入时，数据也被划分成等大小的区块，然后循环向 RAID 5 中写入。<br>
+<br>
+每次循环写入数据的过程中，在其中一块硬盘中加入一个奇偶校验值（Parity），这个奇偶校验值的内容是这次循环写入时其他硬盘数据的备份。当有一块硬盘损坏时，采用这个奇偶校验值进行数据恢复。通过示意图来看看 RAID 5 的存储过程，如图 4 所示。
+<div style="text-align: center;">
+	<br>
+	<img alt="RAID 5 示意图" src="./11.15Linux RAID（磁盘阵列）完全攻略_files/2-1Q016161919610.jpg"><br>
+	图 4 RAID 5 示意图</div>
+<br>
+在这张示意图中，我们使用三块硬盘组成了 RAID 5。当有数据循环写入时，每次循环都会写入一个奇偶校验值（Parity），并且每次奇偶校验值都会写入不同的硬盘。这个奇偶校验值就是其他两块硬盘中的数据经过换算之后产生的。因为每次奇偶校验值都会写入不同的硬盘，所以任何一块硬盘损坏之后，都可以依赖其他两块硬盘中保存的数据恢复这块损坏的硬盘中的数据。<br>
+<br>
+需要注意的是，每次数据循环写入时，都会有一块硬盘用来保存奇偶校验值，所以在 RAID 5 中可以使用的总容量是硬盘总数减去一块的容量之和。<br>
+<br>
+比如，在这张示意图中，由三块硬盘组成了 RAID 5，但是真正可用的容量是两块硬盘的容量之和，也就是说，越多的硬盘组成 RAID 5，损失的容量占比越小，因为不管由多少块硬盘组成 RAID 5，奇偶校验值加起来只占用一块硬盘。而且还要注意，RAID 5 不管是由几块硬盘组成的，只有损坏一块硬盘的情况才能恢复数据，因为奇偶校验值加起来只占用了一块硬盘，如果损坏的硬盘超过一块，那么数据就不能再恢复了。<br>
+<br>
+RAID 5 的优点如下：
+<ul>
+	<li>
+		因为奇偶校验值的存在，RAID 5 具有了数据冗余功能。</li>
+	<li>
+		硬盘容量损失比 RAID 1 小，而且组成 RAID 5 的硬盘数量越多，容量损失占比越小。</li>
+	<li>
+		RAID 5的数据读/写性能要比 RAID 1 更好，但是在数据写入性能上比 RAID 0 差。</li>
+</ul>
+<br>
+RAID 5 的缺点如下：
+<ul>
+	<li>
+		不管由多少块硬盘组成 RAID 5，只支持一块硬盘损坏之后的数据恢复。</li>
+	<li>
+		RAID 5 的实际容量是组成 RAID 5 的硬盘总数减去一块的容量之和。也就是有一块硬盘用来保存奇偶校验值，但不能保存数据。</li>
+</ul>
+<br>
+从总体上来说，RAID 5 更像 RAID 0 和 RAID 1 的折中，性能比 RAID 1 好，但是不如 RAID 0；数据冗余比 RAID 0 好，而且不像 RAID 1 那样浪费了 50% 的硬盘容量。<br>
+<h2>
+	软 RAID 和硬 RAID</h2>
+我们要想在服务器上实现 RAID，可以采用磁盘阵列卡（RAID 卡）来组成 RAID，也就是硬 RAID。RAID 卡上有专门的芯片负责 RAID 任务，因此性能要好得多，而且不占用系统性能，缺点是 RAID 卡比较昂贵。<br>
+<br>
+如果我们既不想花钱又想使用 RAID，那就只能使用软 RAID 了。软 RAID 是指通过软件实现 RAID 功能，没有多余的费用，但是更加耗费服务器系统性能，而数据的写入速度比硬 RAID 慢。</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./11.15Linux RAID（磁盘阵列）完全攻略_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/vip_5092.html">Linux LVM（逻辑卷管理）的删除</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/vip_5095.html">使用图形界面来配置RAID</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/1338.html" title="单例模式（单例设计模式）详解">单例模式（单例设计模式）详解</a></li>
+<li><a href="http://c.biancheng.net/view/vip_2115.html" title="强符号和弱符号">强符号和弱符号</a></li>
+<li><a href="http://c.biancheng.net/view/2313.html" title="C++重载++和--（自增和自减运算符）详解">C++重载++和--（自增和自减运算符）详解</a></li>
+<li><a href="http://c.biancheng.net/view/2694.html" title="Unity 3D Color控件">Unity 3D Color控件</a></li>
+<li><a href="http://c.biancheng.net/view/4151.html" title="Python能干什么，Python的应用领域">Python能干什么，Python的应用领域</a></li>
+<li><a href="http://c.biancheng.net/view/5150.html" title="Hibernate max方法：计算某一列的最大值">Hibernate max方法：计算某一列的最大值</a></li>
+<li><a href="http://c.biancheng.net/view/7622.html" title="HTML按钮">HTML按钮</a></li>
+<li><a href="http://c.biancheng.net/view/vip_7686.html" title="C++如何跳过（忽略）指定字符？">C++如何跳过（忽略）指定字符？</a></li>
+<li><a href="http://c.biancheng.net/view/8119.html" title="PHP下载文件">PHP下载文件</a></li>
+<li><a href="http://c.biancheng.net/maven2/pom.html" title="Maven POM">Maven POM</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 5093;
+window.arcId = "22b47g7sXCakMVVBdsYfXoTfP/9qoGTo+DehL58ft0SHc7/B2ij0CffIIQg";
+window.typeidChain = "88|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./11.15Linux RAID（磁盘阵列）完全攻略_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./11.15Linux RAID（磁盘阵列）完全攻略_files/jquery1.12.4.min.js.下载"></script>
+<script src="./11.15Linux RAID（磁盘阵列）完全攻略_files/common.js.下载"></script>
+<span style="display:none;"><script src="./11.15Linux RAID（磁盘阵列）完全攻略_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>

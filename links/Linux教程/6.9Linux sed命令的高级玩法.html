@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)http://c.biancheng.net/view/vip_5063.html -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="text/javascript" async="" charset="utf-8" src="./6.9Linux sed命令的高级玩法_files/core.php"></script>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<!-- 启用Chromium高速渲染模式 -->
+<meta name="renderer" content="webkit">
+<meta name="force-rendering" content="webkit">
+<!-- 禁止百度转码 -->
+<meta name="applicable-device" content="pc,mobile">
+<meta name="MobileOptimized" content="width">
+<meta name="HandheldFriendly" content="true">
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<!-- 禁止识别电话号码 -->
+<meta name="format-detection" content="telephone=no">
+
+<link rel="shortcut icon" href="http://c.biancheng.net/favicon.ico?v=1.6.72">
+<link href="./6.9Linux sed命令的高级玩法_files/common.css" rel="stylesheet">
+<title>Linux sed命令的高级玩法</title>
+<meta name="description" content="《 Linux sed用法详解 》一节给大家介绍了如何用 sed 命令的基本功能处理文本中的数据，所涵盖的知识点，可以满足日常大多数文本编辑需求。本节将介绍 sed 提供的一些高级功能，这些">
+</head>
+<body>
+<div id="topbar" class="clearfix">
+	<ul id="product-type" class="left">
+		<li>
+			<a href="http://c.biancheng.net/"><span class="iconfont iconfont-home"></span>首页</a>
+		</li>
+		<li class="active">
+			<a href="http://c.biancheng.net/sitemap/" rel="nofollow"><span class="iconfont iconfont-book"></span>教程</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/vip/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-vip"></span>VIP会员</a>
+		</li>
+		<li>
+			<a href="http://vip.biancheng.net/p/q2a/show.php" rel="nofollow" target="_blank"><span class="iconfont iconfont-q2a"></span>一对一答疑</a>
+		</li>
+		<li>
+			<a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank"><span class="iconfont iconfont-fudao"></span>辅导班</a>
+		</li>
+	</ul>
+</div>
+<div id="header" class="clearfix">
+	<a id="logo" class="left" href="http://c.biancheng.net/">
+		<img height="26" src="./6.9Linux sed命令的高级玩法_files/logo.png" alt="C语言中文网">
+	</a>
+	<ul id="nav-main" class="hover-none left clearfix">
+		<li class="wap-yes"><a href="http://c.biancheng.net/">首页</a></li>
+		<li><a href="http://c.biancheng.net/c/">C语言教程</a></li>
+		<li><a href="http://c.biancheng.net/cplus/">C++教程</a></li>
+		<li><a href="http://c.biancheng.net/python/">Python教程</a></li>
+		<li><a href="http://c.biancheng.net/java/">Java教程</a></li>
+		<li><a href="http://c.biancheng.net/linux_tutorial/">Linux入门</a></li>
+		<li><a href="http://c.biancheng.net/sitemap/" title="网站地图">更多&gt;&gt;</a></li>
+	</ul>
+	<span id="sidebar-toggle" class="toggle-btn" toggle-target="#sidebar">目录 <span class="glyphicon"></span></span>
+
+	<a href="http://vip.biancheng.net/?from=topbar" class="user-info glyphicon glyphicon-user hover-none" target="_blank" rel="nofollow" title="用户中心"></a>
+</div>
+<div id="main" class="clearfix">
+	<div id="sidebar" class="toggle-target">
+	<div id="contents">
+		<dt><span class="glyphicon glyphicon-option-vertical" aria-hidden="true"></span><a href="http://c.biancheng.net/linux_tutorial/">Linux</a></dt>
+		
+			<dd>
+				<span class="channel-num">1</span>
+				<a href="http://c.biancheng.net/linux_tutorial/10/">Linux简介</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">2</span>
+				<a href="http://c.biancheng.net/linux_tutorial/20/">Linux安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">3</span>
+				<a href="http://c.biancheng.net/linux_tutorial/file_content/">Linux文件和目录管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">4</span>
+				<a href="http://c.biancheng.net/linux_tutorial/bale_compress/">Linux打包（归档）和压缩</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">5</span>
+				<a href="http://c.biancheng.net/linux_tutorial/40/">Vim文本编辑器</a>
+			</dd>
+		<dd class="this"> <span class="channel-num">6</span> <a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a> </dd><dl class="dl-sub"><dd>6.1 <a href="http://c.biancheng.net/view/728.html">Linux连接合并文件内容(cat命令）</a></dd><dd>6.2 <a href="http://c.biancheng.net/view/729.html">Linux分屏显示文件内容（more命令）</a></dd><dd>6.3 <a href="http://c.biancheng.net/view/736.html">Linux显示文件开头内容（head命令）</a></dd><dd>6.4 <a href="http://c.biancheng.net/view/4004.html">Linux查看文件内容（less命令）</a></dd><dd>6.5 <a href="http://c.biancheng.net/view/737.html">Linux显示文件结尾内容（tail命令）</a></dd><dd>6.6 <a href="http://c.biancheng.net/view/vip_7660.html">Linux重定向（输入输出重定向）</a><span class="glyphicon glyphicon-usd"></span></dd><dd>6.7 <a href="http://c.biancheng.net/view/4017.html">Linux grep（Linux三剑客之一）</a></dd><dd>6.8 <a href="http://c.biancheng.net/view/4028.html">Linux sed（Linux三剑客之一）</a></dd><dd class="active">6.9 <a href="http://c.biancheng.net/view/vip_5063.html">Linux sed命令的高级玩法</a><span class="glyphicon glyphicon-usd"></span></dd><dd>6.10 <a href="http://c.biancheng.net/view/4082.html">Linux awk（Linux三剑客之一）</a></dd><dd>6.11 <a href="http://c.biancheng.net/view/vip_5064.html">Linux awk命令的高级玩法</a><span class="glyphicon glyphicon-usd"></span></dd></dl>
+			<dd>
+				<span class="channel-num">7</span>
+				<a href="http://c.biancheng.net/linux_tutorial/50/">Linux软件安装</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">8</span>
+				<a href="http://c.biancheng.net/linux_tutorial/60/">Linux用户和用户组管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">9</span>
+				<a href="http://c.biancheng.net/linux_tutorial/70/">Linux权限管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">10</span>
+				<a href="http://c.biancheng.net/linux_tutorial/80/">Linux文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">11</span>
+				<a href="http://c.biancheng.net/linux_tutorial/90/">Linux高级文件系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">12</span>
+				<a href="http://c.biancheng.net/linux_tutorial/14/">Linux系统管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">13</span>
+				<a href="http://c.biancheng.net/linux_tutorial/17/">Linux备份与恢复</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">14</span>
+				<a href="http://c.biancheng.net/linux_tutorial/13/">Linux系统服务管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">15</span>
+				<a href="http://c.biancheng.net/linux_tutorial/15/">Linux系统日志管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">16</span>
+				<a href="http://c.biancheng.net/linux_tutorial/12/">Linux启动管理</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">17</span>
+				<a href="http://c.biancheng.net/linux_tutorial/16/">LAMP环境搭建和LNMP环境搭建</a>
+			</dd>
+		
+			<dd>
+				<span class="channel-num">18</span>
+				<a href="http://c.biancheng.net/linux_tutorial/18/">SELinux管理</a>
+			</dd>
+		
+	</div>
+</div>
+	<div id="article-wrap">
+		<div id="article">
+			<div class="arc-info">
+	<span class="position"><span class="glyphicon glyphicon-map-marker"></span> <a href="http://c.biancheng.net/">首页</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/">Linux</a> &gt; <a href="http://c.biancheng.net/linux_tutorial/text_processing/">Linux文本处理（Linux三剑客）</a></span>
+	<span class="read-num">阅读：14,033</span>
+</div>
+
+<div id="ad-position-bottom"></div>
+			<h1>Linux sed命令的高级玩法</h1>
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/4028.html">Linux sed（Linux三剑客之一）</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/4082.html">Linux awk（Linux三剑客之一）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-top"><p class="pic"></p><p class="text" adid="linuxprobe"><a href="http://fudao.biancheng.net/" rel="nofollow" target="_blank" style="color:#D33428;">C语言中文网推出辅导班啦，包括<span style="color: #008000;">「C语言辅导班、C++辅导班、算法/数据结构辅导班」</span>，全部都是一对一教学：一对一辅导 + 一对一答疑 + 布置作业 + 项目实践 + 永久学习。QQ在线，随时响应！</a></p></div>
+			<div id="arc-body">《<a href="http://c.biancheng.net/view/4028.html" target="_blank">Linux sed用法详解</a>》一节给大家介绍了如何用 sed 命令的基本功能处理文本中的数据，所涵盖的知识点，可以满足日常大多数文本编辑需求。本节将介绍 sed 提供的一些高级功能，这些功能虽不常用，但知道这些功能的存在以及用法也是有必要的。<br>
+<h2>
+	sed 多行命令</h2>
+在学习 sed 命令的基础功能时，你可能注意到了一个局限，即所有的 sed 命令都只是针对单行数据执行操作，在 sed 命令读取缓冲区中的文本数据时，它会基于换行符的位置，将数据分成行，sed 会根据定义好的脚本命令一次处理一行数据。<br>
+<br>
+但是，有时我们需要对跨多行的数据执行特定操作。比如说，在文本中查找一串字符串<code>"http://c.biancheng.net"</code>，它很有可能出现在两行中，每行各包含其中一部分。这时，如果用普通的 sed 编辑器命令来处理文本，就不可能发现这种被分开的情况。<br>
+<br>
+幸运的是，sed 命令的设计人员已经考虑到了这种情况，并设计了对应的解决方案。sed 包含了三个可用来处理多行文本的特殊命令，分别是：<br>
+<ol>
+	<li>
+		Next 命令（N）：将数据流中的下一行加进来创建一个多行组来处理。</li>
+	<li>
+		Delete（D）：删除多行组中的一行。</li>
+	<li>
+		Print（P）：打印多行组中的一行。</li>
+</ol>
+<p class="info-box">
+	注意，以上命令的缩写，都为大写。</p>
+<h4>
+	N 多行操作命令</h4>
+N 命令会将下一行文本内容添加到缓冲区已有数据之后（之间用换行符分隔），从而使前后两个文本行同时位于缓冲区中，sed 命令会将这两行数据当成一行来处理。<br>
+<br>
+下面这个例子演示的 N 命令的功能：
+<p class="info-box">
+	[root@localhost ~]# cat data2.txt<br>
+	This is the header line.<br>
+	This is the first data line.<br>
+	This is the second data line.<br>
+	This is the last line.<br>
+	[root@localhost ~]# sed '/first/{ N ; s/\n/ / }' data2.txt<br>
+	This is the header line.<br>
+	This is the first data line. This is the second data line.<br>
+	This is the last line.</p>
+在这个例子中，sed 命令查找含有单词 first 的那行文本。找到该行后，它会用 N 命令将下一行合并到那行，然后用替换命令 s 将换行符替换成空格。结果是，文本文件中的两行在 sed 的输出中成了一行。<br>
+<br>
+如果要在数据文件中查找一个可能会分散在两行中的文本短语，如何实现呢？这里给大家一个实例：
+<p class="info-box">
+	[root@localhost ~]# cat data3.txt<br>
+	On Tuesday, the Linux System<br>
+	Administrator's group meeting will be held.<br>
+	All System Administrators should attend.<br>
+	Thank you for your attendance.<br>
+	[root@localhost ~]# sed 'N ; s/System Administrator/Desktop User/' data3.txt<br>
+	On Tuesday, the Linux Desktop User's group meeting will be held.<br>
+	All Desktop Users should attend.<br>
+	Thank you for your attendance.</p>
+用 N 命令将发现第一个单词的那行和下一行合并后，即使短语内出现了换行，你仍然可以找到它，这是因为，替换命令在 System 和 Administrator之间用了通配符（.）来匹配空格和换行符这两种情况。但当它匹配了换行符时，它就从字符串中删掉了换行符，导致两行合并成一行。这可能不是你想要的。<br>
+<br>
+要解决这个问题，可以在 sed 脚本中用两个替换命令，一个用来匹配短语出现在多行中的情况，一个用来匹配短语出现在单行中的情况，比如：
+<p class="info-box">
+	[root@localhost ~]# sed 'N<br>
+	&gt; s/System\nAdministrator/Desktop\nUser/<br>
+	&gt; s/System Administrator/Desktop User/<br>
+	&gt; ' data3.txt<br>
+	On Tuesday, the Linux Desktop<br>
+	User's group meeting will be held.<br>
+	All Desktop Users should attend.<br>
+	Thank you for your attendance.</p>
+第一个替换命令专门查找两个单词间的换行符，并将它放在了替换字符串中。这样就能在第一个替换命令专门在两个检索词之间寻找换行符，并将其纳入替换字符串。这样就允许在新文本的同样位置添加换行符了。<br>
+<br>
+但这个脚本中仍有个小问题，即它总是在执行 sed 命令前将下一行文本读入到缓冲区中，当它到了后一行文本时，就没有下一行可读了，此时 N 命令会叫 sed 程序停止，这就导致，如果要匹配的文本正好在最后一行中，sed 命令将不会发现要匹配的数据。<br>
+<br>
+解决这个 bug 的方法是，将单行命令放到 N 命令前面，将多行命令放到 N 命令后面，像这样：<br>
+<p class="info-box">
+	[root@localhost ~]# sed '<br>
+	&gt; s/System\nAdministrator/Desktop\nUser/<br>
+	&gt; N<br>
+	&gt; s/System Administrator/Desktop User/<br>
+	&gt; ' data3.txt<br>
+	On Tuesday, the Linux Desktop<br>
+	User's group meeting will be held.<br>
+	All Desktop Users should attend.<br>
+	Thank you for your attendance.</p>
+现在，查找单行中短语的替换命令在数据流的后一行也能正常工作，多行替换命令则会负责短语出现在数据流中间的情况。<br>
+<h4>
+	D 多行删除命令</h4>
+sed 不仅提供了单行删除命令（d），也提供了多行删除命令 D，其作用是只删除缓冲区中的第一行，也就是说，D 命令将缓冲区中第一个换行符（包括换行符）之前的内容删除掉。<br>
+<br>
+比如说：
+<p class="info-box">
+	[root@localhost ~]# cat data4.txt<br>
+	On Tuesday, the Linux System<br>
+	Administrator's group meeting will be held.<br>
+	All System Administrators should attend.<br>
+	[root@localhost ~]# sed 'N ; /System\nAdministrator/D' data4.txt<br>
+	Administrator's group meeting will be held.<br>
+	All System Administrators should attend.</p>
+文本的第二行被 N 命令加到了缓冲区，因此 sed 命令第一次匹配就是成功，而 D 命令会将缓冲区中第一个换行符之前（也就是第一行）的数据删除，所以，得到了如上所示的结果。<br>
+<br>
+下面的例子中，它会删除数据流中出现在第一行前的空白行：
+<p class="info-box">
+	[root@localhost ~]# cat data5.txt<br>
+	<br>
+	This is the header line.<br>
+	This is a data line.<br>
+	<br>
+	This is the last line.<br>
+	[root@localhost ~]# sed '/^$/{N ; /header/D}' data5.txt<br>
+	This is the header line.<br>
+	This is a data line.<br>
+	<br>
+	This is the last line.</p>
+sed会查找空白行，然后用 N 命令来将下一文本行添加到缓冲区。此时如果缓冲区的内容中含有单词 header，则 D 命令会删除缓冲区中的第一行。<br>
+<h4>
+	P 多行打印命令</h4>
+同 d 和 D 之间的区别一样，P（大写）命令和单行打印命令 p（小写）不同，对于具有多行数据的缓冲区来说，它只会打印缓冲区中的第一行，也就是首个换行符之前的所有内容。<br>
+<br>
+例如，test.txt 文件中的内容如下：<br>
+<p class="info-box">
+	[root@localhost ~]# cat test.txt<br>
+	aaa<br>
+	bbb<br>
+	ccc<br>
+	ddd<br>
+	eee<br>
+	fff</p>
+<br>
+表 1 中是对 test.txt 文件中的内容分别用 p 命令和 P 命令后，产生的输出信息的对比。<br>
+<br>
+<table>
+	<caption>
+		表 1 P 命令和 p 命令的对比</caption>
+	<tbody>
+		<tr>
+			<th>
+				P（大写）命令</th>
+			<th>
+				p（小写）命令</th>
+		</tr>
+		<tr>
+			<td>
+				<p class="info-box">
+					[root@localhost ~]# sed '/.*/N;P'<br>
+					aaa<br>
+					aaa<br>
+					bbb<br>
+					ccc<br>
+					ccc<br>
+					ddd<br>
+					eee<br>
+					eee<br>
+					fff<br>
+					<br>
+					<br>
+					&nbsp;</p>
+			</td>
+			<td>
+				<p class="info-box">
+					[root@localhost ~]# sed '/.*/N;p'<br>
+					aaa<br>
+					bbb<br>
+					aaa<br>
+					bbb<br>
+					ccc<br>
+					ddd<br>
+					ccc<br>
+					ddd<br>
+					eee<br>
+					fff<br>
+					eee<br>
+					fff</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+第一个 sed 命令，每次都使用 N 将下一行内容追加到缓冲区内容的后面（用换行符间隔），也就是说，第一次时缓冲区中的内容为 aaa\nbbb，但 P（大写） 命令的作用的打印换行符之前的内容，也就是 aaa，之后则是 sed 在自动输出功能输出 aaa 和 bbb（sed 命令会自动将 \n 输出为换行），依次类推，就输出了所看到的结果。<br>
+<br>
+第二个 sed 命令，使用的是 p （小写）单行打印命令，它会将缓冲区中的所有内容全部打印出来（\n 会自动输出为换行），因此，出现了看到的结果。
+<h2>
+	sed 保持空间</h2>
+前面我们一直说，sed 命令处理的是缓冲区中的内容，其实这里的缓冲区，应称为<span style="color:#008000;">模式空间</span>。值得一提的是，模式空间并不是 sed 命令保存文件的唯一空间。sed 还有另一块称为<span style="color:#008000;">保持空间</span>的缓冲区域，它可以用来临时存储一些数据。<br>
+<br>
+表 2 列出了 5 条可用来操作保持空间的命令。<br>
+<br>
+<table>
+	<caption>
+		表 2 sed 保持空间命令</caption>
+	<tbody>
+		<tr>
+			<th>
+				命令</th>
+			<th>
+				功能</th>
+		</tr>
+		<tr>
+			<td>
+				h</td>
+			<td>
+				将模式空间中的内容复制到保持空间</td>
+		</tr>
+		<tr>
+			<td>
+				H</td>
+			<td>
+				将模式空间中的内容附加到保持空间</td>
+		</tr>
+		<tr>
+			<td>
+				g</td>
+			<td>
+				将保持空间中的内容复制到模式空间</td>
+		</tr>
+		<tr>
+			<td>
+				G</td>
+			<td>
+				将保持空间中的内容附加到模式空间</td>
+		</tr>
+		<tr>
+			<td>
+				x</td>
+			<td>
+				交换模式空间和保持空间中的内容</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+通常，在使用 h 或 H 命令将字符串移动到保持空间后，最终还要用 g、G 或 x 命令将保存的字符串移回模式空间。保持空间最直接的作用是，一旦我们将模式空间中所有的文件复制到保持空间中，就可以清空模式空间来加载其他要处理的文本内容。<br>
+<br>
+由于有两个缓冲区域，下面的例子中演示了如何用 h 和 g 命令来将数据在 sed 缓冲区之间移动。<br>
+<p class="info-box">
+	[root@localhost ~]# cat data2.txt<br>
+	This is the header line.<br>
+	This is the first data line.<br>
+	This is the second data line.<br>
+	This is the last line.<br>
+	[root@localhost ~]# sed -n '/first/ {h ; p ; n ; p ; g ; p }' data2.txt<br>
+	This is the first data line.<br>
+	This is the second data line.<br>
+	This is the first data line.</p>
+这个例子的运行过程是这样的：
+<ul>
+	<li>
+		sed脚本命令用正则表达式过滤出含有单词first的行；</li>
+	<li>
+		当含有单词 first 的行出现时，h 命令将该行放到保持空间；</li>
+	<li>
+		p 命令打印模式空间也就是第一个数据行的内容；</li>
+	<li>
+		n 命令提取数据流中的下一行（This is the second data line），并将它放到模式空间；</li>
+	<li>
+		p 命令打印模式空间的内容，现在是第二个数据行；</li>
+	<li>
+		g 命令将保持空间的内容（This is the first data line）放回模式空间，替换当前文本；</li>
+	<li>
+		p 命令打印模式空间的当前内容，现在变回第一个数据行了。</li>
+</ul>
+<h2>
+	sed改变指定流程</h2>
+<h4>
+	b 分支命令</h4>
+通常，sed 程序的执行过程会从第一个脚本命令开始，一直执行到最后一个脚本命令（D 命令是个例外，它会强制 sed 返回到脚本的顶部，而不读取新的行）。sed 提供了 <span style="color:#b22222;">b 分支命令</span>来改变命令脚本的执行流程，其结果与结构化编程类似。<br>
+<br>
+b 分支命令基本格式为：
+<p class="info-box">
+	[address]b [label]</p>
+其中，address 参数决定了哪些行的数据会触发分支命令，label 参数定义了要跳转到的位置。<br>
+<br>
+需要注意的是，如果没有加 label 参数，跳转命令会跳转到脚本的结尾，比如：<br>
+<p class="info-box">
+	[root@localhost ~]# cat data2.txt<br>
+	This is the header line.<br>
+	This is the first data line.<br>
+	This is the second data line.<br>
+	This is the last line.<br>
+	[root@localhost ~]# sed '{2,3b ; s/This is/Is this/ ; s/line./test?/}' data2.txt<br>
+	Is this the header test?<br>
+	This is the first data line.<br>
+	This is the second data line.<br>
+	Is this the last test?</p>
+可以看到，因为 b 命令未指定 label 参数，因此数据流中的第2行和第3行并没有执行那两个替换命令。<br>
+<br>
+如果我们不想直接跳到脚本的结尾，可以为 b 命令指定一个标签（也就是格式中的 label，最多为 7 个字符长度）。在使用此该标签时，要以冒号开始（比如 :label2），并将其放到要跳过的脚本命令之后。这样，当 sed 命令匹配并处理该行文本时，会跳过标签之前所有的脚本命令，但会执行标签之后的脚本命令。<br>
+<br>
+比如说：
+<p class="info-box">
+	[root@localhost ~]# sed '{/first/b jump1 ; s/This is the/No jump on/<br>
+	&gt; :jump1<br>
+	&gt; s/This is the/Jump here on/}' data2.txt<br>
+	No jump on header line<br>
+	Jump here on first data line<br>
+	No jump on second data line<br>
+	No jump on last line</p>
+在这个例子中，如果文本行中出现了 first，程序的执行会直接跳到 jump1 标签之后的脚本行。如果分支命令的模式没有匹配，sed 会继续执行所有的脚本命令。<br>
+<br>
+b 分支命令除了可以向后跳转，还可以向前跳转，例如：<br>
+<p class="info-box">
+	[root@localhost ~]# echo "This, is, a, test, to, remove, commas." | sed -n '{<br>
+	&gt; :start<br>
+	&gt; s/,//1p<br>
+	&gt; /,/b start<br>
+	&gt; }'<br>
+	This is, a, test, to, remove, commas.<br>
+	This is a, test, to, remove, commas.<br>
+	This is a test, to, remove, commas.<br>
+	This is a test to, remove, commas.<br>
+	This is a test to remove, commas.<br>
+	This is a test to remove commas.</p>
+在这个例子中，当缓冲区中的行内容中有逗号时，脚本命令就会一直循环执行，每次迭代都会删除文本中的第一个逗号，并打印字符串，直至内容中没有逗号。<br>
+<h4>
+	t 测试命令</h4>
+类似于 b 分支命令，t 命令也可以用来改变 sed 脚本的执行流程。t 测试命令会根据 s 替换命令的结果，如果匹配并替换成功，则脚本的执行会跳转到指定的标签；反之，t 命令无效。<br>
+<br>
+测试命令使用与分支命令相同的格式：
+<p class="info-box">
+	[address]t [label]</p>
+跟分支命令一样，在没有指定标签的情况下，如果 s 命令替换成功，sed 会跳转到脚本的结尾（相当于不执行任何脚本命令）。例如：<br>
+<p class="info-box">
+	[root@localhost ~]# sed '{<br>
+	&gt; s/first/matched/<br>
+	&gt; t<br>
+	&gt; s/This is the/No match on/<br>
+	&gt; }' data2.txt<br>
+	No match on header line<br>
+	This is the matched data line<br>
+	No match on second data line<br>
+	No match on last line</p>
+此例中，第一个替换命令会查找模式文本 first，如果匹配并替换成功，命令会直接跳过后面的替换命令；反之，如果第一个替换命令未能匹配成功，第二个替换命令就会被执行。<br>
+<br>
+再举个例子：
+<p class="info-box">
+	[root@localhost ~]#&nbsp; echo "This, is, a, test, to, remove, commas. " | sed -n '{<br>
+	&gt; :start<br>
+	&gt; s/,//1p<br>
+	&gt; t start<br>
+	&gt; }'<br>
+	This is, a, test, to, remove, commas.<br>
+	This is a, test, to, remove, commas.<br>
+	This is a test, to, remove, commas.<br>
+	This is a test to, remove, commas.<br>
+	This is a test to remove, commas.<br>
+	This is a test to remove commas.</p>
+</div>
+			<div id="arc-append">
+	<p>关注微信公众号「站长严长生」，在手机上阅读所有教程，随时随地都能学习。本公众号由<a class="col-link" href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">C语言中文网站长</a>运营，每日更新，坚持原创，敢说真话，凡事有态度。</p>
+	<p style="margin-top:12px; text-align:center;">
+		<img width="180" src="./6.9Linux sed命令的高级玩法_files/qrcode_weixueyuan_original.png" alt="魏雪原二维码"><br>
+		<span class="col-green">微信扫描二维码关注公众号</span>
+	</p>
+</div>
+<!-- <p>关注微信公众号「魏雪原」，跟着<a class="col-link" href="/view/8092.html" target="_blank">站长</a>一起学习，拒绝躺平，跳出内卷，用知识完成阶级跃升：</p>
+	<ul>
+		<li>每日更新，坚持原创，敢说真话，凡事有态度。</li>
+		<li>编程+求职+创业+营销，既有硬知识，也有软技能。</li>
+		<li>手机端阅读教程，随时随地都能学习。</li>
+		<li>即将绑定网站部分功能，包括注册登录、找回密码、获取下载链接等。</li>
+	</ul> -->
+			<div class="pre-next-page clearfix">
+                    <span class="pre left"><span class="icon">&lt;</span> <span class="text-brief text-brief-pre">上一页</span><a href="http://c.biancheng.net/view/4028.html">Linux sed（Linux三剑客之一）</a></span>
+                    <span class="next right"><a href="http://c.biancheng.net/view/4082.html">Linux awk（Linux三剑客之一）</a><span class="text-brief text-brief-next">下一页</span> <span class="icon">&gt;</span></span>
+                </div>
+			<div id="ad-arc-bottom"></div>
+
+<!-- <div id="ad-bottom-weixin" class="clearfix">
+	<div class="left" style="width: 535px;">
+		<p><span class="col-red">编程帮</span>，一个分享编程知识的公众号。跟着<a class="col-link" href="/cpp/about/author/" target="_blank">站长</a>一起学习，每天都有进步。</p>
+		<p>通俗易懂，深入浅出，一篇文章只讲一个知识点。</p>
+		<p>文章不深奥，不需要钻研，在公交、在地铁、在厕所都可以阅读，随时随地涨姿势。</p>
+		<p>文章不涉及代码，不烧脑细胞，人人都可以学习。</p>
+		<p>当你决定关注「编程帮」，你已然超越了90%的程序员！</p>
+	</div>
+	<div class="right" style="width: 150px;">
+		<img width="150" src="/templets/new/images/erweima_biancheng.gif?v=1.6.72" alt="编程帮二维码" /><br />
+		<span class="col-green">微信扫描二维码关注</span>
+	</div>
+</div> -->
+
+<div id="nice-arcs" class="box-bottom">
+	<h4>优秀文章</h4>
+	<ul class="clearfix">
+<li><a href="http://c.biancheng.net/view/75.html" title="Go语言内嵌结构体成员名字冲突">Go语言内嵌结构体成员名字冲突</a></li>
+<li><a href="http://c.biancheng.net/view/214.html" title="指针变量的初始化，C语言指针变量初始化详解">指针变量的初始化，C语言指针变量初始化详解</a></li>
+<li><a href="http://c.biancheng.net/view/1654.html" title="猎豹网校32位80x86汇编语言视频教程(MP4)">猎豹网校32位80x86汇编语言视频教程(MP4)</a></li>
+<li><a href="http://c.biancheng.net/view/2033.html" title="C语言结构体指针（指向结构体的指针）详解">C语言结构体指针（指向结构体的指针）详解</a></li>
+<li><a href="http://c.biancheng.net/view/2215.html" title="Python if else条件语句详解">Python if else条件语句详解</a></li>
+<li><a href="http://c.biancheng.net/view/3864.html" title="汇编语言.MODEL伪指令：确定程序的特性">汇编语言.MODEL伪指令：确定程序的特性</a></li>
+<li><a href="http://c.biancheng.net/view/4253.html" title="Spring DI（依赖注入）的实现方式：属性注入和构造注入">Spring DI（依赖注入）的实现方式：属性注入和构造注入</a></li>
+<li><a href="http://c.biancheng.net/view/4323.html" title="MyBatis核心配置文件properties元素">MyBatis核心配置文件properties元素</a></li>
+<li><a href="http://c.biancheng.net/view/4959.html" title="JSP Response.invalidate()方法：销毁session对象">JSP Response.invalidate()方法：销毁session对象</a></li>
+<li><a href="http://c.biancheng.net/thread/vip_8613.html" title="终止线程执行，千万别踩这个坑！">终止线程执行，千万别踩这个坑！</a></li>
+</ul>
+</div>
+		</div>
+		
+	</div>
+</div>
+<script type="text/javascript">
+// 当前文章ID
+window.arcIdRaw = 'a_' + 5063;
+window.arcId = "5567Kea7CZp8Av11Sed2/uflsj+YmQLNxKGod0Re9vwLY2dCPbkKseW3fS4";
+window.typeidChain = "290|77";
+</script>
+<div id="footer" class="clearfix">
+	<div class="info left">
+	<p>精美而实用的网站，分享优质编程教程，帮助有志青年。千锤百炼，只为大作；精益求精，处处斟酌；这种教程，看一眼就倾心。</p>
+	<p>
+		<a href="http://c.biancheng.net/view/8066.html" target="_blank" rel="nofollow">关于网站</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8092.html" target="_blank" rel="nofollow">关于站长</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8097.html" target="_blank" rel="nofollow">如何完成一部教程</a> <span>|</span>
+		<a href="http://c.biancheng.net/view/8093.html" target="_blank" rel="nofollow">联系我们</a> <span>|</span>
+		<a href="http://c.biancheng.net/sitemap/" target="_blank" rel="nofollow">网站地图</a>
+	</p>
+	<p>Copyright ©2012-2021 biancheng.net, <a href="http://www.beian.miit.gov.cn/" target="_blank" rel="nofollow" style="color:#666;">陕ICP备15000209号</a></p>
+	</div>
+	<img class="right" src="./6.9Linux sed命令的高级玩法_files/logo_bottom.gif" alt="底部Logo">
+	<span id="return-top"><b>↑</b></span>
+</div>
+
+<script type="text/javascript">
+window.siteId = 4;
+window.cmsTemplets = "/templets/new";
+window.cmsTempletsVer = "1.6.72";
+</script>
+
+<script src="./6.9Linux sed命令的高级玩法_files/jquery1.12.4.min.js.下载"></script>
+<script src="./6.9Linux sed命令的高级玩法_files/common.js.下载"></script>
+<span style="display:none;"><script src="./6.9Linux sed命令的高级玩法_files/z_stat.php" type="text/javascript" defer="defer" async="async"></script></span>
+
+</body></html>
